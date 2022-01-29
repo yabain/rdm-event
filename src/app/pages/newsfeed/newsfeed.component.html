@@ -1,0 +1,60 @@
+<div class="container">
+	<div class="row">
+
+		<!-- Main Content -->
+
+		<main class="col col-xl-6 order-xl-2 col-lg-12 order-lg-1 col-md-12 col-sm-12 col-12">
+
+			<div class="ui-block">
+				<app-new-newsfeed-form></app-new-newsfeed-form>			
+			</div>
+
+			<app-newsfeed-list></app-newsfeed-list>
+
+			<a id="load-more-button" href="#" class="btn btn-control btn-more" data-load-link="items-to-load.html" data-container="newsfeed-items-grid"><svg class="olymp-three-dots-icon"><use xlink:href="#olymp-three-dots-icon"></use></svg></a>
+
+		</main>
+
+		<!-- ... end Main Content -->
+
+
+		<!-- Left Sidebar -->
+
+		<aside class="col col-xl-3 order-xl-1 col-lg-6 order-lg-2 col-md-6 col-sm-6 col-12">
+			<div class="ui-block">
+				<app-weather></app-weather>
+			</div>
+
+			<div class="ui-block">
+				<app-calendar></app-calendar>		
+			</div>
+
+			<div class="ui-block">
+				<app-page-you-may-like></app-page-you-may-like>
+			</div>
+		</aside>
+
+		<!-- ... end Left Sidebar -->
+
+
+		<!-- Right Sidebar -->
+
+		<aside class="col col-xl-3 order-xl-3 col-lg-6 order-lg-3 col-md-6 col-sm-6 col-12">
+
+			<div class="ui-block">
+				<app-birthday-alert></app-birthday-alert>			
+			</div>
+
+			<div class="ui-block">
+				<app-friend-suggestion></app-friend-suggestion>
+			</div>
+
+			<div class="ui-block">
+				<app-feed-activity></app-feed-activity>
+			</div>
+		</aside>
+
+		<!-- ... end Right Sidebar -->
+
+	</div>
+</div>
