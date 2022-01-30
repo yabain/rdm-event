@@ -5,11 +5,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
 import { NewsfeedComponent } from './pages/newsfeed/newsfeed.component';
+import { EventComponent } from './pages/event/event.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NewsfeedComponent
+    NewsfeedComponent,
+    EventComponent
   ],
   imports: [
     BrowserModule,
