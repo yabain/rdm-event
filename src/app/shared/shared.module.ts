@@ -16,6 +16,7 @@ import { PreloaderComponent } from "./components/preloader/preloader.component";
 import { RightSideMenuListFriendComponent } from "./components/right-side-menu-list-friend/right-side-menu-list-friend.component";
 import { TopHeaderMenuComponent } from "./components/top-header-menu/top-header-menu.component";
 import { WeatherComponent } from "./components/weather/weather.component";
+import { HeaderPageComponent } from './components/header-page/header-page.component';
 
 
 
@@ -34,7 +35,8 @@ import { WeatherComponent } from "./components/weather/weather.component";
     FeedActivityComponent,
     NewNewsfeedFormComponent,
     NewsfeedListComponent,
-    CalendarInteractWidgetComponent
+    CalendarInteractWidgetComponent,
+    HeaderPageComponent
   ],
   imports: [
     CommonModule,
@@ -55,7 +57,8 @@ import { WeatherComponent } from "./components/weather/weather.component";
     FeedActivityComponent,
     NewNewsfeedFormComponent,
     NewsfeedListComponent,
-    CalendarInteractWidgetComponent    
+    CalendarInteractWidgetComponent,
+    HeaderPageComponent  
   ]
 })
 export class SharedModule { }

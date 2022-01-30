@@ -52,6 +52,7 @@
               "src/assets/js/theme/libs-init.js",
               "src/assets/js/plugins/bootstrap/bootstrap.bundle.min.js",
               "src/assets/js/plugins/svg-loader/svg-loader.js",
+              "src/assets/js/plugins/full-calendar/fullcalendar.js",
               "src/assets/js/theme/theme-init.js"
 
             ]
