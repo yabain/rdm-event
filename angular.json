@@ -54,7 +54,6 @@
               "src/assets/js/plugins/svg-loader/svg-loader.js",
               "src/assets/js/plugins/full-calendar/fullcalendar.js",
               "src/assets/js/theme/theme-init.js"
-
             ]
           },
           "configurations": {
@@ -129,5 +128,8 @@
       }
     }
   },
-  "defaultProject": "rdm-event"
+  "defaultProject": "rdm-event",
+  "cli": {
+    "analytics": "165f9d4f-88f8-4409-beaa-b380786c6834"
+  }
 }
