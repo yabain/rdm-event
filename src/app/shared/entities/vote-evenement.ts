@@ -1,7 +1,8 @@
-import { Entity } from ".";
+import { Entity, Evenement } from ".";
+import { UserActionBuilder } from "../utils/functions";
 import { VoteCandidate } from "./votecandidate";
 
-export class VoteEvenement extends Entity
+export class VoteEvenement extends Evenement
 {
     candidates:VoteCandidate[]=[];
     
@@ -10,6 +11,11 @@ export class VoteEvenement extends Entity
         for(const key of Object.keys(entity))
         {
             if(key=="id") this.id.setId(entity[key]);
+            if(key=="actions") this.actions=entity[key].map((action)=>{
+                let act = UserActionBuilder(action)
+                act.hydrate(action)
+                return act
+            })
             if(key=="candidates") this.candidates=entity[key].map((candidate)=>{
                 let can=new VoteCandidate();
                 can.hydrate(candidate);
@@ -26,6 +32,7 @@ export class VoteEvenement extends Entity
         {
             if(k=="id") r[k]=this.id.toString();
             if(k=="candidates") r[k]=this.candidates.map((candidate)=>candidate.toString());
+            if(k=="actions") r[k]=this.actions.map((action)=>action.toString());
             else r[k]=Reflect.get(this,k);
         }
         return r;

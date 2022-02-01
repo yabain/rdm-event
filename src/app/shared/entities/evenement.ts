@@ -15,6 +15,8 @@ export class Evenement extends Entity
     selectedGroupVisibilityAction:String="";
     eventType:EventType=EventType.VOTE_EVENT;
     actions:UserAction[]=[];
+    datePublication:number=0
+
 
     override hydrate(entity: Record<string | number,any>):void
     {

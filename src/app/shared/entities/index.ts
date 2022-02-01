@@ -1,6 +1,7 @@
 import { Entity } from "./entity"
 import { EntityID } from "./entityid"
 import { Evenement } from "./evenement"
+import { FilActualitePost } from "./fil-actualite-post"
 import { User } from "./user"
 import { UserAction } from "./useraction"
 
@@ -10,5 +11,6 @@ export {
     EntityID,
     User,
     Evenement,
-    UserAction
+    UserAction,
+    FilActualitePost
 }

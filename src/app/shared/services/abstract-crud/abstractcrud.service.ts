@@ -47,6 +47,11 @@ export abstract class AbstractCrudService<T extends Entity>
       this.list.set(obj.id.toString(),obj);
       this.setList(this.list);  
     }
+    deleteObject(obj:T)
+    {
+        if(this.list.has(obj.id.toString())) this.list.delete(obj.id.toString())
+        this.setList(this.list);
+    }
 
     save(object:T,branch:String):Promise<ActionStatus<void>>
     {
@@ -68,7 +73,23 @@ export abstract class AbstractCrudService<T extends Entity>
     update(obj:T,branch): Promise<ActionStatus<T>> {
         return new Promise<ActionStatus<T>>((resolve, reject) => {
           this.firebaseApi.update(branch, obj.toString())
-            .then((result: ActionStatus<T>) => resolve(result))
+            .then((result: ActionStatus<T>) => {
+                this.setObject(obj);
+                resolve(result)
+            })
+            .catch((error: ActionStatus<T>) => {
+              this.firebaseApi.handleApiError(error);
+              reject(error);
+            });
+        });
+    }
+    delete(obj:T,branch): Promise<ActionStatus<T>> {
+        return new Promise<ActionStatus<T>>((resolve, reject) => {
+          this.firebaseApi.delete(branch)
+            .then((result: ActionStatus<T>) => {
+                this.deleteObject(obj)
+                resolve(result)
+            })
             .catch((error: ActionStatus<T>) => {
               this.firebaseApi.handleApiError(error);
               reject(error);
@@ -97,7 +118,7 @@ export abstract class AbstractCrudService<T extends Entity>
         });
     }
 
-    findAll(branch:String):Promise<ActionStatus<T>>
+    findAll(branch:String):Promise<ActionStatus<T[]>>
     {
       return new Promise<ActionStatus<T>>((resolve,reject)=>{
         this.firebaseApi.fetchOnce(branch.toString())
