@@ -63,10 +63,35 @@ export class VoteAction extends UserAction
 export class CommentAction extends UserAction
 {
     override actionType: UserActionType=UserActionType.COMMENT_ACTION;
+    parentCommentID:EntityID=new EntityID()
     content:String=""
+    override hydrate(entity: Record<string | number,any>):void
+    {
+        for(const key of Object.keys(entity))
+        {
+            if(key=="id") this.id.setId(entity[key]);
+            else if(key=="idOwnerAction") this.idOwnerAction.setId(entity[key]);
+            else if(key=="parentCommentID") this.parentCommentID.setId(entity[key]);
+            else if(Reflect.has(this,key)) Reflect.set(this,key,entity[key]);
+        }
+    }
+
+    override toString():Record<string | number,any>
+    {
+        let r={};
+        for(const k of Object.keys(this))
+        {
+            if(k=="id") r[k]=this.id.toString();
+            if(k=="idOwnerAction") r[k]=this.idOwnerAction.toString();
+            if(k=="parentCommentID") r[k]=this.parentCommentID.toString();
+            else r[k]=Reflect.get(this,k);
+        }
+        return r;
+    }
 }
 
 export class LiketAction extends UserAction
 {
     override actionType: UserActionType=UserActionType.LIKE_ACTION;
+
 }

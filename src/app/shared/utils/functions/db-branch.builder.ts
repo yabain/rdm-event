@@ -15,13 +15,13 @@ export function getBranchOfEvents():string
 {
     return `${DbBranch.posts}`
 }
-export function getFilActualites():string
+export function getBranchOfFilActualites():string
 {
     return `${DbBranch.fil_atualites}`
 }
-export function getFilActualite(eventID:EntityID):string
+export function getBranchOfFilActualite(eventID:EntityID):string
 {
-    return `${getFilActualites()}/${eventID.toString()}`
+    return `${getBranchOfFilActualites()}/${eventID.toString()}`
 }
 
 export function getBranchOfEvent(eventID:EntityID):string

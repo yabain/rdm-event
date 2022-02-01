@@ -10,6 +10,8 @@ import * as db_branch_builder from "./../../utils/functions/db-branch.builder"
   providedIn: 'root'
 })
 export class FilActualiteService extends AbstractCrudService<FilActualitePost> {
+  protected cursorForLoadSegmentData:any="";
+  protected maxPageLoad=5;
 
   constructor(
     firebaseApi:FirebaseDataBaseApi,
@@ -18,15 +20,30 @@ export class FilActualiteService extends AbstractCrudService<FilActualitePost> {
     super(firebaseApi,localStrogeService)
     this.localstorage_key="fil_actualite"
   }
-
+  loadNewBunchData():Promise<ActionStatus<void>>
+  {
+    return new Promise<ActionStatus<boolean>>((resolve,reject)=>{
+      if(this.cursorForLoadSegmentData=="")
+      {
+        this.firebaseApi.getFirebaseDatabase()
+        .ref(db_branch_builder.getBranchOfFilActualites())
+        .endAt(this.maxPageLoad)
+        .orderByChild("datePublication",this.cursorForLoadSegmentData)
+        .limitToLast(this.maxPageLoad)
+        .once("value",(snapshoot)=>{
+          console.log(snapshoot.doc)
+        })
+      }
+    })
+  }
   addNewPost(post:FilActualitePost):Promise<ActionStatus<void>>
   {
-    return this.save(post,db_branch_builder.getFilActualite(post.id))
+    return this.save(post,db_branch_builder.getBranchOfFilActualite(post.id))
   }
 
   deletePost(post:FilActualitePost):Promise<ActionStatus<boolean>>
   {
-    return this.delete(post,db_branch_builder.getFilActualite(post.id))
+    return this.delete(post,db_branch_builder.getBranchOfFilActualite(post.id))
   }
 
   deletePostByEventID(eventID):Promise<ActionStatus<boolean>>
@@ -34,7 +51,7 @@ export class FilActualiteService extends AbstractCrudService<FilActualitePost> {
     let r:ActionStatus<boolean>=new ActionStatus<boolean>(); 
 
     return new Promise<ActionStatus<boolean>>((resolve,reject)=>{
-      this.findByKey("idEvent",eventID.toString(),db_branch_builder.getFilActualites())
+      this.findByKey("idEvent",eventID.toString(),db_branch_builder.getBranchOfFilActualites())
       .then((result)=>{
         if(result.result.length==0) 
         {
@@ -42,7 +59,7 @@ export class FilActualiteService extends AbstractCrudService<FilActualitePost> {
           return Promise.resolve(r)
         }
         let post = result.result[0];
-        return this.delete(post,db_branch_builder.getFilActualite(post.id))
+        return this.delete(post,db_branch_builder.getBranchOfFilActualite(post.id))
       })
       .then((result)=>{
         r.result=true;
