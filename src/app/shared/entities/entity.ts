@@ -1,6 +1,6 @@
 import { EntityID } from './entityid';
 
-export abstract class Entity
+export  class Entity
 {
     id:EntityID=new EntityID();
     hydrate(entity: Record<string | number,any>):void

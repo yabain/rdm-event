@@ -17,16 +17,10 @@ export class User extends Entity
     nationalite:String="";
     rememberMe:boolean=false;
     about:String=""
-    identity:String="";
     availability:number=0;
     dateDeleted:String=""
 
 
-    getIdentity()
-    {
-      if(this.identity=="") return this.phoneNumber==""?this.email:this.phoneNumber
-      return this.identity
-    }
 
     getPrintableName()
     {

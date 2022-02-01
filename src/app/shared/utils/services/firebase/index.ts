@@ -1,4 +1,4 @@
 import { FireBaseConstant } from "./firebase-constant";
-// import { FirebaseDataBaseApi } from "./FirebaseDatabaseApi";
+import { FirebaseDataBaseApi } from "./FirebaseDatabaseApi";
 // FirebaseDataBaseApi as FireBaseApi
-export { FireBaseConstant as FireBaseErrorType}
+export { FireBaseConstant as FireBaseErrorType,FirebaseDataBaseApi}

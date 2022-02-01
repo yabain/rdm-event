@@ -36,7 +36,8 @@ export class Message extends Entity
       msg.content.data=msgObj.shortBody
       return msg
     }
-    hydrate(entity: Record<string | number,any>):void
+    
+    override hydrate(entity: Record<string | number,any>):void
     {
         for(const key of Object.keys(entity))
         {
@@ -49,7 +50,7 @@ export class Message extends Entity
         }
     }
 
-    toString():Record<string | number,any>
+    override toString():Record<string | number,any>
     {
         let r={};
         for(const k of Object.keys(this))
@@ -78,7 +79,7 @@ export class Discussion extends Entity
     about="";
     dateCreated:String=""
 
-    toString()
+    override toString()
     {
         let r={};
         for(const k of Object.keys(this))
@@ -94,7 +95,7 @@ export class Discussion extends Entity
         console.log("R ",r)
         return r;
     }
-    hydrate(entity: any)
+    override hydrate(entity: any)
     {
         for(const key of Object.keys(entity))
         {
@@ -138,5 +139,5 @@ export class Discussion extends Entity
 
 export class GroupDiscussion extends Discussion
 {
-    type:DiscussionType=DiscussionType.GROUP_DISCUSSION;
+    override type:DiscussionType=DiscussionType.GROUP_DISCUSSION;
 }
