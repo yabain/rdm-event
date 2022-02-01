@@ -10,6 +10,11 @@ const routes: Routes = [
     component:MainPageTemplateComponent,
     children:[
       {
+        path: '',
+        redirectTo: 'news',
+        pathMatch: 'full',
+      },
+      {
         path:'news',
         pathMatch:'full',
         component:NewsfeedComponent
@@ -23,12 +28,18 @@ const routes: Routes = [
     ]
   },
   {
-    path:'',
+    path:'login',
     loadChildren:()=>import("./pages/auth/auth.module").then(m=>m.AuthModule)
   },
   {
+    path: '',
+    redirectTo:'page',
+    pathMatch: 'full',
+  },
+  {
     path: '**',
-    redirectTo:'login'
+    redirectTo:'login',
+    pathMatch: 'full',
   }
 ];
 
