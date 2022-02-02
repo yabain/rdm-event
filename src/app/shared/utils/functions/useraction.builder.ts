@@ -13,4 +13,5 @@ export function UserActionBuilder(entity):UserAction
         case UserActionType.VOTE_ACTION:
             return new VoteAction()
     }
+    return null;
 }
