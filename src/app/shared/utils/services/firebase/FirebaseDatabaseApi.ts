@@ -1,7 +1,8 @@
 import { Injectable, isDevMode } from '@angular/core';
-import firebase from 'firebase/app';
-import 'firebase/auth';
-import 'firebase/database';
+import { initializeApp } from 'firebase/app';
+import { getAuth,signOut , createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
+import {getDatabase } from 'firebase/database';
+import { getStorage } from "firebase/storage";
 import { ActionStatus } from '../../../others/actionstatus';
 import { FireBaseConstant } from './firebase-constant'
 // declare var firebase:any;
@@ -16,6 +17,8 @@ export class FirebaseDataBaseApi {
   debug: boolean = false;
   offlineMode: boolean = false;
   db: any;
+  firebase = null;
+  firebaseAuth=null;
 
   constructor() {
 
@@ -45,9 +48,10 @@ export class FirebaseDataBaseApi {
     }
 
     // Initialize Firebase
-    firebase.initializeApp(FirebaseDataBaseApi.firebaseConfig);
+    this.firebase=initializeApp(FirebaseDataBaseApi.firebaseConfig);
     // firebase.analytics();
-    this.db = firebase.database();
+    this.db = getDatabase(this.firebase);
+    this.firebaseAuth=getAuth(this.firebase)
     this.setDebugMode();
     this.setModeApp();
   }
@@ -60,7 +64,7 @@ export class FirebaseDataBaseApi {
   }
   getFirebaseFile()
   {
-    return firebase.storage()
+    return getStorage(this.firebase);
   }
   getFirebaseDatabase() {
     return this.db;
@@ -196,13 +200,13 @@ export class FirebaseDataBaseApi {
 
   }
   get user() {
-    return firebase.auth().currentUser;
+    return this.firebaseAuth.currentUser;
   }
 
   signInApi(email: string, password: string): Promise<ActionStatus<any>> {
     let result: ActionStatus<any> = new ActionStatus<any>();
     return new Promise(async (resolve, reject) => {
-      firebase.auth().signInWithEmailAndPassword(email, password)
+      signInWithEmailAndPassword(this.firebaseAuth,email, password)
         .then((userCredential: any) => {
           result.description = 'Authentification successful';
           result.result = userCredential;
@@ -219,8 +223,16 @@ export class FirebaseDataBaseApi {
     });
   }
 
-  signOutApi() {
-    firebase.auth().signOut();
+  signOutApi():Promise<ActionStatus<boolean>> {
+    let r=new ActionStatus<boolean>()
+    r.result=true;
+    return new Promise<ActionStatus<boolean>> ((resolve,reject)=>{
+      signOut(this.firebaseAuth).then((result)=>resolve(r))
+      .catch((error)=>{
+        r.result=false;
+        reject(r)
+      });
+    })
   }
 
   updateUser(user:Record<string,any>):Promise<ActionStatus<any>>
@@ -242,7 +254,8 @@ export class FirebaseDataBaseApi {
   createUserApi(email: string, password: string): Promise<ActionStatus<any>> {
     let result: ActionStatus<any> = new ActionStatus<any>();
     return new Promise(async (resolve, reject) => {
-      firebase.auth().createUserWithEmailAndPassword(email, password)
+
+      createUserWithEmailAndPassword(this.firebaseAuth,email, password)
         .then((userCredential: any) => {
           result.description = 'Account was created successful';
           result.result = userCredential.user;
@@ -259,10 +272,17 @@ export class FirebaseDataBaseApi {
   }
 
   handleConnexionState(callBack: any) {
-    firebase.database().ref('./info/connected').on('value', (snap: any) => {
-      if (snap.val() === true) { callBack({ connected: true }); }
-      else { callBack({ connected: false }); }
-    })
+    onAuthStateChanged(this.firebaseAuth, (user) => {
+      if (user) {
+        // User is signed in, see docs for a list of available properties
+        // https://firebase.google.com/docs/reference/js/firebase.User
+        callBack({ connected: true });
+        // ...
+      } else {
+        // User is signed out
+        callBack({ connected: false });
+      }
+    });
   }
 
   handleApiError(result: ActionStatus<any>) {
