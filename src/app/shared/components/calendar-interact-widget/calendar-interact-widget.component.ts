@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DatePipe } from '@angular/common';
 
 
   /* -----------------------------
@@ -17,7 +18,22 @@ declare var $:any;
 })
 export class CalendarInteractWidgetComponent implements OnInit {
 
-  constructor() { }
+    maDate = new Date();
+
+    day: any;
+    year: any;
+    month: any;
+    dateString : string;
+  
+    constructor(private datePipe: DatePipe){
+        this.dateString = this.datePipe.transform(this.maDate, 'yyyy-MM-dd');
+        console.log(this.dateString);
+
+        this.day = this.maDate.getMonth();
+        this.year =  this.maDate.getFullYear();
+        this.month = this.maDate.getDay();
+        // console.log('jour: ' , this.day, ' mois: ', this.month, ' année: ', this.year);
+    }
 
   ngOnInit(): void {
       var calendarEl = document.getElementById('calendar');
@@ -25,7 +41,7 @@ export class CalendarInteractWidgetComponent implements OnInit {
       var calendar = new FullCalendar.Calendar(calendarEl, {
           plugins: ['interaction', 'dayGrid', 'timeGrid'],
           defaultView: 'dayGridMonth',
-          defaultDate: '2019-05-07',
+          defaultDate: this.dateString,
           header: {
               left: 'prev',
               center: 'title',
@@ -54,40 +70,21 @@ export class CalendarInteractWidgetComponent implements OnInit {
               $(modal).modal('show');
           },
           events: [
+            {
+                title: 'Ellection Mis & Mister UdM',
+                start: '2022-02-05',
+                url: 'modal:#private-event'
+            },
               {
-                  title: 'Chris Greyson’s Bday',
-                  start: '2019-05-08',
+                  title: 'Bal de l UdM',
+                  start: '2022-02-05',
                   url: 'modal:#public-event'
               },
               {
-                  title: 'Make Dinner Plans...',
-                  start: '2019-05-08',
+                  title: 'UdM One heart',
+                  start: '2022-02-12',
+                  end: '2022-02-13',
                   url: 'modal:#private-event'
-              },
-              {
-                  title: 'Jenny’s Birthday...',
-                  start: '2019-05-30',
-                  url: 'modal:#private-event'
-              },
-              {
-                  title: 'Videocall to talk...',
-                  start: '2019-05-30',
-                  url: 'modal:#public-event'
-              },
-              {
-                  title: 'Breakfast at the...',
-                  start: '2019-05-26',
-                  url: 'modal:#public-event'
-              },
-              {
-                  title: 'Send the new...',
-                  start: '2019-05-26',
-                  url: 'modal:#private-event'
-              },
-              {
-                  title: 'Take Querty to the...',
-                  start: '2019-05-26',
-                  url: 'modal:#public-event'
               }
           ]
       });

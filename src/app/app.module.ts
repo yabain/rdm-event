@@ -6,12 +6,14 @@ import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
 import { NewsfeedComponent } from './pages/newsfeed/newsfeed.component';
 import { EventComponent } from './pages/event/event.component';
+import { EllectionsComponent } from './pages/ellections/ellections.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NewsfeedComponent,
-    EventComponent
+    EventComponent,
+    EllectionsComponent
   ],
   imports: [
     BrowserModule,

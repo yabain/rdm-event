@@ -27,7 +27,7 @@ ul {
 }
 .header {
     height: 70px;
-    background-color: #023507;
+    background-color: #4e814c;
     position: fixed;
     top: 0;
     left: 0;
@@ -2758,7 +2758,7 @@ img {
     background-color: var(--olympus-secondary-color);
 }
 .number-spinner.input-group.number-spinner--breez .input-group-btn > .btn {
-    background-color: #08ddc1;
+    background-color: #4e814c;
 }
 .number-spinner.input-group.number-spinner--green .input-group-btn > .btn {
     background-color: #1ed760;
@@ -2818,7 +2818,7 @@ img {
     --olympus-purple: #7c5ac2;
     --olympus-purple-dark: #6236b2;
     --olympus-blue: #38a9ff;
-    --olympus-breez: #08ddc1;
+    --olympus-breez: #4e814c;
     --olympus-breez-light: #2aebcb;
     --olympus-orange: #ff763a;
     --olympus-yellow: #ffdc1b;
@@ -3212,7 +3212,7 @@ button:hover {
     background-color: var(--olympus-blue);
 }
 .btn-breez {
-    background-color: #08ddc1;
+    background-color: #4e814c;
     background-color: var(--olympus-breez);
 }
 .btn-green {
@@ -3501,7 +3501,7 @@ input {
     content: "\2713";
     line-height: 20px;
     font-size: 9px;
-    background-color: #08ddc1;
+    background-color: #4e814c;
     background-color: var(--olympus-breez);
     color: var(--olympus-white-color);
     top: 50%;
@@ -3635,7 +3635,7 @@ select.form-control {
     background-color: var(--olympus-primary-color);
 }
 .tooltip-completed .tooltip-inner {
-    background-color: #08ddc1;
+    background-color: #4e814c;
     background-color: var(--olympus-breez);
 }
 .togglebutton {
@@ -6729,7 +6729,7 @@ figure {
     fill: var(--olympus-primary-color);
 }
 .create-event .icon.check {
-    fill: #08ddc1;
+    fill: #4e814c;
     fill: var(--olympus-breez);
 }
 .create-event .olymp-happy-face-icon {
@@ -6751,7 +6751,7 @@ figure {
 }
 .create-event .bootstrap-select li.selected a,
 .create-event .form-group.label-floating .bootstrap-select.btn-group .dropdown-toggle .filter-option {
-    background-color: #08ddc1;
+    background-color: #4e814c;
     background-color: var(--olympus-breez);
 }
 .create-event .bs-searchbox input {
@@ -6785,7 +6785,7 @@ figure {
     margin-right: 10px;
 }
 .private-event-head .more-dropdown a:hover {
-    color: #08ddc1;
+    color: #4e814c;
     color: var(--olympus-breez);
 }
 .event-description {
@@ -8232,7 +8232,7 @@ ol ol li {
     height: 20px;
 }
 .no-past-events a:hover {
-    color: #08ddc1;
+    color: #4e814c;
     color: var(--olympus-breez);
     font-weight: 500;
 }
@@ -8276,7 +8276,7 @@ ol ol li {
     padding-right: 25px;
 }
 .event-item-table .author-date a {
-    color: #08ddc1;
+    color: #4e814c;
     color: var(--olympus-breez);
 }
 .event-item-table .author-date .author-name {
@@ -8400,7 +8400,7 @@ ol ol li {
     content: "";
     width: 9px;
     height: 9px;
-    border: 2px solid #08ddc1;
+    border: 2px solid #4e814c;
     border: 2px solid var(--olympus-breez);
     border-radius: 100%;
     display: block;
@@ -8429,7 +8429,7 @@ ol ol li {
     fill: var(--olympus-body-font-color);
 }
 .today-events .event-status-icon.completed {
-    fill: #08ddc1;
+    fill: #4e814c;
     fill: var(--olympus-breez);
 }
 .today-events .event-status-icon.checked {
@@ -8502,7 +8502,7 @@ ol ol li {
     font-size: 12px;
 }
 .today-events.calendar .accordion-header .more-dropdown a:hover {
-    color: #08ddc1;
+    color: #4e814c;
     color: var(--olympus-breez);
 }
 .today-events.calendar .accordion-header .olymp-dropdown-arrow-icon {
@@ -8594,7 +8594,7 @@ ol ol li {
     background-color: var(--olympus-icon-color);
 }
 .event-status.completed {
-    background-color: #08ddc1;
+    background-color: #4e814c;
     background-color: var(--olympus-breez);
 }
 .event-status.b-day {
@@ -8629,7 +8629,7 @@ ol ol li {
 }
 .check-all {
     padding: 20px;
-    background-color: #08ddc1;
+    background-color: #4e814c;
     background-color: var(--olympus-breez);
     color: #fff;
     color: var(--olympus-white-color);
@@ -8658,7 +8658,7 @@ ol ol li {
 .crumina-full-calendar .fc-button.fc-prev-button .fc-icon:hover,
 .crumina-full-calendar .fc-button.fc-timeGridDay-button .fc-icon:hover,
 .crumina-full-calendar .fc-button.fc-timeGridWeek-button .fc-icon:hover {
-    color: #08ddc1;
+    color: #4e814c;
     color: var(--olympus-breez);
 }
 .crumina-full-calendar .fc-button-primary:not(:disabled).fc-button-active:focus,
@@ -8732,7 +8732,7 @@ ol ol li {
     margin-right: 6px;
     border-radius: 100%;
     margin-bottom: 2px;
-    background-color: #08ddc1;
+    background-color: #4e814c;
     background-color: var(--olympus-breez);
 }
 .crumina-full-calendar .fc-content {
@@ -8775,7 +8775,7 @@ ol ol li {
     border-radius: 100%;
 }
 .crumina-full-calendar .fc-dayGrid-view .fc-today .fc-day-number {
-    background-color: #08ddc1;
+    background-color: #4e814c;
     background-color: var(--olympus-breez);
     color: #fff;
     color: var(--olympus-white-color);
@@ -8851,7 +8851,7 @@ ol ol li {
     margin-top: 3px;
 }
 .positive {
-    color: #08ddc1;
+    color: #4e814c;
     color: var(--olympus-breez);
 }
 .negative {
@@ -11546,7 +11546,7 @@ ol ol li {
     background-color: var(--olympus-blue-light);
 }
 .bg-breez {
-    background-color: #08ddc1;
+    background-color: #4e814c;
     background-color: var(--olympus-breez);
 }
 .bg-breez-light {
@@ -12145,17 +12145,17 @@ ol ol li {
 .range-slider--red .irs--flat .irs-to,
 .range-slider--red .irs-grid-pol,
 .range-slider--red .irs-slider:before {
-    background-color: #08ddc1;
+    background-color: #4e814c;
     background-color: var(--olympus-breez);
 }
 .range-slider--red .irs--flat .irs-from::before,
 .range-slider--red .irs--flat .irs-single::before,
 .range-slider--red .irs--flat .irs-to::before {
-    border-top-color: #08ddc1;
+    border-top-color: #4e814c;
     border-top-color: var(--olympus-breez);
 }
 .range-slider--red .irs--flat .irs-handle > i:first-child {
-    background-color: #08ddc1;
+    background-color: #4e814c;
     background-color: var(--olympus-breez);
 }
 .range-slider--green .irs--flat .irs-bar {
@@ -13458,7 +13458,7 @@ ol ol li {
     font-size: 12px;
 }
 .calendar .more-dropdown a:hover {
-    color: #08ddc1;
+    color: #4e814c;
     color: var(--olympus-breez);
 }
 .calendar .card-header svg {
@@ -13899,7 +13899,7 @@ a[data-goto] {
 .daterangepicker td.active,
 .daterangepicker td.active:hover,
 .daterangepicker td.start-date.end-date {
-    background-color: #08ddc1;
+    background-color: #4e814c;
     background-color: var(--olympus-breez);
     border-color: transparent;
     color: #fff;
