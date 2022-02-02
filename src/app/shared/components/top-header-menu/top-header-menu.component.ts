@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-top-header-menu',
@@ -6,10 +6,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./top-header-menu.component.scss']
 })
 export class TopHeaderMenuComponent implements OnInit {
+  @Input()
+  isLogin = false;
+  isAdmin = true;
 
-  constructor() { }
+  constructor(
+  ) { 
+  }
 
   ngOnInit(): void {
   }
-
 }
