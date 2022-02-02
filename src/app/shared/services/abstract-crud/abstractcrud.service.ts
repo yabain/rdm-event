@@ -12,8 +12,8 @@ export abstract class AbstractCrudService<T extends Entity>
     listSubject: BehaviorSubject<Map<any, T>> = new BehaviorSubject<Map<any, T>>(this.list);
 
     constructor(
-        private firebaseApi:FirebaseDataBaseApi,
-        private localStorageService:LocalStorageService,
+        protected firebaseApi:FirebaseDataBaseApi,
+        protected localStorageService:LocalStorageService,
         
         )
     {
