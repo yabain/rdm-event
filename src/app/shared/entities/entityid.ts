@@ -6,7 +6,7 @@
 */
 export class EntityID
 {
-    private _id:Number;
+    private _id:String;
     constructor()
     {
         this._id=this.generateId();
@@ -15,21 +15,20 @@ export class EntityID
      * @description cette methode permet de générer un identifiant unique a 16 caractéres
      * @return une chaine de carractére de 16 éléments 
      */
-    private generateId():Number
+    private generateId():String
     {
-        // var timestamp = (new Date().getTime() / 1000 | 0).toString(16);
-        // return timestamp + 'xxxxxxxxxxxxxxxx'.replace(/[x]/g, function() {
-        //     return (Math.random() * 16 | 0).toString(16);
-        // }).toLowerCase();
-        return 0;
+        var timestamp = (new Date().getTime() / 1000 | 0).toString(16);
+        return timestamp + 'xxxxxxxxxxxxxxxx'.replace(/[x]/g, function() {
+            return (Math.random() * 16 | 0).toString(16);
+        }).toLowerCase();
     }
     
-    setId(id:Number)
+    setId(id:String)
     {
         this._id=id;
     }
 
-    toString():Number
+    toString():String
     {
         return this._id;
     }

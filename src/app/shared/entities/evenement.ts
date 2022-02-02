@@ -6,12 +6,16 @@ import { EntityID } from "./entityid";
 export class Evenement extends Entity
 {
     name:String="";
+    place:String=""
     state:EventState=EventState.UNPUBLISHED;
     startDate:String="";
+    startTime:String="";
+    endTime:String="";
+
     endDate:String=""
     description:String="";
     urlBanner:String=""
-    scopeVisibilityAction:EventScopeAction=EventScopeAction.FOR_NONE;
+    scopeVisibilityAction:EventScopeAction=EventScopeAction.PERSONNAL;
     selectedGroupVisibilityAction:String="";
     eventType:EventType=EventType.VOTE_EVENT;
     actions:UserAction[]=[];

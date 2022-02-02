@@ -19,6 +19,7 @@ import { WeatherComponent } from "./components/weather/weather.component";
 import { HeaderPageComponent } from './components/header-page/header-page.component';
 import { EllectHeadComponent } from './components/ellect-head/ellect-head.component';
 import { CandidatsListComponent } from './components/candidats-list/candidats-list.component';
+import { FormNewEventComponent } from "./components/form-new-event/form-new-event.component";
 
 
 
@@ -40,7 +41,8 @@ import { CandidatsListComponent } from './components/candidats-list/candidats-li
     CalendarInteractWidgetComponent,
     HeaderPageComponent,
     EllectHeadComponent,
-    CandidatsListComponent
+    CandidatsListComponent,
+    FormNewEventComponent
   ],
   imports: [
     CommonModule,
@@ -64,7 +66,8 @@ import { CandidatsListComponent } from './components/candidats-list/candidats-li
     CalendarInteractWidgetComponent,
     HeaderPageComponent,
     EllectHeadComponent,
-    CandidatsListComponent
+    CandidatsListComponent,
+    FormNewEventComponent
   ]
 })
 export class SharedModule { }

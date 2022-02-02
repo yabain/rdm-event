@@ -11,9 +11,9 @@ export enum EventState
 
 export enum EventScopeAction
 {
-    FOR_ALL="for_all",
-    FOR_GROUP="for_group",
-    FOR_INSTITUTON="for_institution",
+    PUBLIC="public",
+    PERSONNAL="personnal",
+    PRIVATE="private",
     FOR_NONE="for_none"
 }
 
