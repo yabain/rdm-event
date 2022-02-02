@@ -7,8 +7,8 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class TopHeaderMenuComponent implements OnInit {
   @Input()
-  isLogin = false;
-  isAdmin = true;
+  isLogin:boolean = false;
+  isAdmin:boolean = true;
 
   constructor(
   ) { 

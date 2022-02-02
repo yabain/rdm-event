@@ -325,8 +325,7 @@
 					<a href="" class="view-all bg-primary">View All Notifications</a>
 				</div>
 			</div>
-
-			<div class="author-page author vcard inline-items more" *ngIf="!isLogin">
+			<div class="author-page author vcard inline-items more" *ngIf="isLogin==false">
 				<div class="author-thumb">
 					<div class="more-dropdown more-with-triangle">
 						<div class="mCustomScrollbar" data-mcs-theme="dark">
@@ -363,7 +362,7 @@
 				</a>
 			</div>
 
-			<div class="author-page author vcard inline-items more" *ngIf="isLogin">
+			<div class="author-page author vcard inline-items more" *ngIf="isLogin==true">
 				<div class="author-thumb">
 					<img alt="author" src="./../../../../assets/img/img/user.jpeg" width="36" height="36" class="avatar">
 					<span class="icon-status online"></span>
