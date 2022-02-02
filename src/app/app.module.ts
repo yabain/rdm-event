@@ -7,6 +7,7 @@ import { SharedModule } from './shared/shared.module';
 import { NewsfeedComponent } from './pages/newsfeed/newsfeed.component';
 import { EventComponent } from './pages/event/event.component';
 import { EllectionsComponent } from './pages/ellections/ellections.component';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,9 @@ import { EllectionsComponent } from './pages/ellections/ellections.component';
     BrowserModule,
     AppRoutingModule,
     SharedModule
+  ],
+  exports: [
+    CommonModule
   ],
   providers: [],
   bootstrap: [AppComponent]

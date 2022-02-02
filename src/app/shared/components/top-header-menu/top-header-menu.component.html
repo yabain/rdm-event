@@ -3,20 +3,20 @@
 <header class="header" id="site-header">
 
 	<div class="page-title">
-		<h6>Newsfeed</h6>
+		<h6> Réseau des Montagnes </h6>
 	</div>
 
 	<div class="header-content-wrapper">
 		<form class="search-bar w-search notification-list friend-requests">
 			<div class="form-group with-button">
-				<input class="form-control js-user-search" placeholder="Search here people or pages..." type="text">
+				<input class="form-control js-user-search" placeholder="Que chercher-vous..." type="text">
 				<button>
 					<svg class="olymp-magnifying-glass-icon"><use xlink:href="#olymp-magnifying-glass-icon"></use></svg>
 				</button>
 			</div>
 		</form>
 
-		<a href="" class="link-find-friend">Find Friends</a>
+		<!-- <a href="" class="link-find-friend">Find Friends</a> -->
 
 		<div class="control-block">
 
@@ -326,14 +326,51 @@
 				</div>
 			</div>
 
-			<div class="author-page author vcard inline-items more">
+			<div class="author-page author vcard inline-items more" *ngIf="!isLogin">
 				<div class="author-thumb">
-					<img alt="author" src="./../../../assets/img/template/avatar/author-page.webp" width="36" height="36" class="avatar">
+					<div class="more-dropdown more-with-triangle">
+						<div class="mCustomScrollbar" data-mcs-theme="dark">
+							<div class="ui-block-title ui-block-title-small">
+								<h6 class="title">Rejoignez-nous</h6>
+							</div>
+
+							<ul class="account-settings">
+								<li>
+									<a routerLink="/login">
+
+										<i class="fa fa-sign-in fa-2x"></i>
+
+										<span style="padding-left: 8px;"> Se  connecter</span>
+									</a>
+								</li>
+								<li>
+									<a routerLink="/registration">
+										<i class="fa fa-wpforms fa-2x"></i>
+										<span style="padding-left: 8px;"> S'enregistrer</span>
+									</a>
+								</li>
+							</ul>
+
+						</div>
+
+					</div>
+				</div>
+				<a href="02-ProfilePage.html" class="author-name fn">
+					<div class="author-title">
+						Se connecter <svg class="olymp-dropdown-arrow-icon"><use xlink:href="#olymp-dropdown-arrow-icon"></use></svg>
+					</div>
+					<span class="author-subtitle" style="color: #fff;">S'enregistrer</span>
+				</a>
+			</div>
+
+			<div class="author-page author vcard inline-items more" *ngIf="isLogin">
+				<div class="author-thumb">
+					<img alt="author" src="./../../../../assets/img/img/user.jpeg" width="36" height="36" class="avatar">
 					<span class="icon-status online"></span>
 					<div class="more-dropdown more-with-triangle">
 						<div class="mCustomScrollbar" data-mcs-theme="dark">
 							<div class="ui-block-title ui-block-title-small">
-								<h6 class="title">Your Account</h6>
+								<h6 class="title">Mon compte</h6>
 							</div>
 
 							<ul class="account-settings">
@@ -342,7 +379,7 @@
 
 										<svg class="olymp-menu-icon"><use xlink:href="#olymp-menu-icon"></use></svg>
 
-										<span>Profile Settings</span>
+										<span>Paramètres</span>
 									</a>
 								</li>
 								<li>
