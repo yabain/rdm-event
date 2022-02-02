@@ -6,8 +6,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./newsfeed-list.component.scss']
 })
 export class NewsfeedListComponent implements OnInit {
+  isAuth: boolean;
+  isAdmin: boolean;
 
-  constructor() { }
+  constructor() { 
+    this.isAuth = true;
+    this.isAdmin = true;}
 
   ngOnInit(): void {
   }
