@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { LocalStorageService } from './shared/services/localstorage/localstorage.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,5 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'rdm-event';
+  constructor(protected localStorageService:LocalStorageService){}
 }

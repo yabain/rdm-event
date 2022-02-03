@@ -14,14 +14,16 @@ export abstract class AbstractCrudService<T extends Entity>
     constructor(
         protected firebaseApi:FirebaseDataBaseApi,
         protected localStorageService:LocalStorageService,
+        localstoragekey,
+        private entityCtor:{new () :T}
         
         )
     {
+        this.localstorage_key=localstoragekey
         this.localStorageService.getSubjectByKey(this.localstorage_key).subscribe((value)=>{
-
             if(!value) return;
             value.forEach((obj: Record<string | number, any>)=>{
-              let instance:T= <T> new Entity();
+              let instance:T= new this.entityCtor();
               instance.hydrate(obj);
               this.list.clear();
               this.list.set(instance.id.toString(),instance);
@@ -29,6 +31,10 @@ export abstract class AbstractCrudService<T extends Entity>
       
             this.listSubject.next(this.list)
           })
+    }
+    init()
+    {
+
     }
 
     setList(objs:Map<String,T>)

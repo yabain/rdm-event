@@ -15,14 +15,14 @@ import * as db_branch_builder from "./../../utils/functions/db-branch.builder"
   providedIn: 'root'
 })
 export class EvenementBussinessService extends AbstractCrudService<Evenement> {
+  override 
 
   constructor(
     firebaseApi:FirebaseDataBaseApi,
     localStorageService:LocalStorageService,
     private filActualiteService:FilActualiteService
   ) {
-    super(firebaseApi,localStorageService)
-    this.localstorage_key="evenements"
+    super(firebaseApi,localStorageService,"evenements",Evenement)
   }
 
   createNewEvent(event:Evenement):Promise<ActionStatus<boolean>>

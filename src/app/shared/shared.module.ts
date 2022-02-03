@@ -20,6 +20,7 @@ import { HeaderPageComponent } from './components/header-page/header-page.compon
 import { EllectHeadComponent } from './components/ellect-head/ellect-head.component';
 import { CandidatsListComponent } from './components/candidats-list/candidats-list.component';
 import { FormNewEventComponent } from "./components/form-new-event/form-new-event.component";
+import { TodayEventBreadcrumbComponent } from './components/today-event-breadcrumb/today-event-breadcrumb.component';
 
 
 
@@ -42,7 +43,9 @@ import { FormNewEventComponent } from "./components/form-new-event/form-new-even
     HeaderPageComponent,
     EllectHeadComponent,
     CandidatsListComponent,
-    FormNewEventComponent
+    FormNewEventComponent,
+    TodayEventBreadcrumbComponent,
+
   ],
   imports: [
     CommonModule,
@@ -67,7 +70,8 @@ import { FormNewEventComponent } from "./components/form-new-event/form-new-even
     HeaderPageComponent,
     EllectHeadComponent,
     CandidatsListComponent,
-    FormNewEventComponent
+    FormNewEventComponent,
+    TodayEventBreadcrumbComponent
   ]
 })
 export class SharedModule { }

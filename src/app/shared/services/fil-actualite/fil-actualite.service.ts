@@ -17,8 +17,7 @@ export class FilActualiteService extends AbstractCrudService<FilActualitePost> {
     firebaseApi:FirebaseDataBaseApi,
     localStrogeService:LocalStorageService
   ) { 
-    super(firebaseApi,localStrogeService)
-    this.localstorage_key="fil_actualite"
+    super(firebaseApi,localStrogeService,"fil_actualite",FilActualitePost)
   }
   loadNewBunchData():Promise<ActionStatus<void>>
   {

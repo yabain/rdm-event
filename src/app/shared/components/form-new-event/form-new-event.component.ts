@@ -28,11 +28,11 @@ export class FormNewEventComponent implements OnInit,AfterViewInit {
     /*moment.locale('uk');*/
     if (date_select_field.length) {
       var start = moment().subtract(29, 'days');
-
+      console.log("startDate",start)
       date_select_field.daterangepicker({
         minDate: '12/05/1900',
         startDate: start,
-        autoUpdateInput: false,
+        autoUpdateInput: true,
         singleDatePicker: true,
         showDropdowns: true,
         locale: {

@@ -1,0 +1,86 @@
+
+<!-- Today Events -->
+
+<div class="today-events calendar">
+    <div class="today-events-thumb">
+        <div class="date">
+            <div class="day-number">{{day}}</div>
+            <div class="day-week">{{month}}</div>
+            <div class="month-year">{{year}}</div>
+        </div>
+    </div>
+
+    <div class="list">
+        <div class="control-block-button">
+            <a class="btn btn-control bg-breez" data-bs-toggle="modal"
+                data-bs-target="#create-event">
+                <svg class="olymp-plus-icon">
+                    <use xlink:href="#olymp-plus-icon"></use>
+                </svg>
+            </a>
+        </div>
+        <div *ngIf="hasLoadData==true && eventList.length==0" class="">
+            <span class="text-center">Pas d'évènement dans votre calendrier aujourd'hui</span>
+        </div>
+        <div *ngIf="hasLoadData==false" class="loading">
+            Chargement de vos évènement...
+        </div>
+        <div *ngIf="hasLoadData==true" class="accordion day-event" id="accordionExample" [attr.data-month]="monthNum" [attr.data-day]="day">
+            
+            <div *ngFor="let event of eventList" class="accordion-item">
+                <div class="accordion-header" id="headingOne">
+                    <div class="event-time">
+                        <time class="published" [dateTime]="event.datetime">{{event.datetimeString}}</time>
+                        <div class="more">
+                            <svg class="olymp-three-dots-icon">
+                                <use xlink:href="#olymp-three-dots-icon"></use>
+                            </svg>
+                            <ul class="more-dropdown">
+                                <li *ngIf="event.type!='vote_event'">
+                                    <a>Réserver une place</a>
+                                </li>
+                                <li *ngIf="event.type=='vote_event'">
+                                    <a>Passer au vote</a>
+                                </li>
+                                <li>
+                                    <a>Aller voir</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                        [attr.data-bs-target]="event.id" aria-expanded="true"
+                        [attr.aria-controls]="event.controlsid">
+                        {{event.title}}
+                        <svg width="8" height="8">
+                            <use xlink:href="#olymp-dropdown-arrow-icon"></use>
+                        </svg>
+                        <span class="event-status-icon" data-bs-toggle="modal"
+                            data-bs-target="#public-event">
+                            <svg class="olymp-calendar-icon" data-bs-toggle="tooltip"
+                                data-bs-placement="top" data-bs-original-title="UNCOMPLETED">
+                                <use xlink:href="#olymp-calendar-icon"></use>
+                            </svg>
+                        </span>
+                    </button>
+                </div>
+                <div [id]="event.controlsid" class="accordion-collapse collapse"
+                    aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        {{event.description}}
+                        <div class="place inline-items">
+                            <svg class="olymp-add-a-place-icon">
+                                <use xlink:href="#olymp-add-a-place-icon"></use>
+                            </svg>
+                            <span>{{event.place}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+
+    </div>
+</div>
+
+<!-- ... end Today Events -->

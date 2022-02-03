@@ -24,7 +24,7 @@ export class UserService extends AbstractCrudService<User> {
     firebaseApi:FirebaseDataBaseApi,
     private authService:AuthService
   ) {
-      super(firebaseApi,localStorageService)
+      super(firebaseApi,localStorageService,"users_list",User)
   }
 
 
