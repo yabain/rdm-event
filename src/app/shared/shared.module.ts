@@ -21,6 +21,8 @@ import { EllectHeadComponent } from './components/ellect-head/ellect-head.compon
 import { CandidatsListComponent } from './components/candidats-list/candidats-list.component';
 import { FormNewEventComponent } from "./components/form-new-event/form-new-event.component";
 import { TodayEventBreadcrumbComponent } from './components/today-event-breadcrumb/today-event-breadcrumb.component';
+import { ProgressIndeterminateModule } from "./components/progress-indeterminate/progress-indeterminate.module";
+// import { ToastComponent } from './components/toast/toast.component';
 
 
 
@@ -45,13 +47,15 @@ import { TodayEventBreadcrumbComponent } from './components/today-event-breadcru
     CandidatsListComponent,
     FormNewEventComponent,
     TodayEventBreadcrumbComponent,
+    // ToastComponent,
 
   ],
   imports: [
     CommonModule,
     RouterModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ProgressIndeterminateModule
   ],
   exports:[
     PreloaderComponent,
@@ -72,6 +76,8 @@ import { TodayEventBreadcrumbComponent } from './components/today-event-breadcru
     CandidatsListComponent,
     FormNewEventComponent,
     TodayEventBreadcrumbComponent
+  ],
+  providers:[
   ]
 })
 export class SharedModule { }

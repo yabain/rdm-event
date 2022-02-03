@@ -20,7 +20,6 @@ export class EventComponent implements OnInit {
       this.day = this.maDate.getMonth();
       this.year =  this.maDate.getFullYear();
       this.month = this.maDate.getDay();
-      // console.log('jour: ' , this.day, ' mois: ', this.month, ' année: ', this.year);
   }
 
   ngOnInit(): void {

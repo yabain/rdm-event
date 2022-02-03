@@ -8,23 +8,28 @@ import { NewsfeedComponent } from './pages/newsfeed/newsfeed.component';
 import { EventComponent } from './pages/event/event.component';
 import { EllectionsComponent } from './pages/ellections/ellections.component';
 import { CommonModule } from '@angular/common';
+import { ProgressIndeterminateModule } from './shared/components/progress-indeterminate/progress-indeterminate.module';
+import { ToastComponent } from './shared/components/toast/toast.component';
+// import { NotificationService } from './shared/services/notification/notification.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     NewsfeedComponent,
     EventComponent,
-    EllectionsComponent
+    EllectionsComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    SharedModule
+    SharedModule,
+    ProgressIndeterminateModule
   ],
   exports: [
     CommonModule
   ],
-  providers: [],
+  providers: [
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

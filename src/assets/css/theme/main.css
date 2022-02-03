@@ -690,7 +690,7 @@ ul {
     transition: all 0.3s ease;
     margin: 0;
     padding: 0;
-    background-color: #3f4257;
+    background-color: #4e814c;
     background-color: var(--olympus-secondary-color);
     border-color: #e6ecf5;
     border-color: var(--olympus-border-color);
@@ -778,7 +778,7 @@ ul {
     background-color: var(--olympus-white-color);
 }
 .header--standard-dark {
-    background-color: #3f4257;
+    background-color: #4e814c;
     background-color: var(--olympus-secondary-color);
 }
 .header--standard-dark .column-tittle,
@@ -789,7 +789,7 @@ ul {
     color: var(--olympus-white-color);
 }
 .header--standard-dark .header-menu {
-    background-color: #3f4257;
+    background-color: #4e814c;
     background-color: var(--olympus-secondary-color);
 }
 .header--standard-dark .header-menu a {
@@ -800,7 +800,7 @@ ul {
     background-color: #545875;
 }
 .header--standard-dark .dropdown-menu {
-    background-color: #3f4257;
+    background-color: #4e814c;
     background-color: var(--olympus-secondary-color);
     border-color: #4a4d66;
 }
@@ -1777,7 +1777,7 @@ section {
     padding: 70px 55px;
 }
 .footer--dark {
-    background-color: #3f4257;
+    background-color: #4e814c;
     background-color: var(--olympus-secondary-color);
 }
 .footer--dark .socials i,
@@ -2134,7 +2134,7 @@ select {
     color: var(--olympus-primary-color);
 }
 .mobile-notification-tabs {
-    background-color: #3f4257;
+    background-color: #4e814c;
     background-color: var(--olympus-secondary-color);
     border-bottom-color: transparent;
     justify-content: space-around;
@@ -2754,7 +2754,7 @@ img {
     content: "\2b";
 }
 .number-spinner.input-group.number-spinner--secondary .input-group-btn > .btn {
-    background-color: #3f4257;
+    background-color: #4e814c;
     background-color: var(--olympus-secondary-color);
 }
 .number-spinner.input-group.number-spinner--breez .input-group-btn > .btn {
@@ -2804,7 +2804,7 @@ img {
 }
 :root {
     --olympus-primary-color: #4e814c;
-    --olympus-secondary-color: #3f4257;
+    --olympus-secondary-color: #4e814c;
     --olympus-placeholder-form-color: #888da8;
     --olympus-white-color: #fff;
     --olympus-heading-color: #515365;
@@ -3244,7 +3244,7 @@ button:hover {
     background-color: var(--olympus-smoke);
 }
 .btn-bg-secondary {
-    background-color: #3f4257;
+    background-color: #4e814c;
     background-color: var(--olympus-secondary-color);
 }
 .btn-light-bg,
@@ -3623,11 +3623,11 @@ select.form-control {
     font-size: 9px;
     text-transform: uppercase;
     font-weight: 500;
-    border: 1px solid #3f4257 !important;
+    border: 1px solid #4e814c !important;
     border: 1px solid var(--olympus-secondary-color) !important;
 }
 .tooltip-secondary .tooltip-inner {
-    background-color: #3f4257;
+    background-color: #4e814c;
     background-color: var(--olympus-secondary-color);
 }
 .tooltip-primary .tooltip-inner {
@@ -3781,7 +3781,7 @@ fieldset[disabled] .form-group.is-focused .togglebutton label {
     cursor: pointer;
 }
 .file-upload__label {
-    background-color: #3f4257;
+    background-color: #4e814c;
     background-color: var(--olympus-secondary-color);
     display: block;
     color: #fff;
@@ -5447,7 +5447,7 @@ fieldset[disabled] .checkbox input[type="checkbox"] {
     color: var(--olympus-white-color);
     fill: #fff;
     fill: var(--olympus-white-color);
-    background-color: #3f4257;
+    background-color: #4e814c;
     background-color: var(--olympus-secondary-color);
     margin: 0 auto 35px;
 }
@@ -7104,6 +7104,99 @@ ol ol li {
 .friends-harmonic-wrap + .comments-shared {
     margin-top: 15px;
 }
+/* //////// */
+
+@media (max-width: 2560px) {
+  .has-post-thumbnail .post {
+    width: 100%;
+    height: 370px;
+    background-size: cover;
+    background-position: center;
+    margin-top: 10px;
+  }
+}
+
+@media (max-width: 1490px) {
+  .has-post-thumbnail .post {
+    width: 100%;
+    height: 375px;
+    background-size: cover;
+    background-position: center;
+    margin-top: 10px;
+  }
+}
+
+@media (max-width: 1250px) {
+  .has-post-thumbnail .post {
+    width: 100%;
+    height: 375px;
+    background-size: cover;
+    background-position: center;
+    margin-top: 10px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .has-post-thumbnail .post {
+    width: 100%;
+    height: 350px;
+    background-size: cover;
+    background-position: center;
+    margin-top: 10px;
+  }
+}
+
+@media (max-width: 770px) {
+  .has-post-thumbnail .post {
+    width: 100%;
+    height: 300px;
+    background-size: cover;
+    background-position: center;
+    margin-top: 10px;
+  }
+}
+
+@media (max-width: 550px) {
+  .has-post-thumbnail .post {
+    width: 100%;
+    height: 200px;
+    background-size: cover;
+    background-position: center;
+    margin-top: 10px;
+  }
+}
+
+@media (max-width: 425px) {
+  .has-post-thumbnail .post {
+    width: 100%;
+    height: 200px;
+    background-size: cover;
+    background-position: center;
+    margin-top: 10px;
+  }
+}
+
+@media (max-width: 375px) {
+  .has-post-thumbnail .post {
+    width: 100%;
+    height: 170px;
+    background-size: cover;
+    background-position: center;
+    margin-top: 10px;
+  }
+}
+
+
+@media (max-width: 320px) {
+  .has-post-thumbnail .post {
+    width: 100%;
+    height: 150px;
+    background-size: cover;
+    background-position: center;
+    margin-top: 10px;
+  }
+}
+
 .post {
     padding: 25px;
     border-bottom: 1px solid #e6ecf5;
@@ -9398,7 +9491,7 @@ ol ol li {
     position: relative;
 }
 .blog-post.format-slider .swiper-pagination {
-    background-color: #3f4257;
+    background-color: #4e814c;
     background-color: var(--olympus-secondary-color);
     padding: 0 5px;
     border-radius: 30px;
@@ -11530,7 +11623,7 @@ ol ol li {
     background-color: var(--olympus-primary-color);
 }
 .bg-secondary {
-    background-color: #3f4257;
+    background-color: #4e814c;
     background-color: var(--olympus-secondary-color);
 }
 .bg-purple {
@@ -11622,7 +11715,7 @@ ol ol li {
     color: var(--olympus-orange);
 }
 .c-secondary {
-    color: #3f4257;
+    color: #4e814c;
     color: var(--olympus-secondary-color);
 }
 .c-yellow {
@@ -12846,7 +12939,7 @@ ol ol li {
     margin-right: 0;
     top: 0;
     left: 0;
-    border: 1px solid #3f4257;
+    border: 1px solid #4e814c;
     border: 1px solid var(--olympus-secondary-color);
     width: 8px;
     height: 8px;

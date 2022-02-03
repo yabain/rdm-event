@@ -20,10 +20,28 @@
             </a>
         </div>
         <div *ngIf="hasLoadData==true && eventList.length==0" class="">
-            <span class="text-center">Pas d'évènement dans votre calendrier aujourd'hui</span>
+            <div class="accordion day-event" id="accordionExample" data-month="12" data-day="2">
+                <div class="accordion-item">
+                    <div class="accordion-header" id="headingOne">
+                        <div class="event-time">
+                            <time datetime="2004-07-24T18:18">Pas d'évènement dans votre calendrier aujourd'hui</time>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <div *ngIf="hasLoadData==false" class="loading">
-            Chargement de vos évènement...
+            <div class="accordion day-event" id="accordionExample" data-month="12" data-day="2">
+                <div class="accordion-item">
+                    <div class="accordion-header" id="headingOne">
+                        <div class="event-time">
+                            <time datetime="2004-07-24T18:18">Chargement de vos évènement du jour...</time>
+                        </div>
+                    </div>
+                    <app-progress-indeterminate></app-progress-indeterminate>
+                </div>
+            </div>
+            
         </div>
         <div *ngIf="hasLoadData==true" class="accordion day-event" id="accordionExample" [attr.data-month]="monthNum" [attr.data-day]="day">
             
