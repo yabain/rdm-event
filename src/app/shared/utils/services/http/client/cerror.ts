@@ -11,7 +11,7 @@ export class CError extends Entity
     message:String="";
 
     
-    toString() 
+    override toString() 
     {
         return {
            
@@ -19,7 +19,7 @@ export class CError extends Entity
     }
 
    
-    hydrate(entity: Entity): void {
+    override hydrate(entity: Entity): void {
         throw new Error("Method not implemented.");
     }
 }

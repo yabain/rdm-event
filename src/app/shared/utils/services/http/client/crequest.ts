@@ -121,7 +121,7 @@ export class CRequest extends Entity
         return formData;
     }
 
-    toString()
+    override toString()
     {
         let data={};
         if(this.requestType=="form-data") data= this.toFormData();

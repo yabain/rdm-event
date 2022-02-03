@@ -1093,7 +1093,7 @@
 <div class="modal fade" id="create-event" tabindex="-1" role="dialog" aria-labelledby="create-event" aria-hidden="true">
 	<div class="modal-dialog window-popup create-event" role="document">
 		<div class="modal-content">
-			<a class="close icon-close" data-bs-dismiss="modal" aria-label="Close">
+			<a class="close icon-close" id="event-form-closed"  data-bs-dismiss="modal" aria-label="Close">
 				<svg class="olymp-close-icon">
 					<use xlink:href="#olymp-close-icon"></use>
 				</svg>
@@ -1103,7 +1103,7 @@
 			</div>
 
 			<div class="modal-body">
-				<app-form-new-event></app-form-new-event>
+				<app-form-new-event (submitSuccessCreatedEvent)="closeCreateEventForm()"></app-form-new-event>
 
 			</div>
 		</div>

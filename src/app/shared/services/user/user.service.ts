@@ -18,7 +18,7 @@ import * as db_branch_builder from "./../../utils/functions/db-branch.builder"
   providedIn: 'root'
 })
 export class UserService extends AbstractCrudService<User> {
-
+  
   constructor(
     localStorageService:LocalStorageService,
     firebaseApi:FirebaseDataBaseApi,
@@ -55,6 +55,8 @@ export class UserService extends AbstractCrudService<User> {
   updateUser(user: User):  Promise<ActionStatus<User>> {
     return this.update(user,db_branch_builder.getBranchOfUser(user.id))
   }
-
+  getUserById(userID: EntityID):Promise<ActionStatus<User>> {
+    return this.findByID(userID,db_branch_builder.getBranchOfUser(userID))
+  }
 
 }

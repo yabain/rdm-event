@@ -1,7 +1,9 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Evenement } from '../../entities';
 import { EvenementBussinessService } from '../../services/evenement-bussiness/evenement-bussiness.service';
+import { UserProfilService } from '../../services/user-profil/user-profil.service';
+import { ToastrNotificationService } from '../../utils/services/toastr-notification/toastr-notification.service';
 
 declare var $:any;
 declare var moment:any;
@@ -14,7 +16,12 @@ declare var moment:any;
 export class FormNewEventComponent implements OnInit,AfterViewInit {
   form:FormGroup;
   submited:boolean=false;
-  constructor(private evenementService:EvenementBussinessService) { }
+  @Output() submitSuccessCreatedEvent:EventEmitter<void>=new EventEmitter()
+  constructor(
+    private evenementService:EvenementBussinessService,
+    private toastNotification:ToastrNotificationService,
+    private profilService:UserProfilService
+    ) { }
 
   ngAfterViewInit(): void {
     var date_select_field = $('input[name="datetimepicker"]');
@@ -74,7 +81,6 @@ export class FormNewEventComponent implements OnInit,AfterViewInit {
     this.submited=true;
     let event:Evenement=new Evenement();
     event.hydrate(this.form.value);
-    
     document.querySelector("#btn_submit").textContent="Patientez...";
     (document.querySelector("#btn_submit") as HTMLButtonElement).disabled=true;
     //Créer l'évènement
@@ -83,6 +89,14 @@ export class FormNewEventComponent implements OnInit,AfterViewInit {
       document.querySelector("#btn_submit").textContent="Créer l'évènement";
       (document.querySelector("#btn_submit") as HTMLButtonElement).disabled=false;
       this.submited=false;
+      this.toastNotification.successNofitication("Evenement créé avec succés")
+      this.submitSuccessCreatedEvent.emit()
+    })
+    .catch((error)=>{
+      this.submited=false;
+      document.querySelector("#btn_submit").textContent="Créer l'évènement";
+      (document.querySelector("#btn_submit") as HTMLButtonElement).disabled=false;
+      this.toastNotification.errorNotification(`Erreur lors de la création de l'événement: ${error.message}`)
     })
   }
 

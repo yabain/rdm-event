@@ -11,10 +11,11 @@ export class Evenement extends Entity
     startDate:String="";
     startTime:String="";
     endTime:String="";
-
+    eventOwner:EntityID=new EntityID()
     endDate:String=""
     description:String="";
     urlBanner:String=""
+    createdDate:String=new Date().toISOString()
     scopeVisibilityAction:EventScopeAction=EventScopeAction.PERSONNAL;
     selectedGroupVisibilityAction:String="";
     eventType:EventType=EventType.VOTE_EVENT;
@@ -27,7 +28,8 @@ export class Evenement extends Entity
         for(const key of Object.keys(entity))
         {
             if(key=="id") this.id.setId(entity[key]);
-            if(key=="actions") this.actions=entity[key].map((action)=>{
+            if(key=="eventOwner") this.eventOwner.setId(entity[key]);
+            else if(key=="actions") this.actions=entity[key].map((action)=>{
                 let act = UserActionBuilder(action)
                 act.hydrate(action)
                 return act
@@ -42,7 +44,8 @@ export class Evenement extends Entity
         for(const k of Object.keys(this))
         {
             if(k=="id") r[k]=this.id.toString();
-            if(k=="actions") r[k]=this.actions.map((action)=>action.toString());
+            if(k=="eventOwner") r[k]=this.eventOwner.toString();
+            else if(k=="actions") r[k]=this.actions.map((action)=>action.toString());
             else r[k]=Reflect.get(this,k);
         }
         return r;

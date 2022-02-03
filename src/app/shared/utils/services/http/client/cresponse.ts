@@ -43,7 +43,7 @@ export class CResponse extends Entity
         return this;
     }
    
-    toString() 
+    override toString() 
     {
         return {
            config:this._config,
@@ -53,7 +53,7 @@ export class CResponse extends Entity
         }
     }
 
-    hydrate(entity: Entity): void {
+    override hydrate(entity: Entity): void {
         
     }
 

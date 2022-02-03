@@ -1,7 +1,7 @@
 import { Injectable, isDevMode } from '@angular/core';
 import { initializeApp } from 'firebase/app';
 import { getAuth,signOut , createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
-import {getDatabase } from 'firebase/database';
+import {getDatabase, ref, set } from 'firebase/database';
 import { getStorage } from "firebase/storage";
 import { ActionStatus } from '../../../others/actionstatus';
 import { FireBaseConstant } from './firebase-constant'
@@ -25,25 +25,44 @@ export class FirebaseDataBaseApi {
     if (isDevMode()) {
       console.log("Dev Mode")
       FirebaseDataBaseApi.firebaseConfig= {
-        apiKey: "AIzaSyBZsYMP0JCT5qYXAf-ptlEWnTVXW2CPhv4",
-        authDomain: "rhyscitlema-chatonline.firebaseapp.com",
-        projectId: "rhyscitlema-chatonline",
-        storageBucket: "rhyscitlema-chatonline.appspot.com",
-        messagingSenderId: "310036780903",
-        appId: "1:310036780903:web:e65c228dc6a65173bd41c2"
+        apiKey: "AIzaSyD31cRxzdmCgYMX_trB9ZVndWyLcprc1Fk",
+
+        authDomain: "rdm-event.firebaseapp.com",
+      
+        databaseURL: "https://rdm-event-default-rtdb.firebaseio.com",
+      
+        projectId: "rdm-event",
+      
+        storageBucket: "rdm-event.appspot.com",
+      
+        messagingSenderId: "421117252824",
+      
+        appId: "1:421117252824:web:57ed9ce01fe61b2ece33ad",
+      
+        measurementId: "G-8W1L58D71W"
+      
       };
     }
     else
     {
       console.log("prod mode")
       FirebaseDataBaseApi.firebaseConfig= {
-        apiKey: "AIzaSyCewAAAU1DwfZdoz44iLHwbHj7wlL2FSM0",
-        authDomain: "udm-inscription.firebaseapp.com",
-        projectId: "udm-inscription",
-        storageBucket: "udm-inscription.appspot.com",
-        messagingSenderId: "858214994197",
-        appId: "1:858214994197:web:ef0ddb7cba242eaa86591c",
-        measurementId: "G-JELPVPNT34"
+        apiKey: "AIzaSyD31cRxzdmCgYMX_trB9ZVndWyLcprc1Fk",
+
+        authDomain: "rdm-event.firebaseapp.com",
+      
+        databaseURL: "https://rdm-event-default-rtdb.firebaseio.com",
+      
+        projectId: "rdm-event",
+      
+        storageBucket: "rdm-event.appspot.com",
+      
+        messagingSenderId: "421117252824",
+      
+        appId: "1:421117252824:web:57ed9ce01fe61b2ece33ad",
+      
+        measurementId: "G-8W1L58D71W"
+      
         };
     }
 
@@ -87,7 +106,7 @@ export class FirebaseDataBaseApi {
   set(url: string, value: any): Promise<ActionStatus<any>> {
     let action = new ActionStatus<any>();
     return new Promise<ActionStatus<any>>((resolve, reject) => {
-      this.db.ref(url).set(value).then(() => {
+      set(ref(this.db,url),value).then(() => {
         action.message = 'success';
         action.description = 'successful set new collection';
         resolve(action);

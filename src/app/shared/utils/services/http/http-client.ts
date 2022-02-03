@@ -1,5 +1,5 @@
 
-import { ActionStatus } from "../firebase";
+import { ActionStatus } from "src/app/shared/others/actionstatus";
 import { CRequest } from "./client/crequest";
 
 /**
@@ -9,5 +9,5 @@ import { CRequest } from "./client/crequest";
  */
 export abstract class HttpClient
 {
-    abstract sendRequest(request:CRequest):Promise<ActionStatus>
+    abstract sendRequest(request:CRequest):Promise<ActionStatus<any>>
 }

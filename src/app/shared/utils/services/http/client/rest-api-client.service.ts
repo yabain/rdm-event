@@ -9,11 +9,11 @@ import { CRequest } from "./crequest";
 import { CResponse } from "./cresponse";
 import { CError } from "./cerror";
 import { Injectable } from "@angular/core";
-import { ActionStatus } from "../../firebase";
 
 import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { LocalStorageService } from "src/app/shared/services/localstorage/localstorage.service";
 import { BehaviorSubject } from "rxjs";
+import { ActionStatus } from "src/app/shared/others/actionstatus";
 
 @Injectable({
     providedIn:"root"
@@ -48,9 +48,9 @@ export class RestApiClientService extends CustomHttpClient
             }
         })  )
     }
-    sendRequest(request:CRequest):Promise<ActionStatus>
+    sendRequest(request:CRequest):Promise<ActionStatus<any>>
     {
-        return new Promise<ActionStatus>((resolve,reject)=>{
+        return new Promise<ActionStatus<any>>((resolve,reject)=>{
             let actionResult=new ActionStatus();
             let r=request.toString();
             console.log("body ",request.getData())

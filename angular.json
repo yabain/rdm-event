@@ -34,6 +34,7 @@
               "src/styles.scss",
               "src/assets/css/theme/theme-font.css",
               "src/assets/css/bootstrap/bootstrap.css",
+              "node_modules/awesome-notifications/dist/style.css",
               "src/assets/css/theme/main.css"
             ],
             "scripts": [
@@ -53,6 +54,7 @@
               "src/assets/js/plugins/bootstrap/bootstrap.bundle.min.js",
               "src/assets/js/plugins/svg-loader/svg-loader.js",
               "src/assets/js/plugins/full-calendar/fullcalendar.js",
+              "node_modules/awesome-notifications/dist/index.var.js",
               "src/assets/js/theme/theme-init.js"
             ]
           },

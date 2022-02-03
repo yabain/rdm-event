@@ -26,5 +26,9 @@ export class EventComponent implements OnInit {
   ngOnInit(): void {
     
   }
+  closeCreateEventForm()
+  {
+    (<HTMLElement>document.querySelector("#event-form-closed")).click()
+  }
 
 }
