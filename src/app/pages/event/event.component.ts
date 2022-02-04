@@ -9,6 +9,7 @@ import { DatePipe } from '@angular/common';
   providers: [DatePipe]
 })
 export class EventComponent implements OnInit {
+  nombreEvent : number = 0 ; // Nombre total d'évènements
 
   maDate = new Date();
   day: any;
@@ -20,6 +21,7 @@ export class EventComponent implements OnInit {
       this.day = this.maDate.getMonth();
       this.year =  this.maDate.getFullYear();
       this.month = this.maDate.getDay();
+      this.nombreEvent = 5;
   }
 
   ngOnInit(): void {

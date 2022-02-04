@@ -13,10 +13,17 @@
 							</a>
 						</li>
 
-						<li class="nav-item" role="presentation">
+						<li class="nav-item" role="presentation" *ngIf="nombreEvent==0">
 							<a class="nav-link" id="notifications-tab" data-bs-toggle="tab" href="#notifications"
 								role="tab" aria-controls="home" aria-selected="false">
-								Évènements <span class="items-round-little bg-breez">3</span>
+								Évènements
+							</a>
+						</li>
+
+						<li class="nav-item" role="presentation" *ngIf="nombreEvent!=0">
+							<a class="nav-link" id="notifications-tab" data-bs-toggle="tab" href="#notifications"
+								role="tab" aria-controls="home" aria-selected="false">
+								Évènements <span class="items-round-little bg-breez">{{nombreEvent}}</span>
 							</a>
 						</li>
 
@@ -113,11 +120,9 @@
 									</td>
 									<td class="upcoming">
 										<div class="date-event inline-items align-left">
-											<svg class="olymp-small-calendar-icon">
-												<use xlink:href="#olymp-small-calendar-icon"></use>
-											</svg>
 
-											<span class="month">05 Fév 2022 à 19:00</span>
+											<span class="month"><b>Début:</b> 05 Fév 2022 à 19:00</span> <br>
+											<span class="month"><b>Fin:</b> 05 Fév 2022 à 19:00</span>
 
 										</div>
 									</td>
@@ -201,7 +206,8 @@
 												<use xlink:href="#olymp-small-calendar-icon"></use>
 											</svg>
 
-											<span class="month">du 02 au 05 Fév 2022 à 20:00</span>
+											<span class="month"><b>Début:</b> 05 Fév 2022 à 19:00</span> <br>
+											<span class="month"><b>Fin:</b> 05 Fév 2022 à 19:00</span>
 
 										</div>
 									</td>
@@ -281,7 +287,8 @@
 												<use xlink:href="#olymp-small-calendar-icon"></use>
 											</svg>
 
-											<span class="month">Dec 29, 2016 at 7:00pm</span>
+											<span class="month"><b>Début:</b> 05 Fév 2022 à 19:00</span> <br>
+											<span class="month"><b>Fin:</b> 05 Fév 2022 à 19:00</span>
 
 										</div>
 									</td>
@@ -574,8 +581,8 @@
 							<svg class="olymp-three-dots-icon">
 								<use xlink:href="#olymp-three-dots-icon"></use>
 							</svg>
-							<ul class="more-dropdown">
-								<!-- <li>
+							<!-- <ul class="more-dropdown">
+								<li>
 									<a >Edit Event Settings</a>
 								</li>
 								<li>
@@ -583,8 +590,8 @@
 								</li>
 								<li>
 									<a >Delete Event</a>
-								</li> -->
-							</ul>
+								</li>
+							</ul> -->
 						</div>
 					</div>
 
