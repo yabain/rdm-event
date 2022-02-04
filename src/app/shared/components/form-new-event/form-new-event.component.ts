@@ -28,7 +28,6 @@ export class FormNewEventComponent implements OnInit,AfterViewInit {
     /*moment.locale('uk');*/
     if (date_select_field.length) {
       var start = moment().subtract(29, 'days');
-      console.log("startDate",start)
       date_select_field.daterangepicker({
         minDate: '12/05/1900',
         startDate: start,
@@ -75,12 +74,12 @@ export class FormNewEventComponent implements OnInit,AfterViewInit {
 
   submit()
   {
-    console.log("Value ",this.form.value)
 
     if(!this.form.valid) return;
     this.submited=true;
     let event:Evenement=new Evenement();
     event.hydrate(this.form.value);
+    console.log("event ",event,event.toString())
     document.querySelector("#btn_submit").textContent="Patientez...";
     (document.querySelector("#btn_submit") as HTMLButtonElement).disabled=true;
     //Créer l'évènement
@@ -91,6 +90,7 @@ export class FormNewEventComponent implements OnInit,AfterViewInit {
       this.submited=false;
       this.toastNotification.successNofitication("Evenement créé avec succés")
       this.submitSuccessCreatedEvent.emit()
+      this.form.reset()
     })
     .catch((error)=>{
       this.submited=false;

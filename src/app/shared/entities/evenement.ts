@@ -44,7 +44,7 @@ export class Evenement extends Entity
         for(const k of Object.keys(this))
         {
             if(k=="id") r[k]=this.id.toString();
-            if(k=="eventOwner") r[k]=this.eventOwner.toString();
+            else if(k=="eventOwner") r[k]=this.eventOwner.toString();
             else if(k=="actions") r[k]=this.actions.map((action)=>action.toString());
             else r[k]=Reflect.get(this,k);
         }

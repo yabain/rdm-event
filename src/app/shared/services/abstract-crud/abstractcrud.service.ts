@@ -22,13 +22,13 @@ export abstract class AbstractCrudService<T extends Entity>
         this.localstorage_key=localstoragekey
         this.localStorageService.getSubjectByKey(this.localstorage_key).subscribe((value)=>{
             if(!value) return;
+            console.log("Value ",value)
             value.forEach((obj: Record<string | number, any>)=>{
               let instance:T= new this.entityCtor();
               instance.hydrate(obj);
-              this.list.clear();
               this.list.set(instance.id.toString(),instance);
             });
-      
+            console.log("List ",this.list)
             this.listSubject.next(this.list)
           })
     }

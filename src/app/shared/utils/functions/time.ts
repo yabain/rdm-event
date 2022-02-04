@@ -21,4 +21,20 @@ export class UtilTime
     {
         return monthStringList[num]
     }
+    static getDateFromString(dateString):Date
+    {
+        let d = new Date()
+        d.setFullYear(parseInt(dateString.split("/")[2]))
+        d.setMonth(parseInt(dateString.split("/")[1])-1)
+        d.setDate(parseInt(dateString.split("/")[0]))
+        return d;
+    }
+    static getMonthNumberFromDate(d:Date):String
+    {
+        return `${(d.getMonth()+1)<10?"0"+(d.getMonth()+1):(d.getMonth()+1)}`
+    }
+    static getDateNumberFromDate(d:Date):String
+    {
+        return `${(d.getDate()+1)<10?"0"+(d.getDate()+1):(d.getDate()+1)}`
+    }
 }
