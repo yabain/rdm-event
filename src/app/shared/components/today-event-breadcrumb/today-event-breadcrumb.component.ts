@@ -49,40 +49,14 @@ export class TodayEventBreadcrumbComponent implements OnInit {
         return now>=d1 && now<=d2
       })
       .map((event)=>{
-        let d=new Date();
-        d.setFullYear(parseInt(event.startDate.toString().split("/")[2]))
-        d.setMonth(parseInt(event.startDate.toString().split("/")[1])-1)
-        d.setDate(parseInt(event.startDate.toString().split("/")[0]))
-
-        d.setHours(parseInt(event.startTime.split(":")[0]))
-        d.setMinutes(parseInt(event.startTime.split(":")[1]))
-
-        let d2 = new Date()
-        d2.setFullYear(parseInt(event.endDate.toString().split("/")[2]))
-        d2.setMonth(parseInt(event.endDate.toString().split("/")[1])-1)
-        d2.setDate(parseInt(event.endDate.toString().split("/")[0]))
-
-        let sd= UtilTime.getFormatDayAndMonth(d)
-        let stringTitle= sd.split(" ")[0];
-        if(d.getMonth()!=d2.getMonth())
-        {
-          stringTitle=`${sd} - ${UtilTime.getFormatDayAndMonth(d2)}`;
-        }
-        else if(d.getDate()!=d2.getDate())
-        {
-          let sd2=UtilTime.getFormatDayAndMonth(d2)
-          stringTitle+=` - ${sd2.split(" ")[0]} ${sd2.split(" ")[1]}`
-        }
-        else {
-          stringTitle=sd;
-        }
+       let d = UtilTime.getDateFromString(event.startDate)
 
         return {
           id:`#${event.id.toString().toString().replace(/[0-9]*/g,"")}`,
           controlsid:event.id.toString().toString().replace(/[0-9]*/g,""),
           datetime:d.toISOString(),
           idEvent:event.id.toString(),
-          datetimeString:stringTitle,
+          datetimeString:UtilTime.getStringIntervalDateFromString(event.startDate,event.startTime,event.endDate,event.endTime),
           title:event.name,
           type:event.eventType,
           place:event.place,

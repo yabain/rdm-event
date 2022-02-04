@@ -374,7 +374,7 @@
 							<a class="h3 event-title">{{selectedEvent.name}}</a>
 							<div class="event__date">
 								<time class="published" datetime="2017-03-24T18:18">
-									{{selectedEvent.getStringEventDate()}}
+									 {{selectedEvent.getStringEventDate()}}
 								</time>
 							</div>
 						</div>
@@ -437,12 +437,12 @@
 										<span>{{selectedEvent.place}}</span>
 									</div>
 	
-									<!-- <div class="place inline-items">
+									<div class="place inline-items">
 										<svg class="olymp-add-a-place-icon">
 											<use xlink:href="#olymp-add-a-place-icon"></use>
 										</svg>
-										<span>Mar 26, 2016 at 9:00am UTC-8</span>
-									</div> -->
+										<span>{{selectedEvent.getStringIntervalEventDate()}}</span>
+									</div>
 	
 									<ul class="friends-harmonic">
 										<li>
@@ -464,28 +464,26 @@
 											</a>
 										</li>
 										<li>
-											<a>
-												<img loading="lazy" src="./../../../assets/img/img/user.jpeg" alt="friend"
-													width="28" height="28">
+											<a class="all-users bg-breez">
+												<span *ngIf="selectedEvent.getSpecialActionNumber()!=0">+</span>
+												{{selectedEvent.getSpecialActionNumber()}}
 											</a>
-										</li>
-										<li>
-											<a>
-												<img loading="lazy" src="./../../../assets/img/img/user.jpeg" alt="friend"
-													width="28" height="28">
-											</a>
-										</li>
-										<li>
-											<a class="all-users bg-breez">+64</a>
 										</li>
 	
 										<li class="with-text">
-											Vont assister.
+
+											<span *ngIf="selectedEvent.eventType=='vote_event'">
+												<span *ngIf="selectedEvent.getSpecialActionNumber()==0">Aucun vote</span>
+												<span *ngIf="selectedEvent.getSpecialActionNumber()!=0">Personnes Ont votés.</span>
+												
+											</span>
+											<span *ngIf="selectedEvent.eventType!='vote_event'">Vont assister.</span>
+
 										</li>
 									</ul>
 	
-									<a class="btn btn-blue btn-sm full-width">Acheter un billet</a>
-	
+									<a class="btn btn-blue btn-sm full-width" *ngIf="selectedEvent.eventType=='vote_event'">Passer au vote</a>
+									<a class="btn btn-blue btn-sm full-width" *ngIf="selectedEvent.eventType!='vote_event'">Acheter le billet</a>
 									<a class="btn btn-breez btn-sm full-width">Contacter l'organisation</a>
 								</div>
 							</div>
@@ -498,7 +496,7 @@
 								<svg class="olymp-heart-icon">
 									<use xlink:href="#olymp-heart-icon"></use>
 								</svg>
-								<span>17</span>
+								<span>{{selectedEvent.getLikeNumber()}}</span>
 							</a>
 	
 							<div class="names-people-likes">

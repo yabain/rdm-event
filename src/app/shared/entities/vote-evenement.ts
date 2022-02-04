@@ -1,4 +1,5 @@
 import { Entity, Evenement } from ".";
+import { EventType } from "../enum";
 import { UserActionType } from "../enum/useraction.enum";
 import { UserActionBuilder } from "../utils/functions";
 import { VoteCandidate } from "./votecandidate";
@@ -6,6 +7,7 @@ import { VoteCandidate } from "./votecandidate";
 export class VoteEvenement extends Evenement
 {
     candidates:VoteCandidate[]=[];
+    override eventType:EventType=EventType.VOTE_EVENT
     
     override hydrate(entity: Record<string | number,any>):void
     {
@@ -27,9 +29,13 @@ export class VoteEvenement extends Evenement
     }
     getVoteNumber()
     {
-        this.getActionByType(UserActionType.COMMENT_ACTION).length
+        return this.getActionByType(UserActionType.VOTE_ACTION).length
     }
 
+    override getSpecialActionNumber()
+    {
+        return this.getVoteNumber()
+    }
     override toString():Record<string | number,any>
     {
         let r={};

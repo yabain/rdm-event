@@ -31,12 +31,18 @@ export class UtilTime
     {
         return monthStringList[num]
     }
-    static getDateFromString(dateString):Date
+    static getDateFromString(dateString,timeString=null):Date
     {
         let d = new Date()
         d.setFullYear(parseInt(dateString.split("/")[2]))
         d.setMonth(parseInt(dateString.split("/")[1])-1)
         d.setDate(parseInt(dateString.split("/")[0]))
+
+        if(timeString)
+        {
+            d.setHours(parseInt(timeString.split(":")[0]))
+            d.setMinutes(parseInt(timeString.split(":")[1]))
+        }
         return d;
     }
     static getMonthNumberFromDate(d:Date):String
@@ -50,5 +56,30 @@ export class UtilTime
     static getTimeFromDate(d:Date):String
     {
         return `${d.getHours()<10?"0"+d.getHours():d.getHours()}:${d.getMinutes()<10?"0"+d.getMinutes():d.getMinutes()}`
+    }
+
+    static getStringIntervalDateFromString(startDate,startTime,endDate,endTime)
+    {
+        let d=UtilTime.getDateFromString(startDate,startTime);
+        
+
+        let d2 = UtilTime.getDateFromString(endDate)
+       
+
+        let sd= UtilTime.getFormatDayAndMonth(d)
+        let stringTitle= sd.split(" ")[0];
+        if(d.getMonth()!=d2.getMonth())
+        {
+          stringTitle=`${sd} - ${UtilTime.getFormatDayAndMonth(d2)}`;
+        }
+        else if(d.getDate()!=d2.getDate())
+        {
+          let sd2=UtilTime.getFormatDayAndMonth(d2)
+          stringTitle+=` - ${sd2.split(" ")[0]} ${sd2.split(" ")[1]}`
+        }
+        else {
+          stringTitle=sd;
+        }
+        return stringTitle
     }
 }

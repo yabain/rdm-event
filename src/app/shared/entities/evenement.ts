@@ -37,20 +37,35 @@ export class Evenement extends Entity
         }
         return ""
     }
+    getStringIntervalEventDate()
+    {
+        return UtilTime.getStringIntervalDateFromString(this.startDate,this.startTime,this.endDate,this.endTime)
+    }
     getStringEventDate()
     {
         if(this.startDate=="") return "Chargement de données..."
-        let d = UtilTime.getDateFromString(this.createdDate)
+
+        if(this.state==EventState.PUBLISHED)
+        {
+            let pd=new Date(this.datePublication);
+            return `Publié ${weekStringList[pd.getDay()]} ${UtilTime.getDateNumberFromDate(pd)} ${UtilTime.getMonthStringByNumber(pd.getMonth())} à ${UtilTime.getTimeFromDate(pd)}`
+        }
+        
         let cd = new Date(this.createdDate.toString())
-        return `${weekStringList[d.getDay()]} ${UtilTime.getDateNumberFromDate(d)} ${UtilTime.getMonthStringByNumber(d.getMonth())} à ${UtilTime.getTimeFromDate(cd)}`
+        return `Créer ${weekStringList[cd.getDay()]} ${UtilTime.getDateNumberFromDate(cd)} ${UtilTime.getMonthStringByNumber(cd.getMonth())} à ${UtilTime.getTimeFromDate(cd)}`
     }
     getCommentNumber()
     {
-        this.getActionByType(UserActionType.COMMENT_ACTION).length
+        return this.getActionByType(UserActionType.COMMENT_ACTION).length
     }
     getLikeNumber()
     {
-        this.getActionByType(UserActionType.LIKE_ACTION).length
+        return this.getActionByType(UserActionType.LIKE_ACTION).length
+    }
+
+    getSpecialActionNumber()
+    {
+        return 0;
     }
 
     getActionByType(type:UserActionType)
