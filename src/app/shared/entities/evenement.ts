@@ -4,6 +4,7 @@ import { weekStringList } from "../utils/functions/time";
 import { EventScopeAction, EventState, EventType, UserAction } from "./../enum";
 import { Entity } from "./entity";
 import { EntityID } from "./entityid";
+import { CategorieEvenement } from "./vote-evenement";
 
 export class Evenement extends Entity
 {
@@ -23,7 +24,7 @@ export class Evenement extends Entity
     eventType:EventType=EventType.VOTE_EVENT;
     actions:UserAction[]=[];
     datePublication:number=0
-
+    
     getStringScopeVisibility():String
     {
         switch(this.scopeVisibilityAction)
@@ -101,3 +102,6 @@ export class Evenement extends Entity
         return r;
     }
 }
+
+
+

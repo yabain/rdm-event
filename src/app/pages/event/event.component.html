@@ -13,17 +13,17 @@
 							</a>
 						</li>
 
-						<li class="nav-item" role="presentation" *ngIf="nombreEvent==0">
+						<li class="nav-item" role="presentation" *ngIf="eventList.length==0">
 							<a class="nav-link" id="notifications-tab" data-bs-toggle="tab" href="#notifications"
 								role="tab" aria-controls="home" aria-selected="false">
 								Évènements
 							</a>
 						</li>
 
-						<li class="nav-item" role="presentation" *ngIf="nombreEvent!=0">
+						<li class="nav-item" role="presentation" *ngIf="eventList.length!=0">
 							<a class="nav-link" id="notifications-tab" data-bs-toggle="tab" href="#notifications"
 								role="tab" aria-controls="home" aria-selected="false">
-								Évènements <span class="items-round-little bg-breez">{{nombreEvent}}</span>
+								Évènements <span class="items-round-little bg-breez">{{eventList.length}}</span>
 							</a>
 						</li>
 
@@ -61,9 +61,23 @@
 			<div class="row">
 				<div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
 					<div class="ui-block">
+						<div class="container">
+							<div class="row justify-content-center" *ngIf="hasLoadEventList==false">
+								<div class="col col-sm-4" style="margin-top: 20px;">
+									<span class="fs-6" >Chargement de la liste de vos évènement...</span>
+								</div>
+							</div>
+							<div class="row" *ngIf="hasLoadEventList==false" >
+								<app-progress-indeterminate></app-progress-indeterminate>
+							</div>
+							<div class="row justify-content-center" *ngIf="hasLoadEventList==true && eventList.length==0" >
+								<div class="col col-sm-4" style="margin-top: 20px;">
+									<span class="fs-6" >Aucune donnée trouvé</span>
+								</div>
+							</div>
+						</div>
 
-
-						<table class="event-item-table event-item-table-fixed-width">
+						<table *ngIf="hasLoadEventList==true" class="event-item-table event-item-table-fixed-width">
 
 							<thead>
 
@@ -97,6 +111,75 @@
 							</thead>
 
 							<tbody>
+								<tr class="event-item" *ngFor="let event of eventList">
+									<td class="author">
+										<div class="event-author inline-items">
+											<div class="author-thumb">
+												<img loading="lazy" src="./../../../assets/img/img/MEUdM.jpeg"
+													width="34" height="34" alt="author">
+											</div>
+											<div class="author-date">
+												<a class="author-name h6">Bal UdM</a>
+												<br> Par <a>Mutuelle UdM</a>
+											</div>
+										</div>
+									</td>
+									<td class="location">
+										<div class="place inline-items">
+											<svg class="olymp-add-a-place-icon">
+												<use xlink:href="#olymp-add-a-place-icon"></use>
+											</svg>
+											<span>{{event.event.place}}</span>
+										</div>
+									</td>
+									<td class="upcoming">
+										<div class="date-event inline-items align-left">
+
+											<span class="month"><b>Début:</b> {{getStringDate(event.event.startDate,event.event.startTime)}}</span> <br>
+											<span class="month"><b>Fin:</b> {{getStringDate(event.event.endDate,event.event.endTime)}}</span>
+
+										</div>
+									</td>
+									<td class="description">
+										<p class="description">
+											{{event.event.description}}
+										</p>
+									</td>
+									<td class="users">
+										<ul class="friends-harmonic">
+											<li>
+												<a>
+													<img loading="lazy" src="./../../../assets/img/img/user.jpeg"
+														alt="friend" width="28" height="28">
+												</a>
+											</li>
+											<li>
+												<a>
+													<img loading="lazy" src="./../../../assets/img/img/user.jpeg"
+														alt="friend" width="28" height="28">
+												</a>
+											</li>
+											<li>
+												<a>
+													<img loading="lazy" src="./../../../assets/img/img/user.jpeg"
+														alt="friend" width="28" height="28">
+												</a>
+											</li>
+											
+											<li>
+												<a class="all-users bg-breez">
+												<span *ngIf="event.event.getSpecialActionNumber()!=0">+</span>
+												{{event.event.getSpecialActionNumber()}}</a>
+											</li>
+										</ul>
+									</td>
+									<td class="add-event">
+										<a [routerLink]="['/page/ellection/',event.event.id.toString()]" class="btn btn-breez btn-sm" *ngIf="event.event.eventType=='vote_event'" >Passer au vote</a>
+										<a class="btn btn-breez btn-sm" *ngIf="event.event.eventType!='vote_event'">Acheter le billet</a>
+										<a class="btn btn-sm btn-border-think custom-color c-grey" (click)="selectEvent(event.event.id.toString())">Détails</a>
+									</td>
+								</tr>
+
 								<tr class="event-item">
 									<td class="author">
 										<div class="event-author inline-items">
@@ -482,7 +565,7 @@
 										</li>
 									</ul>
 	
-									<a class="btn btn-blue btn-sm full-width" *ngIf="selectedEvent.eventType=='vote_event'">Passer au vote</a>
+									<a [routerLink]="['/page/ellection/',selectedEvent.id.toString()]" class="btn btn-blue btn-sm full-width" *ngIf="selectedEvent.eventType=='vote_event'">Passer au vote</a>
 									<a class="btn btn-blue btn-sm full-width" *ngIf="selectedEvent.eventType!='vote_event'">Acheter le billet</a>
 									<a class="btn btn-breez btn-sm full-width">Contacter l'organisation</a>
 								</div>
