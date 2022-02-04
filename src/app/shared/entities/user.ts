@@ -1,3 +1,4 @@
+import { UserType } from "../enum";
 import { Entity } from "./entity";
 
 
@@ -19,7 +20,7 @@ export class User extends Entity
     about:String=""
     availability:number=0;
     dateDeleted:String=""
-
+    userType:UserType=UserType.NORMAL_USER
 
 
     getPrintableName()
@@ -36,4 +37,11 @@ export class User extends Entity
         return this.getPrintableName().length>0?this.getPrintableName():(this.email.length>0?this.email:this.phoneNumber)
     }
 
+    getCallerName()
+    {
+        return this.userType==UserType.NORMAL_USER? this.getFullName() : this.getPrintableName()
+    }
+
 }
+
+

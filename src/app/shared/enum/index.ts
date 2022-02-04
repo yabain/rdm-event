@@ -1,5 +1,6 @@
 import { UserAction } from "../entities"
 import { EventScopeAction, EventState, EventType } from "./event.enum"
+import { UserType } from "./user.enum"
 
 export
 {
@@ -7,4 +8,5 @@ export
     EventScopeAction,
     EventState,
     EventType,
+    UserType,
 }

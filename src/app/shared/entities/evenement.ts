@@ -1,4 +1,6 @@
-import { UserActionBuilder } from "../utils/functions";
+import { UserActionType } from "../enum/useraction.enum";
+import { UserActionBuilder, UtilTime } from "../utils/functions";
+import { weekStringList } from "../utils/functions/time";
 import { EventScopeAction, EventState, EventType, UserAction } from "./../enum";
 import { Entity } from "./entity";
 import { EntityID } from "./entityid";
@@ -22,6 +24,39 @@ export class Evenement extends Entity
     actions:UserAction[]=[];
     datePublication:number=0
 
+    getStringScopeVisibility():String
+    {
+        switch(this.scopeVisibilityAction)
+        {
+            case EventScopeAction.PERSONNAL:
+                return "Évènement personnel" 
+            case EventScopeAction.PUBLIC:
+                return "Évènement publique" 
+            case EventScopeAction.PRIVATE:
+                return "Évènement privé" 
+        }
+        return ""
+    }
+    getStringEventDate()
+    {
+        if(this.startDate=="") return "Chargement de données..."
+        let d = UtilTime.getDateFromString(this.createdDate)
+        let cd = new Date(this.createdDate.toString())
+        return `${weekStringList[d.getDay()]} ${UtilTime.getDateNumberFromDate(d)} ${UtilTime.getMonthStringByNumber(d.getMonth())} à ${UtilTime.getTimeFromDate(cd)}`
+    }
+    getCommentNumber()
+    {
+        this.getActionByType(UserActionType.COMMENT_ACTION).length
+    }
+    getLikeNumber()
+    {
+        this.getActionByType(UserActionType.LIKE_ACTION).length
+    }
+
+    getActionByType(type:UserActionType)
+    {
+        return this.actions.filter((userAction)=>userAction.actionType==type)
+    }
 
     override hydrate(entity: Record<string | number,any>):void
     {

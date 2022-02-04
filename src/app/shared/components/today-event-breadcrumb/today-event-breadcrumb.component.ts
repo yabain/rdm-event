@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Evenement } from '../../entities';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { EntityID, Evenement } from '../../entities';
 import { EvenementBussinessService } from '../../services/evenement-bussiness/evenement-bussiness.service';
 import { UtilTime } from '../../utils/functions';
 
@@ -13,7 +13,8 @@ export class TodayEventBreadcrumbComponent implements OnInit {
   year:number=new Date().getFullYear()
   month:string=UtilTime.getMonthStringByNumber(new Date().getMonth())
   monthNum=new Date().getMonth()+1;
-  hasLoadData:boolean=true
+  hasLoadData:boolean=false
+  @Output() selectEvent:EventEmitter<String>=new EventEmitter();
   // {
   //   id:"#klqmjdlfj",
   //   controlsid:"klqmjdlfj",
@@ -80,6 +81,7 @@ export class TodayEventBreadcrumbComponent implements OnInit {
           id:`#${event.id.toString().toString().replace(/[0-9]*/g,"")}`,
           controlsid:event.id.toString().toString().replace(/[0-9]*/g,""),
           datetime:d.toISOString(),
+          idEvent:event.id.toString(),
           datetimeString:stringTitle,
           title:event.name,
           type:event.eventType,
@@ -88,6 +90,11 @@ export class TodayEventBreadcrumbComponent implements OnInit {
         }
       })
     })
+  }
+
+  sendSelectedEvent(id)
+  {
+    this.selectEvent.emit(id)
   }
 
 }

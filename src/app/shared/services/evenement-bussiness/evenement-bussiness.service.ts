@@ -35,6 +35,11 @@ export class EvenementBussinessService extends AbstractCrudService<Evenement> {
     return this.update(event,db_branch_builder.getBranchOfEvent(event.id))
   }
 
+  getEventByID(eventID:EntityID):Promise<ActionStatus<Evenement>>
+  {
+    return this.findByID(eventID,db_branch_builder.getBranchOfEvents())
+  }
+
   addCandidate(eventID:EntityID,candidate:VoteCandidate):Promise<ActionStatus<boolean>>
   {
     (<VoteEvenement>this.list.get(eventID.toString())).candidates.push(candidate)

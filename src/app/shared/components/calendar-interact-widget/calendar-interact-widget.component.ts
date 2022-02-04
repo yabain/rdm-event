@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { EvenementBussinessService } from '../../services/evenement-bussiness/evenement-bussiness.service';
 import { Evenement } from '../../entities';
@@ -28,6 +28,8 @@ export class CalendarInteractWidgetComponent implements OnInit {
     year: any;
     month: any;
     dateString : string;
+    @Output() selectEvent:EventEmitter<String>=new EventEmitter();
+
   
     constructor(private datePipe: DatePipe, private evenementService:EvenementBussinessService){
         this.dateString = this.datePipe.transform(this.maDate, 'yyyy-MM-dd');
@@ -61,17 +63,9 @@ export class CalendarInteractWidgetComponent implements OnInit {
               next: 'far fa-chevron-right'
           },
 
-          eventClick: function (info:any) {
-              var url = info.event.url;
-              var is_modal = url.match(/^modal\:(#[-\w]+)$/);
-              if (!is_modal) {
-                  return;
-              }
-
+          eventClick:  (info:any)=> {
               info.jsEvent.preventDefault();
-              var modal = is_modal[1];
-
-              $(modal).modal('show');
+            this.sendSelectedEvent(info.event.id)
           },
       });
 
@@ -88,7 +82,7 @@ export class CalendarInteractWidgetComponent implements OnInit {
 
             return {
                 title:v.name,
-                data:v,
+                id:v.id.toString(),
                 start:`${ds.getFullYear()}-${UtilTime.getMonthNumberFromDate(ds)}-${UtilTime.getDateNumberFromDate(ds)}`,
                 end:`${de.getFullYear()}-${UtilTime.getMonthNumberFromDate(de)}-${UtilTime.getDateNumberFromDate(de)}`,
                 url:'modal:#private-event'
@@ -96,25 +90,10 @@ export class CalendarInteractWidgetComponent implements OnInit {
             }
         }))
       })
-    //   events: [
-    //     {
-    //         title: 'Ellection Mis & Mister UdM',
-    //         start: '2022-02-05',
-    //         url: 'modal:#private-event'
-    //     },
-    //       {
-    //           title: 'Bal de l UdM',
-    //           start: '2022-02-05',
-    //           url: 'modal:#public-event'
-    //       },
-    //       {
-    //           title: 'UdM One heart',
-    //           start: '2022-02-12',
-    //           end: '2022-02-13',
-    //           url: 'modal:#private-event'
-    //       }
-    //   ]
-
+  }
+  sendSelectedEvent(id)
+  {
+    this.selectEvent.emit(id)
   }
 
 }

@@ -1,4 +1,5 @@
 import { Entity, Evenement } from ".";
+import { UserActionType } from "../enum/useraction.enum";
 import { UserActionBuilder } from "../utils/functions";
 import { VoteCandidate } from "./votecandidate";
 
@@ -23,6 +24,10 @@ export class VoteEvenement extends Evenement
             });
             else if(Reflect.has(this,key)) Reflect.set(this,key,entity[key]);
         }
+    }
+    getVoteNumber()
+    {
+        this.getActionByType(UserActionType.COMMENT_ACTION).length
     }
 
     override toString():Record<string | number,any>

@@ -12,6 +12,16 @@ export const monthStringList = [
     "Novembre",
     "Decembre"
 ]
+
+export const weekStringList = [
+    "Lundi",
+    "Mardi",
+    "Mercredi",
+    "Jeudi",
+    "Vendredi",
+    "Samedi",
+    "Dimanche"
+]
 export class UtilTime
 {
     static getFormatDayAndMonth(date:Date): string {
@@ -36,5 +46,9 @@ export class UtilTime
     static getDateNumberFromDate(d:Date):String
     {
         return `${(d.getDate()+1)<10?"0"+(d.getDate()+1):(d.getDate()+1)}`
+    }
+    static getTimeFromDate(d:Date):String
+    {
+        return `${d.getHours()<10?"0"+d.getHours():d.getHours()}:${d.getMinutes()<10?"0"+d.getMinutes():d.getMinutes()}`
     }
 }

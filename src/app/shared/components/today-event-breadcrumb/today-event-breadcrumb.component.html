@@ -73,8 +73,7 @@
                         <svg width="8" height="8">
                             <use xlink:href="#olymp-dropdown-arrow-icon"></use>
                         </svg>
-                        <span class="event-status-icon" data-bs-toggle="modal"
-                            data-bs-target="#public-event">
+                        <span class="event-status-icon"  (click)="sendSelectedEvent(event.idEvent)">
                             <svg class="olymp-calendar-icon" data-bs-toggle="tooltip"
                                 data-bs-placement="top" data-bs-original-title="UNCOMPLETED">
                                 <use xlink:href="#olymp-calendar-icon"></use>
