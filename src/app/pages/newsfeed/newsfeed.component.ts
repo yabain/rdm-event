@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+// import { NotificationService } from 'src/app/shared/services/notification/notification.sevices';
 
 @Component({
   selector: 'app-newsfeed',
@@ -7,10 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NewsfeedComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    // private notification : NotificationService
+  ) { }
 
   ngOnInit(): void {
-    document.querySelector("body")?.classList.add("page-has-left-panels page-has-right-panels")
+    document.querySelector("body")?.classList.add("page-has-left-panels page-has-right-panels");
+    // this.showNotification();
   }
+
+  showNotification(){
+    // this.notification.showError();
+  }
+
 
 }

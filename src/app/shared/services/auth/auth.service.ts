@@ -17,6 +17,8 @@ import { LocalStorageService } from '../localstorage/localstorage.service';
   providedIn: 'root'
 })
 export class AuthService {
+  isAuth: boolean = true;
+  isAdmin: boolean = true;
 
   isLoggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../../services/auth/auth.service';
 
 @Component({
   selector: 'app-candidats-list',
@@ -6,8 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./candidats-list.component.scss']
 })
 export class CandidatsListComponent implements OnInit {
-  isAuth: boolean;
-  isAdmin: boolean;
+  isAuth: boolean = false;
+  isOwner: boolean = false;
+  isAdmin: boolean = false;
   voteStatus: boolean; //true = vote ouvert
 
 
@@ -21,11 +23,19 @@ export class CandidatsListComponent implements OnInit {
   candidatNum : number;
   metierCandidat : string;
 
-
-  constructor() { 
+  constructor(
+    private isAuthService: AuthService
+  ) { 
     this.voteStatus = true;
-    this.isAuth = true;
-    this.isAdmin = true;
+    this.isAuth = this.isAuthService.isAuth;
+    // this.isOwner = true;
+    this.isAdmin = this.isAuthService.isAdmin;
+    if(this.isAuth){
+      if(this.isAdmin){
+        this.isOwner = true;
+        console.log ('is owner', this.isOwner)
+      }
+    }
   }
 
   ngOnInit(): void {

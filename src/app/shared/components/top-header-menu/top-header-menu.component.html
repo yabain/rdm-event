@@ -328,7 +328,8 @@
 				</div>
 			</div> -->
 
-			<div class="author-page author vcard inline-items more" *ngIf="isLogin==false">
+			<div class="author-page author vcard inline-items more" *ngIf="isAuth==false">
+				<i class="fa fa-sign-in fa-2x" style="color: white"></i>
 				<div class="author-thumb">
 					<div class="more-dropdown more-with-triangle">
 						<div class="mCustomScrollbar" data-mcs-theme="dark">
@@ -339,9 +340,7 @@
 							<ul class="account-settings">
 								<li>
 									<a routerLink="/login">
-
 										<i class="fa fa-sign-in fa-2x"></i>
-
 										<span style="padding-left: 8px;"> Se connecter</span>
 									</a>
 								</li>
@@ -357,7 +356,7 @@
 
 					</div>
 				</div>
-				<a href="02-ProfilePage.html" class="author-name fn">
+				<a class="author-name fn">
 					<div class="author-title">
 						Se connecter <svg class="olymp-dropdown-arrow-icon">
 							<use xlink:href="#olymp-dropdown-arrow-icon"></use>
@@ -367,7 +366,7 @@
 				</a>
 			</div>
 
-			<div class="author-page author vcard inline-items more" *ngIf="isLogin==true">
+			<div class="author-page author vcard inline-items more" *ngIf="isAuth==true">
 				<div class="author-thumb">
 					<img alt="author" src="./../../../../assets/img/img/user.jpeg" width="36" height="36"
 						class="avatar">
@@ -380,7 +379,7 @@
 
 							<ul class="account-settings">
 								<li>
-									<a href="36-FavPage-SettingsAndCreatePopup.html">
+									<a>
 										<svg class="olymp-user-icon left-menu-icon" data-bs-toggle="tooltip"
 											data-bs-placement="right" data-bs-original-title="FAV PAGE">
 											<use xlink:href="#olymp-user-icon"></use>
@@ -390,7 +389,7 @@
 									</a>
 								</li>
 								<li>
-									<a href="29-YourAccount-AccountSettings.html">
+									<a>
 
 										<svg class="olymp-menu-icon">
 											<use xlink:href="#olymp-menu-icon"></use>
@@ -484,7 +483,7 @@
 
 					</div>
 				</div>
-				<a href="02-ProfilePage.html" class="author-name fn">
+				<a class="author-name fn">
 					<div class="author-title">
 						Mon compte <svg class="olymp-dropdown-arrow-icon">
 							<use xlink:href="#olymp-dropdown-arrow-icon"></use>

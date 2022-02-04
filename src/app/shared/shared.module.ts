@@ -22,7 +22,6 @@ import { CandidatsListComponent } from './components/candidats-list/candidats-li
 import { FormNewEventComponent } from "./components/form-new-event/form-new-event.component";
 import { TodayEventBreadcrumbComponent } from './components/today-event-breadcrumb/today-event-breadcrumb.component';
 import { ProgressIndeterminateModule } from "./components/progress-indeterminate/progress-indeterminate.module";
-// import { ToastComponent } from './components/toast/toast.component';
 
 
 
@@ -47,7 +46,6 @@ import { ProgressIndeterminateModule } from "./components/progress-indeterminate
     CandidatsListComponent,
     FormNewEventComponent,
     TodayEventBreadcrumbComponent,
-    // ToastComponent,
 
   ],
   imports: [
@@ -75,7 +73,7 @@ import { ProgressIndeterminateModule } from "./components/progress-indeterminate
     EllectHeadComponent,
     CandidatsListComponent,
     FormNewEventComponent,
-    TodayEventBreadcrumbComponent
+    TodayEventBreadcrumbComponent,
   ],
   providers:[
   ]
