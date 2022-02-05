@@ -21,14 +21,18 @@ const routes: Routes = [
         component:NewsfeedComponent
       },
       {
-        path:'ellection',
-        pathMatch:'full',
-        component:EllectionsComponent
-      },
-      {
         path:'event',
         pathMatch:'full',
         component:EventComponent
+      },
+      {
+        path: 'ellection',
+        children: [
+          {
+            path: '**',
+            component: EllectionsComponent,
+          }
+        ]
       }
 
     ]

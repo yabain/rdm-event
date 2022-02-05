@@ -6,6 +6,7 @@ import { EvenementBussinessService } from 'src/app/shared/services/evenement-bus
 import { UserService } from 'src/app/shared/services/user/user.service';
 import { UtilTime } from 'src/app/shared/utils/functions';
 import { monthStringList } from 'src/app/shared/utils/functions/time';
+import { Router } from '@angular/router';
 
 declare var $:any;
 
@@ -32,7 +33,9 @@ export class EventComponent implements OnInit {
   userList:Map<string,User>=new Map()
   hasLoadEventList:Boolean=false;
 
-  constructor(private datePipe: DatePipe,
+  constructor(
+    private router: Router,
+    private datePipe: DatePipe,
     private eventBusinessService:EvenementBussinessService,
     private userService:UserService){
       // this.maDate = this.datePipe.transform(this.maDate, 'dd/MM/yyyy');
@@ -103,6 +106,16 @@ export class EventComponent implements OnInit {
     .catch((error)=>{
       console.log("Error: ",error)
     })
+  }
+  navigateToEllection(EllectId?){
+    let url = 'page/ellection/' + EllectId;
+    this.router.navigate([url]);
+    // this.router.navigateByUrl('/page/ellection');
+  }
+  navigateToConf(ConfId?: string){
+    let url = '/page/conf/' + ConfId;
+    this.router.navigateByUrl(url);
+    // this.router.navigateByUrl('/page/ellection');
   }
 
 }
