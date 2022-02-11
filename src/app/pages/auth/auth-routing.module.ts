@@ -5,8 +5,7 @@ import { TemplateComponent } from './template/template.component';
 
 const routes: Routes = [
   {
-    path:"auth",
-    pathMatch:"full",
+    path:"",
     component:TemplateComponent,
     children:[
       {

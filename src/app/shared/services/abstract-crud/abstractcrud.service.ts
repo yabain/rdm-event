@@ -123,6 +123,12 @@ export abstract class AbstractCrudService<T extends Entity>
             });
         });
     }
+    hydrateObjet(entity:Record<string,any>):T
+    {
+      let obj:T=<T> new Entity();
+      obj.hydrate(entity);
+      return obj
+    }
 
     findAll(branch:String):Promise<ActionStatus<T[]>>
     {
@@ -132,8 +138,7 @@ export abstract class AbstractCrudService<T extends Entity>
           let data=result.result;
           for(let key in data)
           {
-            let obj:T=<T> new Entity();
-            obj.hydrate(data[key]);
+            let obj = this.hydrateObjet(data[key])
             this.list.set(obj.id.toString(),obj);
           }
           this.setList(this.list)

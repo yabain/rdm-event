@@ -33,12 +33,11 @@ const routes: Routes = [
             component: EllectionsComponent,
           }
         ]
-      }
-
+      },
     ]
   },
   {
-    path:'login',
+    path:'**',
     loadChildren:()=>import("./pages/auth/auth.module").then(m=>m.AuthModule)
   },
   {
@@ -46,11 +45,6 @@ const routes: Routes = [
     redirectTo:'page',
     pathMatch: 'full',
   },
-  {
-    path: '**',
-    redirectTo:'login',
-    pathMatch: 'full',
-  }
 ];
 
 @NgModule({

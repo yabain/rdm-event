@@ -3,6 +3,7 @@ import { BehaviorSubject } from 'rxjs';
 import { EntityID } from '../../entities/entityid';
 import { User } from '../../entities/user';
 import { ActionStatus } from '../../others/actionstatus';
+import { userBuilder } from '../../utils/functions';
 import { EventService } from '../../utils/services/events/event.service';
 import { LocalStorageService } from '../localstorage/localstorage.service';
 import { UserService } from '../user/user.service';
@@ -22,9 +23,7 @@ export class UserProfilService {
 
     this.localStorageService.getSubjectByKey("user_profil").subscribe((userObj:any)=>{
       if(userObj){
-        let user:User=new User()
-        user.hydrate(userObj)
-        this.currentUser.next(user)
+        this.currentUser.next(userBuilder(userObj))
       }
     })
     this.eventService.logoutEvent.subscribe((value)=>{

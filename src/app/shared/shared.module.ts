@@ -74,6 +74,7 @@ import { ProgressIndeterminateModule } from "./components/progress-indeterminate
     CandidatsListComponent,
     FormNewEventComponent,
     TodayEventBreadcrumbComponent,
+    ProgressIndeterminateModule
   ],
   providers:[
   ]

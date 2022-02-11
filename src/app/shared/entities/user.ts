@@ -5,7 +5,7 @@ import { Entity } from "./entity";
 export class User extends Entity
 {
     username:String="";
-    prenom:String="";
+    fullname:String="";
     sexe:String="";
     email:String="";
     photoUrl:String="assets/img/user.png";
@@ -23,13 +23,10 @@ export class User extends Entity
     userType:UserType=UserType.NORMAL_USER
 
 
+
     getPrintableName()
     {
-        return this.prenom.length>0?this.prenom:this.username
-    }
-    getFullName()
-    {
-        return `${this.prenom} ${this.username}`
+        return this.username
     }
 
     getPrintableIdentity()
@@ -39,7 +36,7 @@ export class User extends Entity
 
     getCallerName()
     {
-        return this.userType==UserType.NORMAL_USER? this.getFullName() : this.getPrintableName()
+        return this.userType==UserType.NORMAL_USER? this.fullname : this.getPrintableName()
     }
 
 }

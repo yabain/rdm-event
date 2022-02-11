@@ -5,6 +5,7 @@ import { EntityID } from '../../entities/entityid';
 import { User } from '../../entities/user';
 import { ActionStatus } from '../../others/actionstatus';
 import { DbBranch } from '../../utils/enum/db-branch.enum';
+import { userBuilder } from '../../utils/functions';
 import { FirebaseDataBaseApi } from '../../utils/services/firebase/FirebaseDatabaseApi';
 import { CRequest } from '../../utils/services/http/client/crequest';
 import { RestApiClientService } from '../../utils/services/http/client/rest-api-client.service';
@@ -42,13 +43,20 @@ export class UserService extends AbstractCrudService<User> {
   {
     return this.findByKey(key,value,db_branch_builder.getBranchOfUsers())
   }
+  override hydrateObjet(entity:Record<string,any>):User
+    {
+      return userBuilder(entity)
+    }
   createNewAccount(user:User):Promise<ActionStatus<void>>
   {
     return new Promise<ActionStatus<any>>((resolve,reject)=>{
       this.authService.createAccount(user)
       .then((result:ActionStatus<User>)=>this.addUser(result.result))
       .then((result:ActionStatus<void>)=>resolve(result))
-      .catch((error)=>reject(error))
+      .catch((error)=>{
+        this.firebaseApi.handleApiError(error);
+        reject(error)
+      })
     })
   }
 
