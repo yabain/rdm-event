@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { User } from 'src/app/shared/entities';
 import { BusinessUser } from 'src/app/shared/entities/business-user';
 import { UserType } from 'src/app/shared/enum';
+import { AuthService } from 'src/app/shared/services/auth/auth.service';
 import { UserProfilService } from 'src/app/shared/services/user-profil/user-profil.service';
 import { UserService } from 'src/app/shared/services/user/user.service';
 import { MustMatch } from 'src/app/shared/utils/helpers/validators';
@@ -23,6 +24,7 @@ export class RegisterComponent implements OnInit {
     private formBuilder: FormBuilder,
     private router:Router,
     private userProfilService:UserProfilService,
+    private authService:AuthService,
     private userService:UserService) { }
 
   ngOnInit(): void {
@@ -71,6 +73,7 @@ export class RegisterComponent implements OnInit {
     }
     this.waitResponse=true;
     this.userService.createNewAccount(user)
+    .then((result)=>this.authService.authLogin(user))
     .then((result)=>{
       this.waitResponse=false;
       this.userProfilService.setUser(user);
