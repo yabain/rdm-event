@@ -1,42 +1,112 @@
-<form class="content">
+<form class="content" [formGroup]="form" (ngSubmit)="submit()" novalidate>
 	<div class="row">
-		<div class="col col-12 col-xl-6 col-lg-6 col-md-6 col-sm-12">
-			<div class="form-group label-floating">
-				<label class="control-label">First Name</label>
-				<input class="form-control" placeholder="" type="text">
-			</div>
-		</div>
-		<div class="col col-12 col-xl-6 col-lg-6 col-md-6 col-sm-12">
-			<div class="form-group label-floating">
-				<label class="control-label">Last Name</label>
-				<input class="form-control" placeholder="" type="text">
-			</div>
-		</div>
 		<div class="col col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12">
-			<div class="form-group label-floating">
-				<label class="control-label">Your Email</label>
-				<input class="form-control" placeholder="" type="email">
-			</div>
-			<div class="form-group label-floating">
-				<label class="control-label">Your Password</label>
-				<input class="form-control" placeholder="" type="password">
-			</div>
-
-			<div class="form-group date-time-picker label-floating">
-				<label class="control-label">Your Birthday</label>
-				<input name="datetimepicker" value="10/24/1984" />
-				<span class="input-group-addon">
-								<svg class="olymp-calendar-icon"><use xlink:href="#olymp-calendar-icon"></use></svg>
-							</span>
-			</div>
-
 			<div class="form-group label-floating is-select">
-				<label class="control-label">Your Gender</label>
-				<select class="form-select">
-					<option value="MA">Male</option>
-					<option value="FE">Female</option>
+				<label class="control-label">Type de compte</label>
+				<select [ngClass]="{'form-select':true, 'is-invalid': submitted==true && form.controls['userType'].invalid}" formControlName="userType">
+					<option value="normal_user">Simple</option>
+					<option value="business_user">Organisation</option>
 				</select>
+				<div *ngIf="submitted==true && form.controls['userType'].invalid" class="invalid-feedback">
+					<span *ngIf="form.controls['userType'].errors['required']">Veuillez le type de compte</span>
+				</div>
 			</div>
+			<ng-container formGroupName="org_user"  *ngIf="form.controls['userType'].value=='business_user'">
+		
+				<div class="form-group  label-floating">
+					<label class="control-label">Nom d'organisation</label>
+					<input [ngClass]="{'form-control':true, 'is-invalid': submitted==true && form.get('org_user').get('workGroupName').invalid}" formControlName="workGroupName"  placeholder="" type="text">
+					<div *ngIf="submitted==true && form.get('org_user').get('workGroupName').invalid" class="invalid-feedback">
+						<span *ngIf="form.get('org_user').get('workGroupName').errors['required']">Veuillez entrer le nom de votre organisation</span>
+					</div>
+				</div>
+				<div class="form-group label-floating">
+					<label class="control-label">Email de l'organisation</label>
+					<input [ngClass]="{'form-control':true, 'is-invalid': submitted==true && form.get('org_user').get('email').invalid}" formControlName="email" placeholder="" type="email">
+					<div *ngIf="submitted==true && form.get('org_user').get('email').invalid" class="invalid-feedback">
+						<span *ngIf="form.get('org_user').get('email').errors['required']">Veuillez entrer l'adresse email de votre organisation</span>
+						<span *ngIf="form.get('org_user').get('email').errors['email']">Veuillez entrer une adresse email valide</span>
+					</div>
+				</div>
+				<div class="form-group label-floating">
+					<label class="control-label">Mot de passe</label>
+					<input [ngClass]="{'form-control':true, 'is-invalid': submitted==true && form.get('org_user').get('password').invalid}" formControlName="password" placeholder="" type="password">
+					<div *ngIf="submitted==true && form.get('password').invalid" class="invalid-feedback">
+						<span *ngIf="form.get('org_user').get('password').errors['required']">Veuillez entrer un mot de passe</span>
+						<span *ngIf="form.get('org_user').get('password').errors['minlength']">Le mot de passe doit avoir au moins 6 charactéres</span>
+					</div>
+				</div>
+				<div class="form-group label-floating">
+					<label class="control-label" >Confirmer mot de passe</label>
+					<input [ngClass]="{'form-control':true, 'is-invalid': submitted==true && form.get('org_user').get('confirmpassword').invalid}" formControlName="confirmpassword" placeholder="" type="password">
+					<div *ngIf="submitted==true && form.get('org_user').get('confirmpassword').invalid" class="invalid-feedback">
+						<span *ngIf="form.get('org_user').get('confirmpassword').errors['required']">Veuillez entrer le mot de passe de confirmation</span>
+						<span *ngIf="form.get('org_user').get('confirmpassword').errors['mustMatch']">Le mot de passe de validation n'est pas conforme au mot de passe</span>
+					</div>
+				</div>
+			</ng-container>
+			<ng-container formGroupName="simple_user" *ngIf="form.controls['userType'].value=='normal_user'">
+				
+				<div class="form-group  label-floating">
+					<label class="control-label">Nom & Prenom</label>
+					<input [ngClass]="{'form-control':true, 'is-invalid': submitted==true && form.get('simple_user').get('fullname').invalid}" formControlName="fullname"  placeholder="" type="text">
+					<div *ngIf="submitted==true && form.get('simple_user').get('fullname').invalid" class="invalid-feedback">
+						<span *ngIf="form.get('simple_user').get('fullname').errors['required']">Veuillez entre votre nom complet</span>
+					</div>
+				</div>
+				<div class="form-group label-floating">
+					<label class="control-label">Nom d'utilisateur</label>
+					<input [ngClass]="{'form-control':true, 'is-invalid': submitted==true && form.get('simple_user').get('username').invalid}" formControlName="username" placeholder="" type="text">
+					<div *ngIf="submitted==true && form.get('simple_user').get('fullname').invalid" class="invalid-feedback">
+						<span *ngIf="form.get('simple_user').get('username').errors['required']">Veuillez entrer votre d'utilisateur</span>
+					</div>
+				</div>
+				<div class="form-group label-floating">
+					<label class="control-label">Email</label>
+					<input [ngClass]="{'form-control':true, 'is-invalid': submitted==true && form.get('simple_user').get('email').invalid}" formControlName="email" placeholder="" type="email">
+					<div *ngIf="submitted==true && form.get('simple_user').get('email').invalid" class="invalid-feedback">
+						<span *ngIf="form.get('simple_user').get('email').errors['required']">Veuillez entrer votre adresse email</span>
+						<span *ngIf="form.get('simple_user').get('email').errors['email']">Veuillez entrer une adresse email valide</span>
+					</div>
+				</div>
+				<div class="form-group label-floating">
+					<label class="control-label">Mot de passe</label>
+					<input [ngClass]="{'form-control':true, 'is-invalid': submitted==true && form.get('simple_user').get('password').invalid}" formControlName="password" placeholder="" type="password">
+					<div *ngIf="submitted==true && form.get('simple_user').get('password').invalid" class="invalid-feedback">
+						<span *ngIf="form.get('simple_user').get('password').errors['required']">Veuillez entrer votre mot de passe</span>
+						<span *ngIf="form.get('simple_user').get('password').errors['minlength']">Votre mot de passe doit avoir au moins 6 charactéres</span>
+					</div>
+				</div>
+				<div class="form-group label-floating">
+					<label class="control-label" >Confirmer mot de passe</label>
+					<input [ngClass]="{'form-control':true, 'is-invalid': submitted==true && form.get('simple_user').get('confirmpassword').invalid}" formControlName="confirmpassword" placeholder="" type="password">
+					<div *ngIf="submitted==true && form.get('simple_user').get('confirmpassword').invalid" class="invalid-feedback">
+						<span *ngIf="form.get('simple_user').get('confirmpassword').errors['required']">Veuillez entrer le mot de passe de confirmation</span>
+						<span *ngIf="form.get('simple_user').get('confirmpassword').errors['mustMatch']">Le mot de passe de validation n'est pas conforme au mot de passe</span>
+					</div>
+				</div>
+	
+				<!-- <div class="form-group date-time-picker label-floating">
+					<label class="control-label">Your Birthday</label>
+					<input name="datetimepicker" value="10/24/1984" />
+					<span class="input-group-addon">
+									<svg class="olymp-calendar-icon"><use xlink:href="#olymp-calendar-icon"></use></svg>
+								</span>
+				</div> -->
+	
+				<div class="form-group label-floating is-select">
+					<label class="control-label">Votre sexe</label>
+					<select [ngClass]="{'form-select':true, 'is-invalid': submitted==true && form.get('simple_user').get('sexe').invalid}" formControlName="sexe">
+						<option value="Homme">Homme</option>
+						<option value="Femme">Femme</option>
+					</select>
+					<div *ngIf="submitted==true && form.get('simple_user').get('sexe').invalid" class="invalid-feedback">
+						<span *ngIf="form.get('simple_user').get('sexe').errors['required']">Veuillez choisir votre sexe</span>
+					</div>
+				</div>
+			</ng-container>
+
+			
 
 			<div class="remember">
 				<div class="checkbox">
@@ -47,7 +117,16 @@
 				</div>
 			</div>
 
-			<a href="" class="btn btn-purple btn-lg full-width">Complete Registration!</a>
+			<button type="submit" class="btn btn-purple btn-lg full-width">
+				<app-progress-indeterminate *ngIf="waitResponse"></app-progress-indeterminate>
+				<span *ngIf="!waitResponse">S'enregister!</span>
+			</button>
+			<div class="row justify-content-center">
+				<div class="col-6">
+					<span class="text-red">{{errorMessage}}</span>
+					<span class="text-green">{{successMessage}</span>
+				</div>
+			</div>
 		</div>
 	</div>
 </form>
