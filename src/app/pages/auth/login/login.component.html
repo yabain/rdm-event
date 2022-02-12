@@ -1,27 +1,42 @@
-<form class="content">
+<form class="content" [formGroup]="form" (ngSubmit)="submit()">
 	<div class="row">
 		<div class="col col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12">
 			<div class="form-group label-floating">
-				<label class="control-label">Your Email</label>
-				<input class="form-control" placeholder="" type="email">
+				<label class="control-label">Votre Email</label>
+				<input [ngClass]="{'form-control':true, 'is-invalid': submitted==true && form.controls['email'].invalid}" formControlName="email" placeholder="" type="email">
+				<div *ngIf="submitted==true && form.controls['email'].invalid" class="invalid-feedback">
+					<span *ngIf="form.controls['email'].errors['required']">Veuillez entrez votre email</span>
+				</div>
 			</div>
 			<div class="form-group label-floating">
-				<label class="control-label">Your Password</label>
-				<input class="form-control" placeholder="" type="password">
+				<label class="control-label">Votre Mot de passe</label>
+				<input [ngClass]="{'form-control':true, 'is-invalid': submitted==true && form.controls['password'].invalid}" formControlName="password"  placeholder="" type="password">
+				<div *ngIf="submitted==true && form.controls['password'].invalid" class="invalid-feedback">
+					<span *ngIf="form.controls['password'].errors['required']">Veuillez entrez votre mot de passe</span>
+					<span *ngIf="form.controls['password'].errors['minlength']">Votre mot de passe doit avoir au moins 6 charactéres</span>
+				</div>
 			</div>
 
 			<div class="remember">
 
 				<div class="checkbox">
-					<label>
+					<label> 
 						<input name="optionsCheckboxes" type="checkbox">
 						Remember Me
 					</label>
 				</div>
 				<a href="" class="forgot" data-bs-toggle="modal" data-bs-target="#restore-password">Forgot my Password</a>
 			</div>
-
-			<a href="" class="btn btn-lg btn-primary full-width">Login</a>
+			<div class="row justify-content-center">
+				<div class="col-10">
+					<span class="text-danger">{{errorMessage}}</span>
+					<span class="text-success">{{successMessage}}</span>
+				</div>
+			</div>
+			<button type="submit" class="btn btn-lg btn-primary full-width">
+				<app-progress-indeterminate *ngIf="waitResponse"></app-progress-indeterminate>
+				<span *ngIf="!waitResponse">Login</span>
+			</button>
 
 			<div class="or"></div>
 

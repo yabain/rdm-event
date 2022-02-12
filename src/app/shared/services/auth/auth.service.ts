@@ -28,7 +28,9 @@ export class AuthService {
     private firebaseApi:FirebaseDataBaseApi
   ) {
     this.localStorageService.getSubjectByKey("auth_data").subscribe((userData:any) => {
-      if(userData) this.isLoggedIn.next(userData.isLoggedIn);
+      if(userData) {
+        this.isLoggedIn.next(userData.isLoggedIn);
+      }
     });
 
 
@@ -36,6 +38,7 @@ export class AuthService {
   setAuth(logged:{isLoggedIn:boolean})
   {
     this.localStorageService.setData("auth_data",logged);
+    
   }
 
   /*

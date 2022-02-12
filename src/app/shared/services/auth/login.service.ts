@@ -21,46 +21,21 @@ export class LoginService {
     private authService:AuthService,
     private userProfil:UserProfilService,
     private eventService:EventService,
-    private usersService:UserService,
-    private filActualiteService:FilActualiteService,
-    private restApiService:RestApiClientService
   ) { }
 
   loginUser(user:User):Promise<ActionStatus<boolean>>
   {
     return new Promise<ActionStatus<boolean>>((resolve,reject)=>{
       this.authService.authLogin(user)
-      .then((result:ActionStatus<boolean>)=> this.filActualiteService.loadNewBunchData())
+      .then((result:ActionStatus<EntityID>)=> this.userProfil.getCurrentUserProfil(result.result))
       .then((result:ActionStatus<boolean>)=>{
-        user=result.result;
-        // this.userProfil.setUser(user);
-        if(result.apiCode==ActionStatus.NOT_VALID_ACCOUNT_ERROR) result.code=ActionStatus.SUCCESS;
-        else result.code=ActionStatus.SUCCESS_END;
         this.eventService.loginEvent.next(true);
-        return resolve(result);
+        resolve(result);
       })
       .catch((error:ActionStatus<boolean>)=>{
         reject(error)
       })
     })
   }
-
-  // registerPlateform():Promise<ActionStatus>
-  // {
-  //   return new Promise<ActionStatus>((resolve,reject)=>{
-  //     this.restApiService.sendRequest(new CRequest()
-  //     .url("deviceused?deviceplateform=4")
-  //     .json()
-  //     .header("Authorization",`Bearer ${this.restApiService.headerKey.getValue().get("token")}`)
-  //     .put()
-  //     )
-  //     .then((result:ActionStatus)=>{
-  //       let response:CResponse=result.result
-  //       result.result=response.getData();
-  //       resolve(result)
-  //     })
-  //     .catch((error:ActionStatus)=>reject(error))
-  //   })
-  // }
 
 }

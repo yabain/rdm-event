@@ -22,13 +22,10 @@ export abstract class AbstractCrudService<T extends Entity>
         this.localstorage_key=localstoragekey
         this.localStorageService.getSubjectByKey(this.localstorage_key).subscribe((value)=>{
             if(!value) return;
-            console.log("Value ",value)
             value.forEach((obj: Record<string | number, any>)=>{
-              let instance:T= new this.entityCtor();
-              instance.hydrate(obj);
+              let instance:T= this.hydrateObjet(obj)
               this.list.set(instance.id.toString(),instance);
             });
-            console.log("List ",this.list)
             this.listSubject.next(this.list)
           })
     }
@@ -110,10 +107,9 @@ export abstract class AbstractCrudService<T extends Entity>
             result.result = this.list.get(objID.toString());
             return resolve(result);
             }
-            this.firebaseApi.fetchOnce(`${branch}/${objID.toString()}`)
-            .then((value:ActionStatus<T>)=>{
-                let instance:T= <T>new Entity();
-                instance.hydrate(value.result.getData())
+            this.firebaseApi.fetchOnce(branch.toString())
+            .then((value:ActionStatus<any>)=>{
+                let instance:T=this.hydrateObjet(value.result)
                 this.setObject(instance);
                 value.result=instance;
                 resolve(value);
@@ -160,8 +156,7 @@ export abstract class AbstractCrudService<T extends Entity>
           let objs:T[]=[];
           for(let key in data)
           {
-            let inst:T=<T> new Entity();
-            inst.hydrate(data[key])
+            let inst:T=this.hydrateObjet(data[key])
             // this.listUser.set(key,user);
             objs.push(inst);
           }

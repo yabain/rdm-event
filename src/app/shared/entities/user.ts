@@ -23,7 +23,10 @@ export class User extends Entity
     userType:UserType=UserType.NORMAL_USER
 
 
-
+    getFullName()
+    {
+        return this.fullname
+    }
     getPrintableName()
     {
         return this.username

@@ -10,4 +10,8 @@ export class BusinessUser extends User
     {
         return this.workGroupName
     }
+    override getFullName()
+    {
+        return this.workGroupName
+    }
 }

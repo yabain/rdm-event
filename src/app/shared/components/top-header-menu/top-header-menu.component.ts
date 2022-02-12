@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { User } from '../../entities';
 import { AuthService } from '../../services/auth/auth.service';
 import { UserProfilService } from '../../services/user-profil/user-profil.service';
@@ -17,11 +18,13 @@ export class TopHeaderMenuComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private userProfilService:UserProfilService
+    private userProfilService:UserProfilService,
+    private router:Router
   ) { 
     // this.isAuth = this.isAuthService.isAuth;
     // // this.isOwner = true;
     // this.isAdmin = this.isAuthService.isAdmin;
+
    
   }
 
@@ -33,5 +36,11 @@ export class TopHeaderMenuComponent implements OnInit {
       this.isAuth=isLoggin
     })
 
+  }
+
+  logout()
+  {
+    this.authService.logOut()
+    this.router.navigate(["/login"])
   }
 }
