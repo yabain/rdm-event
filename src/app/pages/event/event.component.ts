@@ -46,30 +46,33 @@ export class EventComponent implements OnInit {
 
   ngOnInit(): void {
     this.eventBusinessService.listSubject.subscribe((event)=>{
+      console.log('Event: ',event)
       this.eventList = [];
       this.hasLoadEventList=true;
-      this.eventList=Array.from(event.values()).map((value:Evenement)=>{
-        return {
-          event:value,
-          user:null
-        }
-      })
-      // Array.from(event.values()).forEach((value:Evenement)=>{
-      //   this.userService.getUserById(value.eventOwner)
-      //   .then((result)=>{
-      //     console.log("result ",result)
-      //     this.eventList.push({
-      //       event:value,
-      //       user:result.result
-      //     })
-      //   })
+      // this.eventList=Array.from(event.values()).map((value:Evenement)=>{
+      //   return {
+      //     event:value,
+      //     user:null
+      //   }
       // })
+      Array.from(event.values()).forEach((value:Evenement)=>{
+        
+        this.userService.getUserById(value.eventOwner)
+        .then((result)=>{
+          console.log("result ",result)
+          this.eventList.push({
+            event:value,
+            user:result.result
+          })
+        })
+      })
     })
   }
   getStringDate(stringDate,stringTime)
   {
     let d = UtilTime.getDateFromString(stringDate,stringTime)
-    return `${UtilTime.getDateNumberFromDate(d)} ${monthStringList[d.getMonth()]} A ${stringTime}`
+    let times =stringTime.split(":")
+    return `${UtilTime.getDateNumberFromDate(d)} ${monthStringList[d.getMonth()]} A ${times[0]}H:${times[1]}`
   }
   closeCreateEventForm()
   {
@@ -97,12 +100,12 @@ export class EventComponent implements OnInit {
       this.selectedEvent=result.result;
       this.hasLoadDetailEvent=true;
 
-      // return this.userService.getUserById(this.selectedEvent.eventOwner)
+      return this.userService.getUserById(this.selectedEvent.eventOwner)
     })
-    // .then((result)=>{
-    //   this.selectedUserCreator=result.result
-    //   this.hasLoadDetailEvent=true;
-    // })
+    .then((result)=>{
+      this.selectedUserCreator=result.result
+      this.hasLoadDetailEvent=true;
+    })
     .catch((error)=>{
       console.log("Error: ",error)
     })

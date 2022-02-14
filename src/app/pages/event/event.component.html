@@ -115,12 +115,12 @@
 									<td class="author">
 										<div class="event-author inline-items">
 											<div class="author-thumb">
-												<img loading="lazy" src="./../../../assets/img/img/MEUdM.jpeg"
+												<img loading="lazy" [src]="event.user.photoUrl"
 													width="34" height="34" alt="author">
 											</div>
 											<div class="author-date">
-												<a class="author-name h6">Bal UdM</a>
-												<br> Par <a>Mutuelle UdM</a>
+												<a class="author-name h6">{{event.event.name}}</a>
+												<br> Par <a>{{event.user.getPrintableName()}}</a>
 											</div>
 										</div>
 									</td>
@@ -492,11 +492,11 @@
 						<div class="row">
 							<div class="col col-lg-7 col-md-7 col-sm-12 col-12">
 								<div class="post__author author vcard inline-items">
-									<img loading="lazy" src="./../../../assets/img/img/MEUdM.jpeg" alt="author" width="42"
+									<img loading="lazy" [src]="selectedUserCreator.photoUrl" alt="author" width="42"
 										height="42">
 	
 									<div class="author-date">
-										<a class="h6 post__author-name fn">{{selectedUserCreator.getCallerName()}}</a>
+										<a class="h6 post__author-name fn">{{selectedUserCreator.getFullName()}}</a>
 										<div class="post__date">
 											<time class="published" datetime="2017-03-24T18:18">
 												{{selectedEvent.getStringEventDate()}}

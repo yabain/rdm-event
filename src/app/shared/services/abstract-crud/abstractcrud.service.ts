@@ -36,6 +36,7 @@ export abstract class AbstractCrudService<T extends Entity>
 
     setList(objs:Map<String,T>)
     {
+      console.log("Objs",objs)
       this.localStorageService.setData(this.localstorage_key,Array.from(objs.values()).map((obj:T)=>obj.toString()))
     }
   
@@ -48,6 +49,8 @@ export abstract class AbstractCrudService<T extends Entity>
   
     setObject(obj: T) {
       this.list.set(obj.id.toString(),obj);
+      console.log("list ",this.list)
+
       this.setList(this.list);  
     }
     deleteObject(obj:T)
@@ -121,7 +124,7 @@ export abstract class AbstractCrudService<T extends Entity>
     }
     hydrateObjet(entity:Record<string,any>):T
     {
-      let obj:T=<T> new Entity();
+      let obj:T=<T> new this.entityCtor();
       obj.hydrate(entity);
       return obj
     }

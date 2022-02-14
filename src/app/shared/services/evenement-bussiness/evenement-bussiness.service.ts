@@ -4,10 +4,13 @@ import { VoteEvenement } from '../../entities/vote-evenement';
 import { VoteCandidate } from '../../entities/votecandidate';
 import { EventState } from '../../enum';
 import { ActionStatus } from '../../others/actionstatus';
+import { UtilTime } from '../../utils/functions';
+import { EventService } from '../../utils/services/events/event.service';
 import { FirebaseDataBaseApi } from '../../utils/services/firebase';
 import { AbstractCrudService } from '../abstract-crud/abstractcrud.service';
 import { FilActualiteService } from '../fil-actualite/fil-actualite.service';
 import { LocalStorageService } from '../localstorage/localstorage.service';
+import { UserProfilService } from '../user-profil/user-profil.service';
 import * as db_branch_builder from "./../../utils/functions/db-branch.builder"
 
 
@@ -15,14 +18,47 @@ import * as db_branch_builder from "./../../utils/functions/db-branch.builder"
   providedIn: 'root'
 })
 export class EvenementBussinessService extends AbstractCrudService<Evenement> {
-  override 
-
+  private startDate:Date=new Date();
+  private endDate:Date=new Date()
+  private currentDate:Date=new Date()
   constructor(
     firebaseApi:FirebaseDataBaseApi,
     localStorageService:LocalStorageService,
+    private userProfilService:UserProfilService,
+    private eventService:EventService,
     private filActualiteService:FilActualiteService
   ) {
     super(firebaseApi,localStorageService,"evenements",Evenement)
+    this.startDate.setDate(1);
+    this.endDate=new Date(this.startDate.getFullYear(),this.startDate.getMonth()+1,0);
+    this.loadNewBunchData()
+    this.eventService.loginEvent.subscribe((value)=>{
+      if(value) 
+      {
+
+      }
+    })
+  }
+
+  loadNewBunchData()
+  {
+    console.log("date",this.startDate.toISOString(),this.endDate.toISOString())
+    this.firebaseApi
+    .getFirebaseDatabase()
+    .ref(db_branch_builder.getBranchOfEvents())
+    .orderByChild("endDateTime")
+    .startAt(this.currentDate.getTime())
+    .once("value",(dataSnapshot)=>{
+      let data=dataSnapshot.val()
+      console.log("Data ",data)
+      for(let k in data)
+      {
+        let event:Evenement=new Evenement()
+        event.hydrate(data[k])
+        let d = UtilTime.getDateFromString(event.startDate);
+        if(this.currentDate>=d) this.setObject(event)
+      }
+    })
   }
 
   createNewEvent(event:Evenement):Promise<ActionStatus<boolean>>

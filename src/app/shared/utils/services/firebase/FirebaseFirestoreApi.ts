@@ -1,7 +1,6 @@
 import { Injectable, isDevMode } from '@angular/core';
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
-import 'firebase/database';
 import 'firebase/firestore';
 import { ActionStatus } from 'src/app/shared/others/actionstatus';
 import { EventService } from '../events/event.service';
@@ -10,7 +9,7 @@ import { FireBaseConstant } from './firebase-constant';
 @Injectable({
   providedIn: 'root'
 })
-export class FirebaseDataBaseApi {
+export class FirebaseFireStoreApi {
   
 
   static firebaseConfig: any = {};
@@ -22,7 +21,7 @@ export class FirebaseDataBaseApi {
 
     if (isDevMode()) {
       // console.log('Dev Mode');
-      FirebaseDataBaseApi.firebaseConfig = {
+      FirebaseFireStoreApi.firebaseConfig = {
         /////// dev database access
 
         apiKey: "AIzaSyD31cRxzdmCgYMX_trB9ZVndWyLcprc1Fk",
@@ -44,7 +43,7 @@ export class FirebaseDataBaseApi {
       };
     } else {
       // console.log('Prod Mode');
-      FirebaseDataBaseApi.firebaseConfig = {
+      FirebaseFireStoreApi.firebaseConfig = {
         /////// real database acces
 
         apiKey: "AIzaSyD31cRxzdmCgYMX_trB9ZVndWyLcprc1Fk",
@@ -67,9 +66,9 @@ export class FirebaseDataBaseApi {
     }
 
     // Initialize Firebase
-    firebase.initializeApp(FirebaseDataBaseApi.firebaseConfig);
+    firebase.initializeApp(FirebaseFireStoreApi.firebaseConfig);
     // firebase.analytics();
-    this.db = firebase.database();
+    this.db = firebase.firestore();
     this.setDebugMode();
     this.setModeApp();
   }
@@ -91,17 +90,19 @@ export class FirebaseDataBaseApi {
   add(url: string, value: any): Promise<ActionStatus<any>> {
     let action = new ActionStatus<any>();
     return new Promise((resolve, reject) => {
-      this.db.ref(url).push().set(value).then((doc) => {
-        action.description = 'successful add new collection';
-        resolve(action);
-      }).catch((err) => {
-        // Bugsnag.notify(err)
-        action.apiCode = err.code;
-        action.code = ActionStatus.UNKNOW_ERROR;
-        action.message = 'error';
-        action.description = '' + err;
-        reject(action);
-      });
+    //   this.db.ref(url).push().set(value).then((doc) => {
+    //     action.description = 'successful add new collection';
+    //     resolve(action);
+    //   }).catch((err) => {
+    //     // Bugsnag.notify(err)
+    //     action.apiCode = err.code;
+    //     action.code = ActionStatus.UNKNOW_ERROR;
+    //     action.message = 'error';
+    //     action.description = '' + err;
+    //     reject(action);
+    //   });
+        
+
     });
   }
 
@@ -272,7 +273,7 @@ export class FirebaseDataBaseApi {
       firebase.auth().createUserWithEmailAndPassword(email, password)
         .then((userCredential) => {
           result.description = 'Account was created successful';
-          result.result = userCredential.user;
+          result.result = userCredential;
           resolve(result);
         })
         .catch((error) => {
@@ -294,7 +295,6 @@ export class FirebaseDataBaseApi {
   }
 
   handleApiError(result: ActionStatus<any>) {
-    console.error("Error",result)
     switch (result.apiCode) {
       case FireBaseConstant.AUTH_USER_NOT_FOUND:
       case FireBaseConstant.AUTH_WRONG_PASSWORD:

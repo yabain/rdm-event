@@ -11,6 +11,8 @@ export class Evenement extends Entity
     name:String="";
     place:String=""
     state:EventState=EventState.UNPUBLISHED;
+    startDateTime:number=0;
+    endDateTime:number=0;
     startDate:String="";
     startTime:String="";
     endTime:String="";
@@ -49,6 +51,7 @@ export class Evenement extends Entity
         if(this.state==EventState.PUBLISHED)
         {
             let pd=new Date(this.datePublication);
+            console.log("Get Day ",pd.getDay())
             return `Publié ${weekStringList[pd.getDay()]} ${UtilTime.getDateNumberFromDate(pd)} ${UtilTime.getMonthStringByNumber(pd.getMonth())} à ${UtilTime.getTimeFromDate(pd)}`
         }
         

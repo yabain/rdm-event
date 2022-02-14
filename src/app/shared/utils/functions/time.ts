@@ -14,13 +14,13 @@ export const monthStringList = [
 ]
 
 export const weekStringList = [
+    "Dimanche",
     "Lundi",
     "Mardi",
     "Mercredi",
     "Jeudi",
     "Vendredi",
     "Samedi",
-    "Dimanche"
 ]
 export class UtilTime
 {
@@ -51,11 +51,11 @@ export class UtilTime
     }
     static getDateNumberFromDate(d:Date):String
     {
-        return `${(d.getDate()+1)<10?"0"+(d.getDate()+1):(d.getDate()+1)}`
+        return `${(d.getDate())<10?"0"+(d.getDate()):(d.getDate())}`
     }
     static getTimeFromDate(d:Date):String
     {
-        return `${d.getHours()<10?"0"+d.getHours():d.getHours()}:${d.getMinutes()<10?"0"+d.getMinutes():d.getMinutes()}`
+        return `${d.getHours()<10?"0"+d.getHours():d.getHours()}H:${d.getMinutes()<10?"0"+d.getMinutes():d.getMinutes()}`
     }
 
     static getStringIntervalDateFromString(startDate,startTime,endDate,endTime)

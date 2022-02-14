@@ -31,6 +31,7 @@ export class UserService extends AbstractCrudService<User> {
 
   addUser(user: User): Promise<ActionStatus<void>>
   {
+    console.log("user ",user)
    return this.save(user,db_branch_builder.getBranchOfUser(user.id))
   }
 

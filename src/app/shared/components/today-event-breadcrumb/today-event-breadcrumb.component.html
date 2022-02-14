@@ -12,7 +12,7 @@
 
     <div class="list">
         <div class="control-block-button">
-            <a class="btn btn-control bg-breez" data-bs-toggle="modal"
+            <a *ngIf="isLoggedUser" class="btn btn-control bg-breez" data-bs-toggle="modal"
                 data-bs-target="#create-event">
                 <svg class="olymp-plus-icon">
                     <use xlink:href="#olymp-plus-icon"></use>

@@ -368,7 +368,7 @@
 
 			<div class="author-page author vcard inline-items more" *ngIf="isAuth==true">
 				<div class="author-thumb">
-					<img alt="author" src="./../../../../assets/img/img/user.jpeg" width="36" height="36"
+					<img alt="author" [src]="user.photoUrl" width="36" height="36"
 						class="avatar">
 					<span class="icon-status online"></span>
 					<div class="more-dropdown more-with-triangle">

@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { EntityID, Evenement } from '../../entities';
+import { AuthService } from '../../services/auth/auth.service';
 import { EvenementBussinessService } from '../../services/evenement-bussiness/evenement-bussiness.service';
 import { UtilTime } from '../../utils/functions';
 
@@ -13,7 +14,8 @@ export class TodayEventBreadcrumbComponent implements OnInit {
   year:number=new Date().getFullYear()
   month:string=UtilTime.getMonthStringByNumber(new Date().getMonth())
   monthNum=new Date().getMonth()+1;
-  hasLoadData:boolean=false
+  hasLoadData:boolean=false;
+  isLoggedUser:boolean=false;
   @Output() selectEvent:EventEmitter<String>=new EventEmitter();
   // {
   //   id:"#klqmjdlfj",
@@ -27,7 +29,7 @@ export class TodayEventBreadcrumbComponent implements OnInit {
   // },
   eventList=[  
   ]
-  constructor(private evenementService:EvenementBussinessService) { }
+  constructor(private evenementService:EvenementBussinessService, private authService:AuthService) { }
 
   ngOnInit(): void {
     this.evenementService.listSubject.subscribe((events:Map<string,Evenement>)=>{
@@ -64,6 +66,8 @@ export class TodayEventBreadcrumbComponent implements OnInit {
         }
       })
     })
+    this.authService.isLoggedIn.subscribe((value)=>this.isLoggedUser=value)
+    
   }
 
   sendSelectedEvent(id)

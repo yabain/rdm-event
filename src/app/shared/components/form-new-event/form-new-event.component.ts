@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Evenement } from '../../entities';
 import { EvenementBussinessService } from '../../services/evenement-bussiness/evenement-bussiness.service';
 import { UserProfilService } from '../../services/user-profil/user-profil.service';
+import { UtilTime } from '../../utils/functions';
 import { ToastrNotificationService } from '../../utils/services/toastr-notification/toastr-notification.service';
 
 declare var $:any;
@@ -20,7 +21,7 @@ export class FormNewEventComponent implements OnInit,AfterViewInit {
   constructor(
     private evenementService:EvenementBussinessService,
     private toastNotification:ToastrNotificationService,
-    private profilService:UserProfilService
+    private userProfilService:UserProfilService
     ) { }
 
   ngAfterViewInit(): void {
@@ -74,12 +75,15 @@ export class FormNewEventComponent implements OnInit,AfterViewInit {
 
   submit()
   {
-
-    if(!this.form.valid) return;
+console.log("result ",this.form.value)
     this.submited=true;
+    if(!this.form.valid) return;
+
     let event:Evenement=new Evenement();
     event.hydrate(this.form.value);
-    console.log("event ",event,event.toString())
+    event.eventOwner.setId(this.userProfilService.currentUser.getValue().id.toString())
+    event.startDateTime=UtilTime.getDateFromString(event.startDate).getTime();
+    event.endDateTime=UtilTime.getDateFromString(event.endDate).getTime();
     document.querySelector("#btn_submit").textContent="Patientez...";
     (document.querySelector("#btn_submit") as HTMLButtonElement).disabled=true;
     //Créer l'évènement
