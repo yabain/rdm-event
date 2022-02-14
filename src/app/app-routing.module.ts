@@ -26,7 +26,7 @@ const routes: Routes = [
         component:EventComponent
       },
       {
-        path: 'ellection',
+        path: 'ellection/:idEvent',
         children: [
           {
             path: '**',
