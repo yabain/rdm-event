@@ -77,18 +77,28 @@ export abstract class AbstractCrudService<T extends Entity>
     }
 
     update(obj:T,branch): Promise<ActionStatus<T>> {
-        return new Promise<ActionStatus<T>>((resolve, reject) => {
-          this.firebaseApi.update(branch, obj.toString())
-            .then((result: ActionStatus<T>) => {
-                this.setObject(obj);
-                resolve(result)
-            })
-            .catch((error: ActionStatus<T>) => {
-              this.firebaseApi.handleApiError(error);
-              reject(error);
-            });
-        });
+      return new Promise<ActionStatus<T>>((resolve,reject)=>{
+        this.updateAttibute(obj.toString(),branch)
+        .then((value)=>{
+          this.setObject(obj);
+          resolve(value)
+        })
+        .catch((error)=>reject(error))
+      })
     }
+
+    updateAttibute(value,branch):Promise<ActionStatus<T>> {
+      return new Promise<ActionStatus<T>>((resolve, reject) => {
+        this.firebaseApi.update(branch, value)
+          .then((result: ActionStatus<T>) => {              
+              resolve(result)
+          })
+          .catch((error: ActionStatus<T>) => {
+            this.firebaseApi.handleApiError(error);
+            reject(error);
+          });
+      });
+  }
     delete(obj:T,branch): Promise<ActionStatus<T>> {
         return new Promise<ActionStatus<T>>((resolve, reject) => {
           this.firebaseApi.delete(branch)

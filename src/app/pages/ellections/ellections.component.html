@@ -37,14 +37,14 @@
 
                     <div class="circle-progress circle-pie-chart">
                         <div class="author-thumb">
-                            <img loading="lazy" src="./../../../assets/img/img/user.jpeg" width="128" height="128"
+                            <img loading="lazy" [src]="owner.photoUrl" width="128" height="128"
                                 alt="author" class="mCS_img_loaded">
                         </div>
                     </div>
                     <div class="chart-text">
-                        <h6>Nom de l'organisateur</h6>
-                        <p>Desctiption
-                        </p>
+                        <h6>Par {{owner.getFullName()}}</h6>
+                        <!-- <p>Desctiption de l'évènement</p> -->
+                        <p>{{event.description}}</p>
                     </div>
                 </div>
             </div>
@@ -66,32 +66,53 @@
                         <div class="modal-body">
                             <form class="form-group label-floating">
                                 <label>Type d'évènement</label>
-                                <h5>Publique</h5>
+                                <h5>{{event.getStringScopeVisibility()}}</h5>
                             </form>
                             <form class="form-group label-floating">
                                 <label>Cathégorie d'évènement</label>
-                                <h5>Ellections</h5>
+                                <h5>{{event.getStringTypeEvenement()}}</h5>
                             </form>
 
                             <form class="form-group label-floating">
                                 <label>lieu</label>
-                                <h5>En ligne</h5>
+                                <h5>{{event.place}}</h5>
                             </form>
                             <form class="form-group label-floating">
                                 <label>Date de début</label>
-                                <h5>dateDébut __ heurDébut</h5>
+                                <h5>{{getStringDate(event.startDate,event.startTime)}}</h5>
                             </form>
                             <form class="form-group label-floating">
                                 <label>Date de Fin</label>
-                                <h5>dateFin __ heurFin</h5>
+                                <h5>{{getStringDate(event.endDate,event.endTime)}}</h5>
                             </form>
                             <div *ngIf="isAuth">
-                                <div *ngIf="isOwner">
-                                    <a *ngIf="!ellectStatus" class="btn btn-blue btn-lg full-width" style="background-color: #4e814c;">Débuter
-                                        maintenant</a>
-                                    <a *ngIf="ellectStatus" class="btn btn-blue btn-lg full-width"
-                                        style="background-color: #d63327;">Cloturer
-                                        maintenant</a>
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-12">
+                                        <div *ngIf="owner.id.toString()==event.eventOwner.toString()">
+                                            <a (click)="changeStatusPublishedEvent()" *ngIf="!event.isPublishedEvent()" class="btn btn-blue btn-lg full-width" style="background-color: #4e814c;">
+                                                <app-progress-indeterminate *ngIf="waitResponseChangePublish"></app-progress-indeterminate>
+                                                
+                                                Publier l'éllection</a>
+                                            <a (click)="changeStatusPublishedEvent()" *ngIf="event.isPublishedEvent()" class="btn btn-blue btn-lg full-width"
+                                                style="background-color: #d63327;">
+                                                <app-progress-indeterminate *ngIf="waitResponseChangePublish"></app-progress-indeterminate>
+                                                Dépublier l'éllection
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+                                        <div *ngIf="owner.id.toString()==event.eventOwner.toString()">
+                                            <a *ngIf="!event.isStarted" (click)="changeStatusStateEvent()" class="btn btn-blue btn-lg full-width" style="background-color: #4e814c;">
+                                                <app-progress-indeterminate *ngIf="waitResponseChangeStatus"></app-progress-indeterminate>
+                                                
+                                                Démarrer l'éllection</a>
+                                            <a *ngIf="event.isStarted" class="btn btn-blue btn-lg full-width" (click)="changeStatusStateEvent()"
+                                                style="background-color: #d63327;">
+                                                <app-progress-indeterminate *ngIf="waitResponseChangeStatus"></app-progress-indeterminate>
+                                                
+                                                Arreter l'éllection</a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

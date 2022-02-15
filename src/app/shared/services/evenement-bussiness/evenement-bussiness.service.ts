@@ -81,6 +81,11 @@ export class EvenementBussinessService extends AbstractCrudService<Evenement> {
     (<VoteEvenement>this.list.get(eventID.toString())).candidates.push(candidate)
     return this.updateEvent(this.list.get(eventID.toString()))
   }
+  changeStatusStarted(eventID:EntityID,value:boolean=false):Promise<ActionStatus<boolean>>
+  {
+    (<VoteEvenement>this.list.get(eventID.toString())).isStarted=value;
+    return this.updateEvent(this.list.get(eventID.toString()))
+  }
 
   addAction(eventID:EntityID,userAction:UserAction):Promise<ActionStatus<boolean>>
   {
@@ -91,11 +96,17 @@ export class EvenementBussinessService extends AbstractCrudService<Evenement> {
   {
 
     this.list.get(eventID.toString()).state=eventStatus;
+    this.list.get(eventID.toString()).datePublication=0;
+
+    console.log("event ",this.list.get(eventID.toString()))
+    
+    let post:FilActualitePost=new FilActualitePost();
+    post.idEvent.setId(eventID.toString())
+    post.id.setId(eventID.toString())
+
     if(eventStatus==EventState.PUBLISHED) 
     {
-      let post:FilActualitePost=new FilActualitePost();
       post.datePublication=new Date().getTime();
-      post.idEvent.setId(eventID.toString())
       this.list.get(eventID.toString()).datePublication=post.datePublication
       return this.update(this.list.get(eventID.toString()),db_branch_builder.getBranchOfEvent(eventID))
       .then((result)=>this.filActualiteService.addNewPost(post))
@@ -103,7 +114,7 @@ export class EvenementBussinessService extends AbstractCrudService<Evenement> {
     else 
     {
       return this.update(this.list.get(eventID.toString()),db_branch_builder.getBranchOfEvent(eventID))
-      .then((result)=>this.filActualiteService.deletePostByEventID(eventID))
+      .then((result)=>this.filActualiteService.deletePost(post))
     }
   }
 }

@@ -11,6 +11,7 @@ export class Evenement extends Entity
     name:String="";
     place:String=""
     state:EventState=EventState.UNPUBLISHED;
+    isStarted:boolean=false;
     startDateTime:number=0;
     endDateTime:number=0;
     startDate:String="";
@@ -26,7 +27,21 @@ export class Evenement extends Entity
     eventType:EventType=EventType.VOTE_EVENT;
     actions:UserAction[]=[];
     datePublication:number=0
-    
+
+    isPublishedEvent()
+    {
+        return this.state==EventState.PUBLISHED;
+    }
+
+    getStringTypeEvenement():String
+    {
+        switch(this.eventType)
+        {
+            case EventType.VOTE_EVENT:
+                return "Ellections"
+        }
+        return ""
+    }
     getStringScopeVisibility():String
     {
         switch(this.scopeVisibilityAction)

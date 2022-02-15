@@ -70,9 +70,7 @@ export class EventComponent implements OnInit {
   }
   getStringDate(stringDate,stringTime)
   {
-    let d = UtilTime.getDateFromString(stringDate,stringTime)
-    let times =stringTime.split(":")
-    return `${UtilTime.getDateNumberFromDate(d)} ${monthStringList[d.getMonth()]} A ${times[0]}H:${times[1]}`
+    return UtilTime.getReadeableDateFromString(stringDate,stringTime)
   }
   closeCreateEventForm()
   {

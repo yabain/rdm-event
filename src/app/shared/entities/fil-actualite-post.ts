@@ -8,7 +8,7 @@ export class FilActualitePost extends Entity
 
     override hydrate(entity: Record<string | number,any>):void
     {
-        for(const key of Object.keys(entity))
+        for(let key of Object.keys(entity))
         {
             if(key=="id") this.id.setId(entity[key]);
             if(key=="idEvent") this.idEvent.setId(entity[key]);
@@ -19,7 +19,7 @@ export class FilActualitePost extends Entity
     override toString():Record<string | number,any>
     {
         let r={};
-        for(const k of Object.keys(this))
+        for(let k of Object.keys(this))
         {
             if(k=="id") r[k]=this.id.toString();
             if(k=="idEvent") r[k]=this.idEvent.toString();

@@ -25,5 +25,9 @@ export class ToastrNotificationService {
   {
     this.notifier.alert(message)
   }
+  warningNotification(message)
+  {
+    this.notifier.warning(message)
+  }
 
 }
