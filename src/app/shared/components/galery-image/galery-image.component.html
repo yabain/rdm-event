@@ -1,0 +1,14 @@
+<div *ngFor="let image of images" class="choose-photo-item">
+    <div class="radio">
+        <label class="custom-radio">
+            <img loading="lazy" [src]="image" alt="photo" width="247" height="166">
+            <input type="radio" name="optionsRadios">
+        </label>
+    </div>
+</div>
+
+<div class="row" >
+    <div class="col">
+        <app-progress-indeterminate></app-progress-indeterminate>
+    </div>
+</div>
