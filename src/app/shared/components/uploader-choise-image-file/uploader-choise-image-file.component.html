@@ -3,7 +3,7 @@
 <div class="modal fade" [id]="idComponent" tabindex="-1" role="dialog" aria-labelledby="update-header-photo" aria-hidden="true">
 	<div class="modal-dialog window-popup update-header-photo" role="document">
 		<div class="modal-content">
-			<a href="" class="close icon-close" data-bs-dismiss="modal" aria-label="Close">
+			<a href="" class="close icon-close" id="closeModal" data-bs-dismiss="modal" aria-label="Close">
 				<svg class="olymp-close-icon"><use xlink:href="#olymp-close-icon"></use></svg>
 			</a>
 
@@ -12,11 +12,12 @@
 			</div>
 
 			<div class="modal-body">
-				<a href="" class="upload-photo-item">
+				<a (click)="selectFile()" class="upload-photo-item">
 				<svg class="olymp-computer-icon"><use xlink:href="#olymp-computer-icon"></use></svg>
 
-				<h6>Uploader une Photo</h6>
+				<h6>Uploadez une Photo</h6>
 				<span>Selectionnez de votre ordinateur.</span>
+				<input type="file" (change)="uploadSelectedFile($event)" style="display: none;" id="selecteFile" accept="image/*" >
 			</a>
 
 				<a href="" class="upload-photo-item" data-bs-toggle="modal" data-bs-target="#choose-from-my-photo">

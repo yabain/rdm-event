@@ -7,8 +7,13 @@
     </div>
 </div>
 
-<div class="row" >
+<div class="row" *ngIf="hasLoaded==false">
     <div class="col">
         <app-progress-indeterminate></app-progress-indeterminate>
+    </div>
+</div>
+<div class="row" *ngIf="hasLoaded==true && images.length==0">
+    <div class="col">
+        <span class="text-center">Aucune photo trouvée. ajoutez une nouvelle photo</span>
     </div>
 </div>

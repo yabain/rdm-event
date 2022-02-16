@@ -8,6 +8,7 @@ import { EvenementBussinessService } from '../../services/evenement-bussiness/ev
 import { VoteEvenementBussinessService } from '../../services/evenement-bussiness/vote-evenement-bussiness.service';
 import { UserProfilService } from '../../services/user-profil/user-profil.service';
 import { UserService } from '../../services/user/user.service';
+import { FirebaseFile } from '../../utils/services/firebase';
 import { ToastrNotificationService } from '../../utils/services/toastr-notification/toastr-notification.service';
 
 @Component({
@@ -36,6 +37,7 @@ export class CandidatsListComponent implements OnInit {
     private userProfilService: UserProfilService,
     private notificationService:ToastrNotificationService,
     private authService: AuthService,
+    private firebaseFile:FirebaseFile
   ) { 
     this.voteStatus = true;
     // this.isOwner = true;
@@ -79,6 +81,29 @@ export class CandidatsListComponent implements OnInit {
   getAllVoteByCandidate(id:EntityID)
   {
     return ""
+  }
+
+  uploadCandidateImage(file)
+  {
+    console.log("File ",file)
+    this.notificationService.asyncNotification(new Promise((resolve,reject)=>{
+      this.firebaseFile.uploadFile(this.event.eventOwner.toString().toString(),file)
+      .subscribe({
+        complete:()=>{
+          resolve(file)
+        },
+        error:(error)=>reject(error)
+      })
+    }),
+    (resp)=>this.notificationService.successNofitication(`L'image ${file.name} a été uploadé avec success`),
+    (error)=>{
+      console.log("upload Error: ",error)
+      return `Erreur lors de l'uplodad de l'image ${file.name}:${error.message}`
+    }
+    ,
+    `Upload de l'image ${file.name} en cours`
+    )
+    
   }
 
   addNewCategorie()

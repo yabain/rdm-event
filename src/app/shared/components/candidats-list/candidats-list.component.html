@@ -209,7 +209,7 @@
                            <hr>
                            <div class="row">
                                <div class="col-12">
-						        <app-galery-image></app-galery-image>
+						        <app-galery-image ></app-galery-image>
 
                                </div>
                            </div>
@@ -439,5 +439,5 @@
         </div>
     </div>
 </div>
-<app-uploader-choise-image-file idComponent="update-header-photo"></app-uploader-choise-image-file>
+<app-uploader-choise-image-file (fileEventUploaded)="uploadCandidateImage($event)" idComponent="update-header-photo"></app-uploader-choise-image-file>
 

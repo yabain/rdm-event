@@ -20,6 +20,10 @@ export class ToastrNotificationService {
   {
     this.notifier.success(message)
   }
+  asyncNotification(promise,...rest)
+  {
+    this.notifier.async(promise,...rest)
+  }
 
   errorNotification(message)
   {

@@ -1,3 +1,4 @@
+import { CustomFile } from "./custom-file"
 import { Entity } from "./entity"
 import { EntityID } from "./entityid"
 import { Evenement } from "./evenement"
@@ -12,5 +13,6 @@ export {
     User,
     Evenement,
     UserAction,
-    FilActualitePost
+    FilActualitePost,
+    CustomFile
 }
