@@ -1,15 +1,17 @@
 <div class="container">
 
-    <a *ngIf="isOwner" class="btn btn-control bg-blue" style="background-color: #4e814c;" data-bs-toggle="modal"
+    <a *ngIf="event.eventOwner.toString()==currentUser.id.toString()" title="Ajouter une catégorie" class="btn btn-control bg-blue" style="background-color: #4e814c;" data-bs-toggle="modal"
         data-bs-target="#add-cathegorie">
         <svg class="olymp-plus-icon">
             <use xlink:href="#olymp-plus-icon"></use>
         </svg>
     </a>
     <hr>
-    <h1> Miss</h1>
+</div>
+<div class="container" *ngFor="let categorie of event.categories">
+    <h1> {{categorie.nom}}</h1>
     <div class="row">
-        <div class="col col-xl-3 col-lg-6 col-md-6 col-sm-6 col-12" *ngIf="isOwner">
+        <div class="col col-xl-3 col-lg-6 col-md-6 col-sm-6 col-12" *ngIf="event.eventOwner.toString()==currentUser.id.toString()">
 
             <!-- Friend Item -->
 
@@ -27,7 +29,7 @@
 
                         <div class="author-content">
                             <a class="h5 author-name">Ajouter une candidate</a>
-                            <div class="country" style="color: #4e814c;">Miss</div>
+                            <div class="country" style="color: #4e814c;">{{categorie.nom}}</div>
                         </div>
 
                     </div>
@@ -36,9 +38,9 @@
             </div>
 
             <!-- ... end Friend Item -->
-        </div>
+        </div> 
 
-        <div class="col col-xl-3 col-lg-6 col-md-6 col-sm-6 col-12 mb-3">
+        <div  *ngFor="let candidat of event.candidates" class="col col-xl-3 col-lg-6 col-md-6 col-sm-6 col-12 mb-3">
             <div class="ui-block h-100 mb-0">
 
                 <!-- Friend Item -->
@@ -47,7 +49,7 @@
 
                     <div class="friend-item-content">
 
-                        <div class="more" *ngIf="isOwner">
+                        <div class="more" >
                             <svg class="olymp-three-dots-icon">
                                 <use xlink:href="#olymp-three-dots-icon"></use>
                             </svg>
@@ -62,18 +64,18 @@
                         </div>
                         <div class="friend-avatar">
                             <div class="author-thumb">
-                                <img loading="lazy" src="./../../../assets/img/logo.webp" alt="Olympus" width="34"
+                                <img loading="lazy" [src]="candidat.images.length>0?candidat.images[0]:''" alt="Olympus" width="34"
                                     height="34">
                             </div>
                             <div class="author-content">
-                                <a class="h5 author-name">{{candidatName}}</a>
+                                <a class="h5 author-name">{{candidat.fullName}}</a>
                             </div>
                         </div>
 
                         <div *ngIf="voteStatus">
-                            <div class="country" *ngIf="isOwner">{{nombreVote}} Votes</div>
+                            <div class="country" *ngIf="isOwner">{{getAllVoteByCandidate(candidat.id)}} Votes</div>
                         </div>
-                        <div class="country" *ngIf="!voteStatus">{{nombreVote}} Votes</div>
+                        <div class="country" *ngIf="!voteStatus">{{getAllVoteByCandidate(candidat.id)}} Votes</div>
 
                         <ul class="friends-harmonic">
                             <li>
@@ -94,24 +96,6 @@
                                         width="28" height="28">
                                 </a>
                             </li>
-                            <li>
-                                <a>
-                                    <img loading="lazy" src="./../../../../assets/img/img/user.jpeg" alt="friend"
-                                        width="28" height="28">
-                                </a>
-                            </li>
-                            <li>
-                                <a>
-                                    <img loading="lazy" src="./../../../../assets/img/img/user.jpeg" alt="friend"
-                                        width="28" height="28">
-                                </a>
-                            </li>
-                            <li>
-                                <a>
-                                    <img loading="lazy" src="./../../../../assets/img/img/user.jpeg" alt="" width="42"
-                                        height="42">
-                                </a>
-                            </li>
                         </ul>
 
 
@@ -123,9 +107,9 @@
                                 </svg>
                             </a>
                             <!-- 				
-							<a class="btn btn-control btn-grey-lighter">
-								<svg class="olymp-settings-icon"><use xlink:href="#olymp-settings-icon"></use></svg>
-							</a> -->
+                            <a class="btn btn-control btn-grey-lighter">
+                                <svg class="olymp-settings-icon"><use xlink:href="#olymp-settings-icon"></use></svg>
+                            </a> -->
 
                         </div>
                     </div>
@@ -137,139 +121,9 @@
 
 
     </div>
-
     <hr style="color: #4e814c;">
-
-    <div class="row">
-        <h1> Mister</h1>
-        <div class="col col-xl-3 col-lg-6 col-md-6 col-sm-6 col-12" *ngIf="isOwner">
-
-            <!-- Friend Item -->
-
-            <div class="friend-item friend-groups create-group h-75 mb-3">
-
-                <a class="full-block" data-bs-toggle="modal" data-bs-target="#add-candidat">
-                    <div class="content">
-
-                        <a class="btn btn-control bg-blue" data-bs-toggle="modal" style="background-color: #4e814c;"
-                            data-bs-target="#add-candidat">
-                            <svg class="olymp-plus-icon">
-                                <use xlink:href="#olymp-plus-icon"></use>
-                            </svg>
-                        </a>
-
-                        <div class="author-content">
-                            <a class="h5 author-name">Ajouter un candidate</a>
-                            <div class="country" style="color: #4e814c;">Mister</div>
-                        </div>
-
-                    </div>
-                </a>
-
-            </div>
-
-            <!-- ... end Friend Item -->
-        </div>
-
-
-        <div class="col col-xl-3 col-lg-6 col-md-6 col-sm-6 col-12 mb-3">
-            <div class="ui-block h-100 mb-0">
-
-                <!-- Friend Item -->
-
-                <div class="friend-item friend-groups">
-
-                    <div class="friend-item-content">
-
-                        <div class="more" *ngIf="isOwner">
-                            <svg class="olymp-three-dots-icon">
-                                <use xlink:href="#olymp-three-dots-icon"></use>
-                            </svg>
-                            <ul class="more-dropdown">
-                                <li>
-                                    <a data-bs-toggle="modal" data-bs-target="#edit-candidat">Modifier</a>
-                                </li>
-                                <li>
-                                    <a>Supprimer</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="friend-avatar">
-                            <div class="author-thumb">
-                                <img loading="lazy" src="./../../../assets/img/logo.webp" alt="Olympus" width="34"
-                                    height="34">
-                            </div>
-                            <div class="author-content">
-                                <a class="h5 author-name">Donald toto</a>
-                            </div>
-                        </div>
-
-                        <div class="country" *ngIf="isOwner">{{nombreVote}} Votes</div>
-                        <div class="country" *ngIf="!voteStatus">{{nombreVote}} Votes</div>
-
-                        <ul class="friends-harmonic">
-                            <li>
-                                <a>
-                                    <img loading="lazy" src="./../../../../assets/img/img/user.jpeg" alt="friend"
-                                        width="28" height="28">
-                                </a>
-                            </li>
-                            <li>
-                                <a>
-                                    <img loading="lazy" src="./../../../../assets/img/img/user.jpeg" alt="friend"
-                                        width="28" height="28">
-                                </a>
-                            </li>
-                            <li>
-                                <a>
-                                    <img loading="lazy" src="./../../../../assets/img/img/user.jpeg" alt="friend"
-                                        width="28" height="28">
-                                </a>
-                            </li>
-                            <li>
-                                <a>
-                                    <img loading="lazy" src="./../../../../assets/img/img/user.jpeg" alt="friend"
-                                        width="28" height="28">
-                                </a>
-                            </li>
-                            <li>
-                                <a>
-                                    <img loading="lazy" src="./../../../../assets/img/img/user.jpeg" alt="friend"
-                                        width="28" height="28">
-                                </a>
-                            </li>
-                            <li>
-                                <a>
-                                    <img loading="lazy" src="./../../../../assets/img/img/user.jpeg" alt="" width="42"
-                                        height="42">
-                                </a>
-                            </li>
-                        </ul>
-
-
-                        <div class="control-block-button">
-                            <a class="btn btn-control bg-blue" data-bs-toggle="modal" style="background-color: #4e814c;"
-                                data-bs-target="#create-friend-group-add-friends">
-                                <svg class="olymp-happy-faces-icon">
-                                    <use xlink:href="#olymp-happy-faces-icon"></use>
-                                </svg>
-                            </a>
-                            <!-- 				
-							<a class="btn btn-control btn-grey-lighter">
-								<svg class="olymp-settings-icon"><use xlink:href="#olymp-settings-icon"></use></svg>
-							</a> -->
-
-                        </div>
-                    </div>
-                </div>
-
-                <!-- ... end Friend Item -->
-            </div>
-        </div>
-
-
-    </div>
 </div>
+
 
 <!-- ... end Main Content Groups -->
 
@@ -288,72 +142,98 @@
             </div>
 
             <div class="modal-body">
-                <form class="form-group label-floating">
-                    <label class="control-label">Nom complet</label>
-                    <input class="form-control" placeholder="" value="" type="text">
-                </form>
-
-                <form class="form-group label-floating">
-                    <label class="control-label">Numéro du candidat</label>
-                    <input class="form-control" placeholder="" value="" type="number">
-                </form>
-
-                <form class="form-group with-button">
-                    <label class="control-label">Importer les photos</label>
-                    <input class="form-control" placeholder="" value="Photo 1 (120x120px min)" type="text">
-                    <button class="bg-grey">
-                        <svg class="olymp-computer-icon">
-                            <use xlink:href="#olymp-computer-icon"></use>
-                        </svg>
-                    </button>
-                    <br>
-                    <input class="form-control" placeholder="" value="Photo 2 (120x120px min)" type="text">
-                    <button class="bg-grey">
-                        <svg class="olymp-computer-icon">
-                            <use xlink:href="#olymp-computer-icon"></use>
-                        </svg>
-                    </button>
-                    <br>
-                    <input class="form-control" placeholder="" value="Photo 3 (120x120px min)" type="text">
-
-                    <button class="bg-grey">
-                        <svg class="olymp-computer-icon">
-                            <use xlink:href="#olymp-computer-icon"></use>
-                        </svg>
-                    </button>
-
-                </form>
-
-                <form class="form-group is-select">
-                    <svg class="olymp-happy-face-icon">
-                        <use xlink:href="#olymp-happy-face-icon"></use>
-                    </svg>
-
-                    <!-- <label> Cathégorie</label>
-                    <select class="form-select" disabled>
-                        <option title="Miss selected">Miss</option>
-
-                        <option title="Mister">Mister</option>
-
-                    </select> -->
-
-                    <label for="area">Description du projet</label> <br>
-                    <textarea name="area" id="area" class="form-control"></textarea>
-                </form>
-
+                
+				<!-- News Feed Form  -->
+				
+				<div class="news-feed-form">
+					<!-- Nav tabs -->
+					<ul class="nav nav-tabs" role="tablist">
+						<li class="nav-item">
+							<a class="nav-link active inline-items" data-bs-toggle="tab" href="#infos" role="tab" aria-expanded="true">
+				
+								<svg class="olymp-status-icon"><use xlink:href="#olymp-status-icon"></use></svg>
+				
+								<span>Infos général</span>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link inline-items" data-bs-toggle="tab" href="#photos" role="tab" aria-expanded="false">
+				
+								<svg class="olymp-multimedia-icon"><use xlink:href="#olymp-multimedia-icon"></use></svg>
+				
+								<span>Photos</span>
+							</a>
+						</li>
+				
+						
+					</ul>
+				
+					<!-- Tab panes -->
+					<div class="tab-content">
+						<div class="tab-pane  active show" id="infos" role="tabpanel" aria-expanded="true">
+                            <p>Informations du candidat</p>
+							<form>
+                                <div class="form-group label-floating mt-3 mb-3">
+                                    <label class="control-label">Nom complet du candidat</label>
+                                    <input class="form-control" placeholder="" value="" type="text">
+                                </div>
+                
+                                <div class="form-group label-floating mb-3 mt-3">
+                                    <label class="control-label">Numéro du candidat</label>
+                                    <input class="form-control" placeholder="" value="" type="number">
+                                </div>                
+                                
+                
+                                <div class="form-group  label-floating mb-3 mt-3">               
+                                    <label for="area">Description du candidate</label> <br>
+                                    <textarea name="area" style="border: 1px solid #e6ecf5" class="form-control"></textarea>
+                                </div>
+							</form>
                 <a class="btn btn-blue btn-lg full-width" style="background-color: #4e814c;">Ajouter</a>
+
+						</div>
+				
+						<div class="tab-pane fade" id="photos" role="tabpanel" aria-expanded="true">
+							<div class="row justify-content-center">
+                                <div class="col-6">
+                                    <span class="mb-4 mt-4 ml-2">Ajouter des photos</span>
+                                </div>
+                            </div>
+                           <div class="row justify-content-center">
+                               <div class="col-3">
+                                <a class="options-message" data-bs-toggle="tooltip" data-bs-placement="top"   data-bs-original-title="ADD PHOTOS">
+                                    <svg class="olymp-camera-icon" data-bs-toggle="modal" data-bs-target="#update-header-photo"><use xlink:href="#olymp-camera-icon"></use></svg>
+                                </a>
+                               </div>
+                           </div>
+                           <hr>
+                           <div class="row">
+                               <div class="col-12">
+						        <app-galery-image></app-galery-image>
+
+                               </div>
+                           </div>
+						</div>
+				
+					</div>
+				</div>
+				
+				<!-- ... end News Feed Form  -->
+
+               
+
             </div>
         </div>
     </div>
 </div>
 
 
-<!-- Add candidat -->
+<!-- Add categorie -->
 <div class="modal fade" id="add-cathegorie" tabindex="-1" role="dialog" aria-labelledby="create-friend-group-1"
     aria-hidden="true">
     <div class="modal-dialog window-popup create-friend-group create-friend-group-1" role="document">
         <div class="modal-content">
-            <a class="close icon-close" data-bs-dismiss="modal" aria-label="Close">
+            <a class="close icon-close" id="categorieModalCloseButton" data-bs-dismiss="modal" aria-label="Close">
                 <svg class="olymp-close-icon">
                     <use xlink:href="#olymp-close-icon"></use>
                 </svg>
@@ -363,17 +243,22 @@
             </div>
 
             <div class="modal-body">
-                <form class="form-group label-floating">
+               <form [formGroup]="formCategorie" (ngSubmit)="addNewCategorie()">
+                <div class="form-group label-floating">
                     <label class="control-label">Nom de la cathégorie</label>
-                    <input class="form-control" placeholder="" value="" type="text">
-                </form>
+                    <input class="form-control" formControlName="nomCategorie" placeholder="" value="" type="text">
+                </div>
 
-                <form class="form-group is-select">
+                <div class="form-group is-select">
                     <label for="area">Description de la cathégorie</label><br>
-                    <textarea name="area" id="area" class="form-control"></textarea>
-                </form>
+                    <textarea name="area" id="area" formControlName="description" class="form-control"></textarea>
+                </div>
 
-                <a class="btn btn-blue btn-lg full-width" style="background-color: #4e814c;">Ajouter</a>
+                <button type="submit" class="btn btn-blue btn-lg full-width" style="background-color: #4e814c;">
+                    <app-progress-indeterminate *ngIf="waitResponse==true"></app-progress-indeterminate>
+                    Ajouter
+                </button>
+               </form>
             </div>
         </div>
     </div>
@@ -396,12 +281,12 @@
             <div class="modal-body">
                 <form class="form-group label-floating">
                     <label class="control-label">Nom complet</label>
-                    <input class="form-control" placeholder="{{candidatName}}" value="" type="text">
+                    <input class="form-control" placeholder="{{selectedCandidate.fullName}}" value="" type="text">
                 </form>
 
                 <form class="form-group label-floating">
                     <label class="control-label">Numéro</label>
-                    <input class="form-control" placeholder="{{candidatNum}}" value="" type="text">
+                    <input class="form-control" placeholder="{{selectedCandidate.num}}" value="" type="text">
                 </form>
 
 
@@ -419,7 +304,7 @@
                     </select>
 
                     <label for="area">Description</label>
-                    <textarea name="area" id="area" placeholder="{{candidatDescription}}"></textarea>
+                    <textarea name="area" id="area" placeholder="{{selectedCandidate.description}}"></textarea>
                 </form>
 
                 <a class="btn btn-blue btn-lg full-width" style="background-color: #4e814c;">Ajouter</a>
@@ -428,223 +313,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="create-event" aria-hidden="true">
-    <div class="modal-dialog window-popup create-event" role="document">
-        <div class="modal-content">
-            <a class="close icon-close" data-bs-dismiss="modal" aria-label="Close">
-                <svg class="olymp-close-icon">
-                    <use xlink:href="#olymp-close-icon"></use>
-                </svg>
-            </a>
 
-            <div class="modal-body">
-                <article class="hentry post has-post-thumbnail thumb-full-width private-event">
-
-                    <div class="private-event-head inline-items">
-                        <img loading="lazy" src="./../../../assets/img/template/avatar/avatar77-sm.webp" alt="author"
-                            width="40" height="40">
-
-                        <div class="author-date">
-                            <a class="h3 event-title">Bal de l'UdM</a>
-                            <div class="event__date">
-                                <time class="published" datetime="2017-03-24T18:18">
-                                    Samedi 05 Fév à 19:00
-                                </time>
-                            </div>
-                        </div>
-
-                        <div class="more">
-                            <svg class="olymp-three-dots-icon">
-                                <use xlink:href="#olymp-three-dots-icon"></use>
-                            </svg>
-                            <ul class="more-dropdown">
-                                <!-- <li>
-									<a >Edit Event Settings</a>
-								</li>
-								<li>
-									<a >Mark as Completed</a>
-								</li>
-								<li>
-									<a >Delete Event</a>
-								</li> -->
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="post-thumb">
-                        <img loading="lazy" src="./../../../assets/img/img/FlyerMaster2022.png" alt="photo" width="769"
-                            height="380">
-                    </div>
-
-                    <div class="row">
-                        <div class="col col-lg-7 col-md-7 col-sm-12 col-12">
-                            <div class="post__author author vcard inline-items">
-                                <img loading="lazy" src="./../../../assets/img/img/MEUdM.jpeg" alt="author" width="42"
-                                    height="42">
-
-                                <div class="author-date">
-                                    <a class="h6 post__author-name fn">Éllections Miss & Mister UdM</a>
-                                    <div class="post__date">
-                                        <time class="published" datetime="2017-03-24T18:18">
-                                            de Aujourd'hui au 05 Fév à 20:00
-                                        </time>
-                                    </div>
-                                </div>
-
-                            </div>
-
-                            <p>
-                                La beauté et l'élégance UdMoise misent en valeur.
-                                <br> Venez faire votre choix.
-                            </p>
-                        </div>
-                        <div class="col col-lg-5 col-md-5 col-sm-12 col-12">
-                            <div class="event-description">
-                                <h6 class="event-description-title">Évènement publique</h6>
-                                <div class="place inline-items">
-                                    <svg class="olymp-add-a-place-icon">
-                                        <use xlink:href="#olymp-add-a-place-icon"></use>
-                                    </svg>
-                                    <span>En ligne, Bangangté</span>
-                                </div>
-
-                                <!-- <div class="place inline-items">
-									<svg class="olymp-add-a-place-icon">
-										<use xlink:href="#olymp-add-a-place-icon"></use>
-									</svg>
-									<span>Mar 26, 2016 at 9:00am UTC-8</span>
-								</div> -->
-
-                                <ul class="friends-harmonic">
-                                    <li>
-                                        <a>
-                                            <img loading="lazy" src="./../../../assets/img/img/user.jpeg" alt="friend"
-                                                width="28" height="28">
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a>
-                                            <img loading="lazy" src="./../../../assets/img/img/user.jpeg" alt="friend"
-                                                width="28" height="28">
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a>
-                                            <img loading="lazy" src="./../../../assets/img/img/user.jpeg" alt="friend"
-                                                width="28" height="28">
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a>
-                                            <img loading="lazy" src="./../../../assets/img/img/user.jpeg" alt="friend"
-                                                width="28" height="28">
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a>
-                                            <img loading="lazy" src="./../../../assets/img/img/user.jpeg" alt="friend"
-                                                width="28" height="28">
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="all-users bg-breez">+128</a>
-                                    </li>
-
-                                </ul>
-
-                                <a class="btn btn-blue btn-sm full-width">Effectuer mon vote</a>
-
-                                <a class="btn btn-breez btn-sm full-width">Contacter l'organisation</a>
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div class="post-additional-info inline-items">
-
-                        <a class="post-add-icon inline-items">
-                            <svg class="olymp-heart-icon">
-                                <use xlink:href="#olymp-heart-icon"></use>
-                            </svg>
-                            <span>17</span>
-                        </a>
-
-                        <!-- <ul class="friends-harmonic">
-							<li>
-								<a >
-									<img loading="lazy" src="./../../../assets/img/img/user.jpeg" alt="friend" width="28" height="28">
-								</a>
-							</li>
-							<li>
-								<a >
-									<img loading="lazy" src="./../../../assets/img/img/user.jpeg" alt="friend" width="28" height="28">
-								</a>
-							</li>
-							<li>
-								<a >
-									<img loading="lazy" src="./../../../assets/img/img/user.jpeg" alt="friend" width="28" height="28">
-								</a>
-							</li>
-							<li>
-								<a >
-									<img loading="lazy" src="./../../../assets/img/img/user.jpeg" alt="friend" width="28" height="28">
-								</a>
-							</li>
-							<li>
-								<a >
-									<img loading="lazy" src="./../../../assets/img/img/user.jpeg" alt="friend" width="28" height="28">
-								</a>
-							</li>
-						</ul> -->
-
-                        <div class="names-people-likes">
-                            <a>UdM </a>, <a>Mutuelle UdM</a> et
-                            <br>15 autre personnes ont aimées.
-                        </div>
-
-
-                        <div class="comments-shared">
-                            <a class="post-add-icon inline-items">
-                                <svg class="olymp-speech-balloon-icon">
-                                    <use xlink:href="#olymp-speech-balloon-icon"></use>
-                                </svg>
-                                <span>34 Commentaires</span>
-                            </a>
-                        </div>
-
-
-                    </div>
-
-                    <div class="control-block-button post-control-button">
-
-                        <a class="btn btn-control">
-                            <svg class="olymp-like-post-icon">
-                                <use xlink:href="#olymp-like-post-icon"></use>
-                            </svg>
-                        </a>
-
-                        <a class="btn btn-control">
-                            <svg class="olymp-comments-post-icon">
-                                <use xlink:href="#olymp-comments-post-icon"></use>
-                            </svg>
-                        </a>
-
-                        <a class="btn btn-control">
-                            <svg class="olymp-share-icon">
-                                <use xlink:href="#olymp-share-icon"></use>
-                            </svg>
-                        </a>
-
-                    </div>
-
-                </article>
-
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Edit candidat -->
 
 <!-- Show candidate -->
 <div class="modal fade" id="create-friend-group-add-friends" tabindex="-1" role="dialog"
@@ -663,7 +332,7 @@
                     <div class="private-event-head inline-items">
 
                         <div class="author-date">
-                            <a class="h3 event-title">Candidat N<sup>o</sup> 0{{candidatNum}}</a>
+                            <a class="h3 event-title">Candidat N<sup>o</sup> 0{{selectedCandidate.num}}</a>
                             <div class="event__date">
                                 <time class="published" datetime="2017-03-24T18:18">
                                 </time>
@@ -680,17 +349,17 @@
                         <div class="col col-lg-12 col-md-12 col-sm-12 col-12">
                             <div class="post__author author vcard inline-items">
                                 <div class="author-date">
-                                    <a class="h6 post__author-name fn">{{candidatName}}</a>
+                                    <a class="h6 post__author-name fn">{{selectedCandidate.fullName}}</a>
                                     <div class="post__date">
                                         <time class="published" datetime="2017-03-24T18:18">
-                                            {{metierCandidat}}
+                                            {{selectedCandidate.metier}}
                                         </time>
                                     </div>
                                 </div>
 
                             </div>
 
-                            <p>{{candidatDescription}}
+                            <p>{{selectedCandidate.description}}
                             </p>
 
                             <div class="event-description">
@@ -770,268 +439,5 @@
         </div>
     </div>
 </div>
+<app-uploader-choise-image-file idComponent="update-header-photo"></app-uploader-choise-image-file>
 
-<!-- ... end Window-popup Create Friends Group Add Friends -->
-
-<a class="back-to-top">
-    <svg class="back-icon" width="14" height="18">
-        <use xlink:href="#olymp-back-to-top"></use>
-    </svg>
-</a>
-
-
-
-
-<!-- Window-popup-CHAT for responsive min-width: 768px -->
-
-<div class="ui-block popup-chat popup-chat-responsive" tabindex="-1" role="dialog"
-    aria-labelledby="popup-chat-responsive" aria-hidden="true">
-
-    <div class="modal-content">
-        <div class="modal-header">
-            <span class="icon-status online"></span>
-            <h6 class="title">Chat</h6>
-            <div class="more">
-                <svg class="olymp-three-dots-icon">
-                    <use xlink:href="#olymp-three-dots-icon"></use>
-                </svg>
-                <svg class="olymp-little-delete js-chat-open">
-                    <use xlink:href="#olymp-little-delete"></use>
-                </svg>
-            </div>
-        </div>
-        <div class="modal-body">
-            <div class="mCustomScrollbar">
-                <ul class="notification-list chat-message chat-message-field">
-                    <li>
-                        <div class="author-thumb">
-                            <img loading="lazy" src="./../../../../assets/img//img/user.jpeg" width="28" height="28"
-                                alt="author" class="mCS_img_loaded">
-                        </div>
-                        <div class="notification-event">
-                            <span class="chat-message-item">Hi James! Please remember to buy the food for tomorrow! I’m
-                                gonna be handling the gifts and Jake’s gonna get the drinks</span>
-                            <span class="notification-date"><time class="entry-date updated"
-                                    datetime="2004-07-24T18:18">Yesterday at 8:10pm</time></span>
-                        </div>
-                    </li>
-
-                    <li>
-                        <div class="author-thumb">
-                            <img loading="lazy" src="./../../../../assets/img//img/user.jpeg" width="36" height="36"
-                                alt="author" class="mCS_img_loaded">
-                        </div>
-                        <div class="notification-event">
-                            <span class="chat-message-item">Don’t worry Mathilda!</span>
-                            <span class="chat-message-item">I already bought everything</span>
-                            <span class="notification-date"><time class="entry-date updated"
-                                    datetime="2004-07-24T18:18">Yesterday at 8:29pm</time></span>
-                        </div>
-                    </li>
-
-                    <li>
-                        <div class="author-thumb">
-                            <img loading="lazy" src="./../../../../assets/img//img/user.jpeg" width="28" height="28"
-                                alt="author" class="mCS_img_loaded">
-                        </div>
-                        <div class="notification-event">
-                            <span class="chat-message-item">Hi James! Please remember to buy the food for tomorrow! I’m
-                                gonna be handling the gifts and Jake’s gonna get the drinks</span>
-                            <span class="notification-date"><time class="entry-date updated"
-                                    datetime="2004-07-24T18:18">Yesterday at 8:10pm</time></span>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-
-            <form class="need-validation">
-
-                <div class="form-group">
-                    <textarea class="form-control" placeholder="Press enter to post..."></textarea>
-                    <div class="add-options-message">
-                        <a class="options-message">
-                            <svg class="olymp-computer-icon">
-                                <use xlink:href="#olymp-computer-icon"></use>
-                            </svg>
-                        </a>
-                        <div class="options-message smile-block">
-
-                            <svg class="olymp-happy-sticker-icon">
-                                <use xlink:href="#olymp-happy-sticker-icon"></use>
-                            </svg>
-
-                            <ul class="more-dropdown more-with-triangle triangle-bottom-right">
-                                <li>
-                                    <a>
-                                        <img loading="lazy" src="./../../../assets/img/icon/icon-chat1.webp" alt="icon"
-                                            width="20" height="20">
-                                    </a>
-                                </li>
-                                <li>
-                                    <a>
-                                        <img loading="lazy" src="./../../../assets/img/icon/icon-chat2.webp" alt="icon"
-                                            width="20" height="20">
-                                    </a>
-                                </li>
-                                <li>
-                                    <a>
-                                        <img loading="lazy" src="./../../../assets/img/icon/icon-chat3.webp" alt="icon"
-                                            width="20" height="20">
-                                    </a>
-                                </li>
-                                <li>
-                                    <a>
-                                        <img loading="lazy" src="./../../../assets/img/icon/icon-chat4.webp" alt="icon"
-                                            width="20" height="20">
-                                    </a>
-                                </li>
-                                <li>
-                                    <a>
-                                        <img loading="lazy" src="./../../../assets/img/icon/icon-chat5.webp" alt="icon"
-                                            width="20" height="20">
-                                    </a>
-                                </li>
-                                <li>
-                                    <a>
-                                        <img loading="lazy" src="./../../../assets/img/icon/icon-chat6.webp" alt="icon"
-                                            width="20" height="20">
-                                    </a>
-                                </li>
-                                <li>
-                                    <a>
-                                        <img loading="lazy" src="./../../../assets/img/icon/icon-chat7.webp" alt="icon"
-                                            width="20" height="20">
-                                    </a>
-                                </li>
-                                <li>
-                                    <a>
-                                        <img loading="lazy" src="./../../../assets/img/icon/icon-chat8.webp" alt="icon"
-                                            width="20" height="20">
-                                    </a>
-                                </li>
-                                <li>
-                                    <a>
-                                        <img loading="lazy" src="./../../../assets/img/icon/icon-chat9.webp" alt="icon"
-                                            width="20" height="20">
-                                    </a>
-                                </li>
-                                <li>
-                                    <a>
-                                        <img loading="lazy" src="./../../../assets/img/icon/icon-chat10.webp" alt="icon"
-                                            width="20" height="20">
-                                    </a>
-                                </li>
-                                <li>
-                                    <a>
-                                        <img loading="lazy" src="./../../../assets/img/icon/icon-chat11.webp" alt="icon"
-                                            width="20" height="20">
-                                    </a>
-                                </li>
-                                <li>
-                                    <a>
-                                        <img loading="lazy" src="./../../../assets/img/icon/icon-chat12.webp" alt="icon"
-                                            width="20" height="20">
-                                    </a>
-                                </li>
-                                <li>
-                                    <a>
-                                        <img loading="lazy" src="./../../../assets/img/icon/icon-chat13.webp" alt="icon"
-                                            width="20" height="20">
-                                    </a>
-                                </li>
-                                <li>
-                                    <a>
-                                        <img loading="lazy" src="./../../../assets/img/icon/icon-chat14.webp" alt="icon"
-                                            width="20" height="20">
-                                    </a>
-                                </li>
-                                <li>
-                                    <a>
-                                        <img loading="lazy" src="./../../../assets/img/icon/icon-chat15.webp" alt="icon"
-                                            width="20" height="20">
-                                    </a>
-                                </li>
-                                <li>
-                                    <a>
-                                        <img loading="lazy" src="./../../../assets/img/icon/icon-chat16.webp" alt="icon"
-                                            width="20" height="20">
-                                    </a>
-                                </li>
-                                <li>
-                                    <a>
-                                        <img loading="lazy" src="./../../../assets/img/icon/icon-chat17.webp" alt="icon"
-                                            width="20" height="20">
-                                    </a>
-                                </li>
-                                <li>
-                                    <a>
-                                        <img loading="lazy" src="./../../../assets/img/icon/icon-chat18.webp" alt="icon"
-                                            width="20" height="20">
-                                    </a>
-                                </li>
-                                <li>
-                                    <a>
-                                        <img loading="lazy" src="./../../../assets/img/icon/icon-chat19.webp" alt="icon"
-                                            width="20" height="20">
-                                    </a>
-                                </li>
-                                <li>
-                                    <a>
-                                        <img loading="lazy" src="./../../../assets/img/icon/icon-chat20.webp" alt="icon"
-                                            width="20" height="20">
-                                    </a>
-                                </li>
-                                <li>
-                                    <a>
-                                        <img loading="lazy" src="./../../../assets/img/icon/icon-chat21.webp" alt="icon"
-                                            width="20" height="20">
-                                    </a>
-                                </li>
-                                <li>
-                                    <a>
-                                        <img loading="lazy" src="./../../../assets/img/icon/icon-chat22.webp" alt="icon"
-                                            width="20" height="20">
-                                    </a>
-                                </li>
-                                <li>
-                                    <a>
-                                        <img loading="lazy" src="./../../../assets/img/icon/icon-chat23.webp" alt="icon"
-                                            width="20" height="20">
-                                    </a>
-                                </li>
-                                <li>
-                                    <a>
-                                        <img loading="lazy" src="./../../../assets/img/icon/icon-chat24.webp" alt="icon"
-                                            width="20" height="20">
-                                    </a>
-                                </li>
-                                <li>
-                                    <a>
-                                        <img loading="lazy" src="./../../../assets/img/icon/icon-chat25.webp" alt="icon"
-                                            width="20" height="20">
-                                    </a>
-                                </li>
-                                <li>
-                                    <a>
-                                        <img loading="lazy" src="./../../../assets/img/icon/icon-chat26.webp" alt="icon"
-                                            width="20" height="20">
-                                    </a>
-                                </li>
-                                <li>
-                                    <a>
-                                        <img loading="lazy" src="./../../../assets/img/icon/icon-chat27.webp" alt="icon"
-                                            width="20" height="20">
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-            </form>
-        </div>
-    </div>
-
-</div>
-
-<!-- ... end Window-popup-CHAT for responsive min-width: 768px -->

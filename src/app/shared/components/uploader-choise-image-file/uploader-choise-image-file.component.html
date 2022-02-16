@@ -1,0 +1,142 @@
+<!-- Window-popup Update Header Photo -->
+
+<div class="modal fade" [id]="idComponent" tabindex="-1" role="dialog" aria-labelledby="update-header-photo" aria-hidden="true">
+	<div class="modal-dialog window-popup update-header-photo" role="document">
+		<div class="modal-content">
+			<a href="" class="close icon-close" data-bs-dismiss="modal" aria-label="Close">
+				<svg class="olymp-close-icon"><use xlink:href="#olymp-close-icon"></use></svg>
+			</a>
+
+			<div class="modal-header">
+				<h6 class="title">Selectionnez une photo</h6>
+			</div>
+
+			<div class="modal-body">
+				<a href="" class="upload-photo-item">
+				<svg class="olymp-computer-icon"><use xlink:href="#olymp-computer-icon"></use></svg>
+
+				<h6>Uploader une Photo</h6>
+				<span>Selectionnez de votre ordinateur.</span>
+			</a>
+
+				<a href="" class="upload-photo-item" data-bs-toggle="modal" data-bs-target="#choose-from-my-photo">
+
+			<svg class="olymp-photos-icon"><use xlink:href="#olymp-photos-icon"></use></svg>
+
+			<h6>Selectionnez dans votre galérie</h6>
+			<span>Selectionnez parmis les photos déjà uploader</span>
+		</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<!-- ... end Window-popup Update Header Photo -->
+
+<!-- Window-popup Choose from my Photo -->
+
+<div class="modal fade" id="choose-from-my-photo" tabindex="-1" role="dialog" aria-labelledby="choose-from-my-photo" aria-hidden="true">
+	<div class="modal-dialog window-popup choose-from-my-photo" role="document">
+
+		<div class="modal-content">
+			<a href="" class="close icon-close" data-bs-dismiss="modal" aria-label="Close">
+				<svg class="olymp-close-icon"><use xlink:href="#olymp-close-icon"></use></svg>
+			</a>
+			<div class="modal-header">
+				<h6 class="title">Selectionnez dans votre galérie</h6>
+
+				<!-- Nav tabs -->
+				<ul class="nav nav-tabs" role="tablist">
+					<li class="nav-item">
+						<a class="nav-link active" data-bs-toggle="tab" href="#home" role="tab" aria-expanded="true">
+							<svg class="olymp-photos-icon"><use xlink:href="#olymp-photos-icon"></use></svg>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" data-bs-toggle="tab" href="#profile" role="tab" aria-expanded="false">
+							<svg class="olymp-albums-icon"><use xlink:href="#olymp-albums-icon"></use></svg>
+						</a>
+					</li>
+				</ul>
+			</div>
+
+			<div class="modal-body">
+				<!-- Tab panes -->
+				<div class="tab-content">
+					<div class="tab-pane fade active show" id="home" role="tabpanel" aria-expanded="true">
+						<app-galery-image></app-galery-image>
+						<a href="" class="btn btn-secondary btn-lg btn--half-width">Annler</a>
+						<a href="" class="btn btn-primary btn-lg btn--half-width">Selectionnez</a>
+
+					</div>
+					<div class="tab-pane fade" id="profile" role="tabpanel" aria-expanded="false">
+
+						<div class="choose-photo-item">
+							<figure>
+								<img loading="lazy" src="img/choose-photo10.webp" alt="photo" width="225" height="180">
+								<figcaption>
+									<a href="">South America Vacations</a>
+									<span>Last Added: 2 hours ago</span>
+								</figcaption>
+							</figure>
+						</div>
+						<div class="choose-photo-item">
+							<figure>
+								<img loading="lazy" src="img/choose-photo11.webp" alt="photo" width="225" height="180">
+								<figcaption>
+									<a href="">Photoshoot Summer 2016</a>
+									<span>Last Added: 5 weeks ago</span>
+								</figcaption>
+							</figure>
+						</div>
+						<div class="choose-photo-item">
+							<figure>
+								<img loading="lazy" src="img/choose-photo12.webp" alt="photo" width="225" height="180">
+								<figcaption>
+									<a href="">Amazing Street Food</a>
+									<span>Last Added: 6 mins ago</span>
+								</figcaption>
+							</figure>
+						</div>
+
+						<div class="choose-photo-item">
+							<figure>
+								<img loading="lazy" src="img/choose-photo13.webp" alt="photo" width="224" height="179">
+								<figcaption>
+									<a href="">Graffity & Street Art</a>
+									<span>Last Added: 16 hours ago</span>
+								</figcaption>
+							</figure>
+						</div>
+						<div class="choose-photo-item">
+							<figure>
+								<img loading="lazy" src="img/choose-photo14.webp" alt="photo" width="225" height="180">
+								<figcaption>
+									<a href="">Amazing Landscapes</a>
+									<span>Last Added: 13 mins ago</span>
+								</figcaption>
+							</figure>
+						</div>
+						<div class="choose-photo-item">
+							<figure>
+								<img loading="lazy" src="img/choose-photo15.webp" alt="photo" width="225" height="180">
+								<figcaption>
+									<a href="">The Majestic Canyon</a>
+									<span>Last Added: 57 mins ago</span>
+								</figcaption>
+							</figure>
+						</div>
+
+
+						<a href="" class="btn btn-secondary btn-lg btn--half-width">Cancel</a>
+						<a href="" class="btn btn-primary btn-lg disabled btn--half-width">Confirm Photo</a>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>
+
+<!-- ... end Window-popup Choose from my Photo -->

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { EntityID, Evenement, FilActualitePost, UserAction } from '../../entities';
-import { VoteEvenement } from '../../entities/vote-evenement';
+import { Entity, EntityID, Evenement, FilActualitePost, UserAction } from '../../entities';
+import { CategorieEvenement, VoteEvenement } from '../../entities/vote-evenement';
 import { VoteCandidate } from '../../entities/votecandidate';
 import { EventState } from '../../enum';
 import { ActionStatus } from '../../others/actionstatus';
@@ -14,21 +14,22 @@ import { UserProfilService } from '../user-profil/user-profil.service';
 import * as db_branch_builder from "./../../utils/functions/db-branch.builder"
 
 
-@Injectable({
+@Injectable({ 
   providedIn: 'root'
 })
-export class EvenementBussinessService extends AbstractCrudService<Evenement> {
+export abstract class EvenementBussinessService<T extends Evenement=Evenement> extends AbstractCrudService<T> {
+ 
   private startDate:Date=new Date();
   private endDate:Date=new Date()
   private currentDate:Date=new Date()
   constructor(
     firebaseApi:FirebaseDataBaseApi,
     localStorageService:LocalStorageService,
-    private userProfilService:UserProfilService,
-    private eventService:EventService,
-    private filActualiteService:FilActualiteService
+    protected userProfilService:UserProfilService,
+    protected eventService:EventService,
+    protected filActualiteService:FilActualiteService
   ) {
-    super(firebaseApi,localStorageService,"evenements",Evenement)
+    super(firebaseApi,localStorageService,"evenements")
     this.startDate.setDate(1);
     this.endDate=new Date(this.startDate.getFullYear(),this.startDate.getMonth()+1,0);
     this.loadNewBunchData()
@@ -39,7 +40,6 @@ export class EvenementBussinessService extends AbstractCrudService<Evenement> {
       }
     })
   }
-
   loadNewBunchData()
   {
     console.log("date",this.startDate.toISOString(),this.endDate.toISOString())
@@ -53,20 +53,19 @@ export class EvenementBussinessService extends AbstractCrudService<Evenement> {
       console.log("Data ",data)
       for(let k in data)
       {
-        let event:Evenement=new Evenement()
-        event.hydrate(data[k])
+        let event=this.hydrateObjet(data[k]);
         let d = UtilTime.getDateFromString(event.startDate);
         if(this.currentDate>=d) this.setObject(event)
       }
     })
   }
 
-  createNewEvent(event:Evenement):Promise<ActionStatus<boolean>>
+  createNewEvent(event:T):Promise<ActionStatus<boolean>>
   {
     return this.save(event,db_branch_builder.getBranchOfEvent(event.id))
   }
 
-  updateEvent(event:Evenement):Promise<ActionStatus<boolean>>
+  updateEvent(event:T):Promise<ActionStatus<boolean>>
   {
     return this.update(event,db_branch_builder.getBranchOfEvent(event.id))
   }
@@ -76,14 +75,10 @@ export class EvenementBussinessService extends AbstractCrudService<Evenement> {
     return this.findByID(eventID,db_branch_builder.getBranchOfEvents())
   }
 
-  addCandidate(eventID:EntityID,candidate:VoteCandidate):Promise<ActionStatus<boolean>>
-  {
-    (<VoteEvenement>this.list.get(eventID.toString())).candidates.push(candidate)
-    return this.updateEvent(this.list.get(eventID.toString()))
-  }
+  
   changeStatusStarted(eventID:EntityID,value:boolean=false):Promise<ActionStatus<boolean>>
   {
-    (<VoteEvenement>this.list.get(eventID.toString())).isStarted=value;
+    this.list.get(eventID.toString()).isStarted=value;
     return this.updateEvent(this.list.get(eventID.toString()))
   }
 
@@ -92,6 +87,8 @@ export class EvenementBussinessService extends AbstractCrudService<Evenement> {
     this.list.get(eventID.toString()).actions.push(userAction)
     return this.updateEvent(this.list.get(eventID.toString()))
   }
+  
+  
   changeEventState(eventID:EntityID,eventStatus:EventState):Promise<ActionStatus<boolean>>
   {
 
@@ -99,7 +96,7 @@ export class EvenementBussinessService extends AbstractCrudService<Evenement> {
     this.list.get(eventID.toString()).datePublication=0;
 
     console.log("event ",this.list.get(eventID.toString()))
-    
+
     let post:FilActualitePost=new FilActualitePost();
     post.idEvent.setId(eventID.toString())
     post.id.setId(eventID.toString())

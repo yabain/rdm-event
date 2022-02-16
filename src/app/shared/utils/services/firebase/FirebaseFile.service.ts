@@ -3,7 +3,7 @@ import * as firebase from 'firebase';
 import { BehaviorSubject } from 'rxjs';
 import { CustomFile } from 'src/app/shared/entities/custom-file';
 import { EntityID } from 'src/app/shared/entities/entityid';
-import { ActionStatus } from '.';
+import { ActionStatus } from 'src/app/shared/others/actionstatus';
 import { FireBaseConstant } from './firebase-constant';
 import { FirebaseDataBaseApi } from './FirebaseDatabaseApi';
 
@@ -26,17 +26,17 @@ export class FirebaseFile {
       contentType:file.type
     })
     
-    uploadTask.on(firebase.default.storage.TaskEvent.STATE_CHANGED,
+    uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
       (snapshot)=>
       {
         result.result=Math.trunc((snapshot.bytesTransferred/snapshot.totalBytes) *100);
         switch(snapshot.state)
         {
-          case firebase.default.storage.TaskState.PAUSED:
+          case firebase.storage.TaskState.PAUSED:
             result.apiCode=ActionStatus.UPLOAD_PAUSED;            
             subject.next(result);
             break;
-          case firebase.default.storage.TaskState.RUNNING:
+          case firebase.storage.TaskState.RUNNING:
             result.apiCode=ActionStatus.UPLOAD_RUNNING;
             subject.next(result)
             break;
@@ -57,6 +57,28 @@ export class FirebaseFile {
       }
     )
     return subject;
+  }
+
+  listAll(url=""):Promise<ActionStatus>
+  {
+    return new Promise<ActionStatus>((resolve,reject)=>{
+      let actionResult=new ActionStatus()
+      this.db.child(url).listAll()
+      .then((res)=>{
+        console.log("List fichiers: ",res.items)
+        res.items.forEach((itemRef)=>{
+          
+        })
+      })
+      .catch((error)=>{
+        console.log("Error ",error)
+        actionResult.apiCode=error.code;
+        actionResult.result=error;
+        actionResult.message=error.message;
+        this.firebaseDatabaseApi.handleApiError(error);
+        reject(error)
+      })
+    })
   }
   
 }

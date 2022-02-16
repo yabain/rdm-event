@@ -7,6 +7,7 @@ import { UserService } from 'src/app/shared/services/user/user.service';
 import { UtilTime } from 'src/app/shared/utils/functions';
 import { monthStringList } from 'src/app/shared/utils/functions/time';
 import { Router } from '@angular/router';
+import { VoteEvenementBussinessService } from 'src/app/shared/services/evenement-bussiness/vote-evenement-bussiness.service';
 
 declare var $:any;
 
@@ -36,7 +37,7 @@ export class EventComponent implements OnInit {
   constructor(
     private router: Router,
     private datePipe: DatePipe,
-    private eventBusinessService:EvenementBussinessService,
+    private eventBusinessService:VoteEvenementBussinessService,
     private userService:UserService){
       // this.maDate = this.datePipe.transform(this.maDate, 'dd/MM/yyyy');
       this.day = this.maDate.getMonth();

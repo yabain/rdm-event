@@ -15,7 +15,6 @@ export abstract class AbstractCrudService<T extends Entity>
         protected firebaseApi:FirebaseDataBaseApi,
         protected localStorageService:LocalStorageService,
         localstoragekey,
-        private entityCtor:{new () :T}
         
         )
     {
@@ -134,10 +133,12 @@ export abstract class AbstractCrudService<T extends Entity>
     }
     hydrateObjet(entity:Record<string,any>):T
     {
-      let obj:T=<T> new this.entityCtor();
+      let obj:T=this.createInstance();
       obj.hydrate(entity);
       return obj
     }
+
+    abstract createInstance():T;
 
     findAll(branch:String):Promise<ActionStatus<T[]>>
     {

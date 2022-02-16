@@ -66,7 +66,6 @@ export class Evenement extends Entity
         if(this.state==EventState.PUBLISHED)
         {
             let pd=new Date(this.datePublication);
-            console.log("Get Day ",pd.getDay())
             return `Publié ${weekStringList[pd.getDay()]} ${UtilTime.getDateNumberFromDate(pd)} ${UtilTime.getMonthStringByNumber(pd.getMonth())} à ${UtilTime.getTimeFromDate(pd)}`
         }
         

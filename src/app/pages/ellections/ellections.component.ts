@@ -5,6 +5,7 @@ import { VoteEvenement } from 'src/app/shared/entities/vote-evenement';
 import { EventState } from 'src/app/shared/enum';
 import { AuthService } from 'src/app/shared/services/auth/auth.service';
 import { EvenementBussinessService } from 'src/app/shared/services/evenement-bussiness/evenement-bussiness.service';
+import { VoteEvenementBussinessService } from 'src/app/shared/services/evenement-bussiness/vote-evenement-bussiness.service';
 import { NotificationService } from 'src/app/shared/services/notification/notification.sevices';
 import { UrlService } from 'src/app/shared/services/url/url.service';
 import { UserProfilService } from 'src/app/shared/services/user-profil/user-profil.service';
@@ -25,7 +26,7 @@ export class EllectionsComponent implements OnInit {
   ellectDescript: string="Bienvenue dans l'espace qui vous permet d'effectuer des éllections. Nous n'attendons plus que vous pour voter.";
   idToUrl : string;
   idEvent:EntityID=new EntityID()
-  event:VoteEvenement;
+  event:VoteEvenement=new VoteEvenement();
   owner:User=new User();
   currentUser:User;
   waitResponseChangeStatus:boolean=false;
@@ -34,11 +35,10 @@ export class EllectionsComponent implements OnInit {
     private userProfilService: UserProfilService,
     private router:Router,
     private activatedRoute:ActivatedRoute,
-    private evenementService:EvenementBussinessService,
+    private evenementService:VoteEvenementBussinessService,
     private userService:UserService,
     private authService:AuthService,
     private notificationService:ToastrNotificationService,
-    private urlService: UrlService
   ) { 
   }
 
@@ -71,16 +71,6 @@ export class EllectionsComponent implements OnInit {
       this.isAuth=isLogged
     })
 
-  }
-
-  isAdminer(isAdmin){
-    if(isAdmin){
-      this.isOwner = true
-    }
-  }
-
-  getUrl(){
-    this.idToUrl = this.urlService.getEllectIdToUrl();
   }
   getStringDate(stringDate,stringTime)
   {

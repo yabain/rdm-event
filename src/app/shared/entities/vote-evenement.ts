@@ -9,6 +9,7 @@ export class VoteEvenement extends Evenement
     override eventType:EventType=EventType.VOTE_EVENT
     categories:CategorieEvenement[]=[]
     candidates:VoteCandidate[]=[];
+    selectedCandidate:VoteCandidate=new VoteCandidate()
 
 
     constructor()
@@ -79,7 +80,7 @@ export class CategorieEvenement extends Entity
         for(const key of Object.keys(entity))
         {
             if(key=="id") this.id.setId(entity[key]);
-            if(key=="evendID") this.id.setId(entity[key]);
+            if(key=="evendID") this.evendID.setId(entity[key]);
             else if(Reflect.has(this,key)) Reflect.set(this,key,entity[key]);
         }
     }

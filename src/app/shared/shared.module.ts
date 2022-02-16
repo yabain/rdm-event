@@ -22,6 +22,8 @@ import { CandidatsListComponent } from './components/candidats-list/candidats-li
 import { FormNewEventComponent } from "./components/form-new-event/form-new-event.component";
 import { TodayEventBreadcrumbComponent } from './components/today-event-breadcrumb/today-event-breadcrumb.component';
 import { ProgressIndeterminateModule } from "./components/progress-indeterminate/progress-indeterminate.module";
+import { UploaderChoiseImageFileComponent } from './components/uploader-choise-image-file/uploader-choise-image-file.component';
+import { GaleryImageComponent } from './components/galery-image/galery-image.component';
 
 
 
@@ -46,6 +48,8 @@ import { ProgressIndeterminateModule } from "./components/progress-indeterminate
     CandidatsListComponent,
     FormNewEventComponent,
     TodayEventBreadcrumbComponent,
+    UploaderChoiseImageFileComponent,
+    GaleryImageComponent,
 
   ],
   imports: [
@@ -74,7 +78,8 @@ import { ProgressIndeterminateModule } from "./components/progress-indeterminate
     CandidatsListComponent,
     FormNewEventComponent,
     TodayEventBreadcrumbComponent,
-    ProgressIndeterminateModule
+    UploaderChoiseImageFileComponent,
+    ProgressIndeterminateModule,
   ],
   providers:[
   ]

@@ -13,7 +13,7 @@ import { UserService } from '../user/user.service';
   providedIn: 'root'
 })
 export class UserProfilService {
-  currentUser: BehaviorSubject<User> = new BehaviorSubject<User>(null);
+  currentUser: BehaviorSubject<User> = new BehaviorSubject<User>(new User());
 
   constructor(
     private localStorageService:LocalStorageService,

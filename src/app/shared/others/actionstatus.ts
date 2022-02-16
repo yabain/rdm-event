@@ -1,4 +1,4 @@
-export class ActionStatus<T> {
+export class ActionStatus<T = any> {
   code: number;
   apiCode: any;
   result: T | any;

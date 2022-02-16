@@ -11,6 +11,7 @@ import * as db_branch_builder from "./../../utils/functions/db-branch.builder"
   providedIn: 'root'
 })
 export class FilActualiteService extends AbstractCrudService<FilActualitePost> {
+  
   protected cursorForLoadSegmentData:any="";
   protected maxPageLoad=5;
 
@@ -19,12 +20,15 @@ export class FilActualiteService extends AbstractCrudService<FilActualitePost> {
     localStrogeService:LocalStorageService,
     private eventService:EventService
   ) { 
-    super(firebaseApi,localStrogeService,"fil_actualite",FilActualitePost)
+    super(firebaseApi,localStrogeService,"fil_actualite")
     this.loadNewBunchData();
 
     this.eventService.loginEvent.subscribe((login)=>{
       if(login) this.loadNewBunchData();
     })
+  }
+  createInstance(): FilActualitePost {
+    return new FilActualitePost()
   }
   loadNewBunchData():Promise<ActionStatus<void>>
   {

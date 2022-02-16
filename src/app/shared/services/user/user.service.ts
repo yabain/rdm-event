@@ -19,13 +19,13 @@ import * as db_branch_builder from "./../../utils/functions/db-branch.builder"
   providedIn: 'root'
 })
 export class UserService extends AbstractCrudService<User> {
-  
+    
   constructor(
     localStorageService:LocalStorageService,
     firebaseApi:FirebaseDataBaseApi,
     private authService:AuthService
   ) {
-      super(firebaseApi,localStorageService,"users_list",User)
+      super(firebaseApi,localStorageService,"users_list")
   }
 
 
@@ -33,6 +33,10 @@ export class UserService extends AbstractCrudService<User> {
   {
     console.log("user ",user)
    return this.save(user,db_branch_builder.getBranchOfUser(user.id))
+  }
+
+  createInstance(): User {
+    return new User()
   }
 
   getAllUser():Promise<ActionStatus<User>>
