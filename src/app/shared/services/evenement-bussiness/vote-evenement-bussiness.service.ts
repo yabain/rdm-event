@@ -24,8 +24,8 @@ import { EvenementBussinessService } from "./evenement-bussiness.service";
       ) {
         super(firebaseApi,localStorageService,userProfilService,eventService,filActualiteService)
       }
-      createInstance(): VoteEvenement {
-        return new VoteEvenement()
+    createInstance(): VoteEvenement {
+      return new VoteEvenement()
     }
     addCathegorie(eventID:EntityID,cathegorie:CategorieEvenement):Promise<ActionStatus<boolean>>
     {

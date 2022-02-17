@@ -329,7 +329,7 @@ export class FirebaseDataBaseApi {
         // this.eventService.newBugEvent.next(bug);
         //Bugsnag.notify(bug.error)
         // console.log("Result error ",result)
-        result.message = 'Unknow error. Please contact administrator';
+        // result.message = 'Unknow error. Please contact administrator';
         break;
     }
   }

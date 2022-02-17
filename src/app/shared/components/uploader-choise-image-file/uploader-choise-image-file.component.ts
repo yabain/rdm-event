@@ -1,5 +1,5 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { CustomFile } from '../../entities';
+import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { CustomFile, EntityID, User } from '../../entities';
 import { FirebaseFile } from '../../utils/services/firebase';
 
 @Component({
@@ -10,12 +10,14 @@ import { FirebaseFile } from '../../utils/services/firebase';
 export class UploaderChoiseImageFileComponent implements OnInit {
   
   @Input() idComponent:string="update-header-photo"
+  @Input() user:User;
   @Output() fileEventUploaded:EventEmitter<CustomFile>=new EventEmitter<CustomFile>()
   constructor(
     private firebaseFile:FirebaseFile
   ) { }
 
   ngOnInit(): void {
+    
     
   }
   selectFile()

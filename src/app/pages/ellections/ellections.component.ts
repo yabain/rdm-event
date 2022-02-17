@@ -45,6 +45,7 @@ export class EllectionsComponent implements OnInit {
   ngOnInit(): void {
     
     let stringId=this.activatedRoute.snapshot.paramMap.get("idEvent")
+    console.log("Stringid ",stringId)
     if(!stringId) 
     {
       this.notificationService.warningNotification("Pas d'évenement sélectionnez. Vous serez redirigé vers la page des évènements")

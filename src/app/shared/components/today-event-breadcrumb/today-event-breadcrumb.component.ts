@@ -2,6 +2,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { EntityID, Evenement } from '../../entities';
 import { AuthService } from '../../services/auth/auth.service';
 import { EvenementBussinessService } from '../../services/evenement-bussiness/evenement-bussiness.service';
+import { VoteEvenementBussinessService } from '../../services/evenement-bussiness/vote-evenement-bussiness.service';
 import { UtilTime } from '../../utils/functions';
 
 @Component({
@@ -29,7 +30,7 @@ export class TodayEventBreadcrumbComponent implements OnInit {
   // },
   eventList=[  
   ]
-  constructor(private evenementService:EvenementBussinessService, private authService:AuthService) { }
+  constructor(private evenementService:VoteEvenementBussinessService, private authService:AuthService) { }
 
   ngOnInit(): void {
     this.evenementService.listSubject.subscribe((events:Map<string,Evenement>)=>{

@@ -59,16 +59,28 @@ export class FirebaseFile {
     return subject;
   }
 
-  listAll(url=""):Promise<ActionStatus>
+  listAll(url=""):Promise<ActionStatus<CustomFile[]>>
   {
     return new Promise<ActionStatus>((resolve,reject)=>{
-      let actionResult=new ActionStatus()
+      let actionResult=new ActionStatus<CustomFile[]>()
       this.db.child(url).listAll()
       .then((res)=>{
-        console.log("List fichiers: ",res.items)
-        res.items.forEach((itemRef)=>{
-          
+      
+        actionResult.result=res.items.map((itemRef)=>{
+          let custom:CustomFile=new CustomFile()
+          custom.name=itemRef.name;
+          custom.link=itemRef.getDownloadURL();
+          return custom;
         })
+        return Promise.all(actionResult.result.map((custom)=>custom.link))
+      })
+      .then((result:ActionStatus[])=>{
+        for(let i=0;i<result.length;i++)
+        {
+          actionResult.result[i].link=result[i];
+        } 
+        console.log("Erreur ",actionResult.result)        
+        resolve(actionResult)
       })
       .catch((error)=>{
         console.log("Error ",error)

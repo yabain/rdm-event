@@ -1,9 +1,13 @@
-<div *ngFor="let image of images" class="choose-photo-item">
-    <div class="radio">
-        <label class="custom-radio">
-            <img loading="lazy" [src]="image" alt="photo" width="247" height="166">
-            <input type="radio" name="optionsRadios">
-        </label>
+<div class="row">
+    <div class="col-12">
+        <div *ngFor="let image of arrayImage" class="choose-photo-item">
+            <div class="radio">
+                <label class="custom-radio">
+                    <img loading="lazy" [src]="image.link" alt="photo" width="247" height="166">
+                    <input type="radio" name="optionsRadios">
+                </label>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -12,7 +16,7 @@
         <app-progress-indeterminate></app-progress-indeterminate>
     </div>
 </div>
-<div class="row" *ngIf="hasLoaded==true && images.length==0">
+<div class="row" *ngIf="hasLoaded==true && arrayImage.length==0">
     <div class="col">
         <span class="text-center">Aucune photo trouvée. ajoutez une nouvelle photo</span>
     </div>

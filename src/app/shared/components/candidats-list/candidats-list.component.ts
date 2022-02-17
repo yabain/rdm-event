@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { EntityID, Evenement, User } from '../../entities';
+import { CustomFile, EntityID, Evenement, User } from '../../entities';
 import { CategorieEvenement, VoteEvenement } from '../../entities/vote-evenement';
 import { VoteCandidate } from '../../entities/votecandidate';
 import { AuthService } from '../../services/auth/auth.service';
@@ -21,7 +21,7 @@ export class CandidatsListComponent implements OnInit {
   isOwner: boolean = false;
   isAdmin: boolean = false;
   voteStatus: boolean; //true = vote ouvert
-  @Input() idEvent:EntityID
+  @Input() idEvent:EntityID=new EntityID()
   event:VoteEvenement=new VoteEvenement();
   currentUser:User=new User();
   owner:User;
@@ -30,6 +30,7 @@ export class CandidatsListComponent implements OnInit {
   formCategorie:FormGroup;
   submitted:boolean=false;
   waitResponse:boolean=false;
+  allImageCandidats:CustomFile[]=[]
 
   constructor(
     private evenementService:VoteEvenementBussinessService,
@@ -85,7 +86,6 @@ export class CandidatsListComponent implements OnInit {
 
   uploadCandidateImage(file)
   {
-    console.log("File ",file)
     this.notificationService.asyncNotification(new Promise((resolve,reject)=>{
       this.firebaseFile.uploadFile(this.event.eventOwner.toString().toString(),file)
       .subscribe({
@@ -95,7 +95,10 @@ export class CandidatsListComponent implements OnInit {
         error:(error)=>reject(error)
       })
     }),
-    (resp)=>this.notificationService.successNofitication(`L'image ${file.name} a été uploadé avec success`),
+    (resp)=>{
+      this.allImageCandidats.push(file)
+      this.notificationService.successNofitication(`L'image ${file.name} a été uploadé avec success`)
+    },
     (error)=>{
       console.log("upload Error: ",error)
       return `Erreur lors de l'uplodad de l'image ${file.name}:${error.message}`

@@ -66,22 +66,12 @@
 				<!-- Tab panes -->
 				<div class="tab-content">
 					<div class="tab-pane fade active show" id="home" role="tabpanel" aria-expanded="true">
-						<app-galery-image></app-galery-image>
+						<app-galery-image [loadFromDatabase]="true" [user]="user"></app-galery-image>
 						<a href="" class="btn btn-secondary btn-lg btn--half-width">Annler</a>
-						<a href="" class="btn btn-primary btn-lg btn--half-width">Selectionnez</a>
+						<a href="" disabled class="btn btn-primary btn-lg btn--half-width">Selectionnez</a>
 
 					</div>
 					<div class="tab-pane fade" id="profile" role="tabpanel" aria-expanded="false">
-
-						<div class="choose-photo-item">
-							<figure>
-								<img loading="lazy" src="img/choose-photo10.webp" alt="photo" width="225" height="180">
-								<figcaption>
-									<a href="">South America Vacations</a>
-									<span>Last Added: 2 hours ago</span>
-								</figcaption>
-							</figure>
-						</div>
 						<div class="choose-photo-item">
 							<figure>
 								<img loading="lazy" src="img/choose-photo11.webp" alt="photo" width="225" height="180">
@@ -91,45 +81,6 @@
 								</figcaption>
 							</figure>
 						</div>
-						<div class="choose-photo-item">
-							<figure>
-								<img loading="lazy" src="img/choose-photo12.webp" alt="photo" width="225" height="180">
-								<figcaption>
-									<a href="">Amazing Street Food</a>
-									<span>Last Added: 6 mins ago</span>
-								</figcaption>
-							</figure>
-						</div>
-
-						<div class="choose-photo-item">
-							<figure>
-								<img loading="lazy" src="img/choose-photo13.webp" alt="photo" width="224" height="179">
-								<figcaption>
-									<a href="">Graffity & Street Art</a>
-									<span>Last Added: 16 hours ago</span>
-								</figcaption>
-							</figure>
-						</div>
-						<div class="choose-photo-item">
-							<figure>
-								<img loading="lazy" src="img/choose-photo14.webp" alt="photo" width="225" height="180">
-								<figcaption>
-									<a href="">Amazing Landscapes</a>
-									<span>Last Added: 13 mins ago</span>
-								</figcaption>
-							</figure>
-						</div>
-						<div class="choose-photo-item">
-							<figure>
-								<img loading="lazy" src="img/choose-photo15.webp" alt="photo" width="225" height="180">
-								<figcaption>
-									<a href="">The Majestic Canyon</a>
-									<span>Last Added: 57 mins ago</span>
-								</figcaption>
-							</figure>
-						</div>
-
-
 						<a href="" class="btn btn-secondary btn-lg btn--half-width">Cancel</a>
 						<a href="" class="btn btn-primary btn-lg disabled btn--half-width">Confirm Photo</a>
 					</div>

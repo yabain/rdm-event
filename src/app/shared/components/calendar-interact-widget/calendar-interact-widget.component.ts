@@ -3,6 +3,7 @@ import { DatePipe } from '@angular/common';
 import { EvenementBussinessService } from '../../services/evenement-bussiness/evenement-bussiness.service';
 import { Evenement } from '../../entities';
 import { UtilTime } from '../../utils/functions';
+import { VoteEvenementBussinessService } from '../../services/evenement-bussiness/vote-evenement-bussiness.service';
 
 
   /* -----------------------------
@@ -31,7 +32,7 @@ export class CalendarInteractWidgetComponent implements OnInit {
     @Output() selectEvent:EventEmitter<String>=new EventEmitter();
 
   
-    constructor(private datePipe: DatePipe, private evenementService:EvenementBussinessService){
+    constructor(private datePipe: DatePipe, private evenementService:VoteEvenementBussinessService){
         this.dateString = this.datePipe.transform(this.maDate, 'yyyy-MM-dd');
         console.log(this.dateString);
 

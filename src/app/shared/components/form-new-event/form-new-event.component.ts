@@ -1,7 +1,9 @@
 import { AfterViewInit, Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Evenement } from '../../entities';
+import { VoteEvenement } from '../../entities/vote-evenement';
 import { EvenementBussinessService } from '../../services/evenement-bussiness/evenement-bussiness.service';
+import { VoteEvenementBussinessService } from '../../services/evenement-bussiness/vote-evenement-bussiness.service';
 import { UserProfilService } from '../../services/user-profil/user-profil.service';
 import { UtilTime } from '../../utils/functions';
 import { ToastrNotificationService } from '../../utils/services/toastr-notification/toastr-notification.service';
@@ -19,7 +21,7 @@ export class FormNewEventComponent implements OnInit,AfterViewInit {
   submited:boolean=false;
   @Output() submitSuccessCreatedEvent:EventEmitter<void>=new EventEmitter()
   constructor(
-    private evenementService:EvenementBussinessService,
+    private evenementService:VoteEvenementBussinessService,
     private toastNotification:ToastrNotificationService,
     private userProfilService:UserProfilService
     ) { }
@@ -79,7 +81,7 @@ console.log("result ",this.form.value)
     this.submited=true;
     if(!this.form.valid) return;
 
-    let event:Evenement=new Evenement();
+    let event:VoteEvenement=new VoteEvenement();
     event.hydrate(this.form.value);
     event.eventOwner.setId(this.userProfilService.currentUser.getValue().id.toString())
     event.startDateTime=UtilTime.getDateFromString(event.startDate).getTime();
