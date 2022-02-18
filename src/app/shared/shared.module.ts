@@ -24,6 +24,7 @@ import { TodayEventBreadcrumbComponent } from './components/today-event-breadcru
 import { ProgressIndeterminateModule } from "./components/progress-indeterminate/progress-indeterminate.module";
 import { UploaderChoiseImageFileComponent } from './components/uploader-choise-image-file/uploader-choise-image-file.component';
 import { GaleryImageComponent } from './components/galery-image/galery-image.component';
+import { ShowVoteCandidatureDetailsComponent } from './components/show-vote-candidature-details/show-vote-candidature-details.component';
 
 
 
@@ -50,6 +51,7 @@ import { GaleryImageComponent } from './components/galery-image/galery-image.com
     TodayEventBreadcrumbComponent,
     UploaderChoiseImageFileComponent,
     GaleryImageComponent,
+    ShowVoteCandidatureDetailsComponent,
 
   ],
   imports: [
@@ -80,6 +82,7 @@ import { GaleryImageComponent } from './components/galery-image/galery-image.com
     TodayEventBreadcrumbComponent,
     UploaderChoiseImageFileComponent,
     ProgressIndeterminateModule,
+    ShowVoteCandidatureDetailsComponent
   ],
   providers:[
   ]

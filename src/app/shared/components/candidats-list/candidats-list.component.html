@@ -100,8 +100,8 @@
 
 
                         <div class="control-block-button">
-                            <a class="btn btn-control bg-blue" data-bs-toggle="modal" style="background-color: #4e814c;"
-                                data-bs-target="#create-friend-group-add-friends">
+                            <a class="btn btn-control bg-blue" (click)="selectCandidat(candidat)" data-bs-toggle="modal" style="background-color: #4e814c;"
+                                data-bs-target="#show-vote-candidature-detail-modal">
                                 <svg class="olymp-happy-faces-icon">
                                     <use xlink:href="#olymp-happy-faces-icon"></use>
                                 </svg>
@@ -222,9 +222,6 @@
 				</div>
 				
 				<!-- ... end News Feed Form  -->
-
-               
-
             </div>
         </div>
     </div>
@@ -318,129 +315,7 @@
 
 
 
-<!-- Show candidate -->
-<div class="modal fade" id="create-friend-group-add-friends" tabindex="-1" role="dialog"
-    aria-labelledby="create-friend-group-add-friends" aria-hidden="true">
-    <div class="modal-dialog window-popup create-friend-group create-friend-group-add-friends" role="document">
-        <div class="modal-content">
-            <a class="close icon-close" data-bs-dismiss="modal" aria-label="Close">
-                <svg class="olymp-close-icon">
-                    <use xlink:href="#olymp-close-icon"></use>
-                </svg>
-            </a>
 
-            <div class="modal-body">
-                <article class="hentry post has-post-thumbnail thumb-full-width private-event">
-
-                    <div class="private-event-head inline-items">
-
-                        <div class="author-date">
-                            <a class="h3 event-title">Candidat N<sup>o</sup> 0{{selectedCandidate.num}}</a>
-                            <div class="event__date">
-                                <time class="published" datetime="2017-03-24T18:18">
-                                </time>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="post-thumb">
-                        <img loading="lazy" src="./../../../assets/img/img/candidat1.jpeg" alt="photo" width="769"
-                            height="380">
-                    </div>
-
-                    <div class="row">
-                        <div class="col col-lg-12 col-md-12 col-sm-12 col-12">
-                            <div class="post__author author vcard inline-items">
-                                <div class="author-date">
-                                    <a class="h6 post__author-name fn">{{selectedCandidate.fullName}}</a>
-                                    <div class="post__date">
-                                        <time class="published" datetime="2017-03-24T18:18">
-                                            {{selectedCandidate.metier}}
-                                        </time>
-                                    </div>
-                                </div>
-
-                            </div>
-
-                            <p>{{selectedCandidate.description}}
-                            </p>
-
-                            <div class="event-description">
-                                <h6 class="event-description-title">Est-ce votre favori?</h6>
-                                <br>
-                                <br>
-                                <div *ngIf="isAuth">
-                                    <a *ngIf="!voteStatus" class="btn btn-blue btn-sm full-width"
-                                        style="background-color: #595959;">Terminé</a>
-                                    <label *ngIf="!voteStatus">Les élection ont été cloturées.</label>
-
-                                    <a *ngIf="voteStatus" class="btn btn-breez btn-sm full-width">Voter ce candidat</a>
-                                </div>
-                                <div *ngIf="!isAuth">
-                                    <a *ngIf="voteStatus" class="btn btn-breez btn-sm full-width" routerLink="/login">Me
-                                        connecter pour voter</a>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div class="post-additional-info inline-items">
-
-                        <a class="post-add-icon inline-items">
-                            <svg class="olymp-heart-icon">
-                                <use xlink:href="#olymp-heart-icon"></use>
-                            </svg>
-                            <span>17</span>
-                        </a>
-
-                        <div class="names-people-likes">
-                            <a>UdM </a>, <a>Mutuelle UdM</a> et
-                            <br>15 autre personnes ont aimées.
-                        </div>
-
-
-                        <div class="comments-shared">
-                            <a class="post-add-icon inline-items">
-                                <svg class="olymp-speech-balloon-icon">
-                                    <use xlink:href="#olymp-speech-balloon-icon"></use>
-                                </svg>
-                                <span>34 Commentaires</span>
-                            </a>
-                        </div>
-
-
-                    </div>
-
-                    <div class="control-block-button post-control-button">
-
-                        <a class="btn btn-control">
-                            <svg class="olymp-like-post-icon">
-                                <use xlink:href="#olymp-like-post-icon"></use>
-                            </svg>
-                        </a>
-
-                        <a class="btn btn-control">
-                            <svg class="olymp-comments-post-icon">
-                                <use xlink:href="#olymp-comments-post-icon"></use>
-                            </svg>
-                        </a>
-
-                        <a class="btn btn-control">
-                            <svg class="olymp-share-icon">
-                                <use xlink:href="#olymp-share-icon"></use>
-                            </svg>
-                        </a>
-
-                    </div>
-
-                </article>
-
-
-            </div>
-        </div>
-    </div>
-</div>
+<app-show-vote-candidature-details [userOwner]="owner" [event]="event" [candidate]="selectedCandidate" idComponent="show-vote-candidature-detail-modal"></app-show-vote-candidature-details>
 <app-uploader-choise-image-file [user]="owner" (fileEventUploaded)="uploadCandidateImage($event)" idComponent="update-header-photo"></app-uploader-choise-image-file>
 

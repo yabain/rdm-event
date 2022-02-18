@@ -1,0 +1,202 @@
+<!-- Window-popup Open Photo Popup V1 -->
+
+<div class="modal fade modal-has-swiper" [id]="idComponent" tabindex="-1" role="dialog" aria-labelledby="open-photo-popup-v1" aria-hidden="true">
+	<div class="modal-dialog window-popup open-photo-popup open-photo-popup-v1" role="document">
+		<div class="modal-content">
+			<a href="#" class="close icon-close" data-bs-dismiss="modal" aria-label="Close">
+				<svg class="olymp-close-icon"><use xlink:href="#olymp-close-icon"></use></svg>
+			</a>
+
+			<div class="modal-body">
+				<div class="open-photo-thumb">
+					<div class="swiper-container" data-slide="fade">
+						<div class="swiper-wrapper">
+
+							<div *ngFor="let image of candidate.images" class="swiper-slide">
+								<div class="photo-item">
+									<img loading="lazy" [src]="image" style="max-height: 646px; max-width: 970;" alt="photo" width="970" height="646">
+									<div class="overlay"></div>
+									<a href="#" class="more"><svg class="olymp-three-dots-icon"><use xlink:href="#olymp-three-dots-icon"></use></svg></a>
+									<a href="#" class="tag-friends" data-bs-toggle="tooltip" data-bs-placement="top"   data-bs-original-title="FAITE VOTRE CHOIX">
+										<svg class="olymp-happy-face-icon"><use xlink:href="#olymp-happy-face-icon"></use></svg>
+									</a>
+
+									<!-- <div class="content">
+										<a href="#" class="h6 title">Photoshoot 2016</a>
+										<time class="published" datetime="2017-03-24T18:18">2 weeks ago</time>
+									</div> -->
+								</div>
+							</div>
+
+						</div>
+
+						<!--Prev Next Arrows-->
+
+						<svg class="btn-next-without olymp-popup-right-arrow"><use xlink:href="#olymp-popup-right-arrow"></use></svg>
+
+						<svg class="btn-prev-without olymp-popup-left-arrow"><use xlink:href="#olymp-popup-left-arrow"></use></svg>
+					</div>
+				</div>
+
+				<div class="open-photo-content">
+
+					<article class="hentry post">
+
+						<div class="post__author author vcard inline-items">
+							<img loading="lazy" [src]="userOwner.photoUrl" width="36" height="36" alt="author">
+
+							<div class="author-date">
+								<a class="h6 post__author-name fn" href="02-ProfilePage.html">Par {{userOwner.getFullName()}}</a>
+								<!-- <div class="post__date">
+									<time class="published" datetime="2017-03-24T18:18">
+										2 hours ago
+									</time>
+								</div> -->
+							</div>
+
+							<div class="more"><svg class="olymp-three-dots-icon"><use xlink:href="#olymp-three-dots-icon"></use></svg>
+								<!-- <ul class="more-dropdown">
+									<li>
+										<a href="#">Edit Post</a>
+									</li>
+									<li>
+										<a href="#">Delete Post</a>
+									</li>
+									<li>
+										<a href="#">Turn Off Notifications</a>
+									</li>
+									<li>
+										<a href="#">Select as Featured</a>
+									</li>
+								</ul> -->
+							</div>
+
+						</div>
+
+						<p>Candidate N°{{candidate.num}} dans le cadre de l'évènement intitulé << {{event.name}} >></p>
+
+
+						<div class="post-additional-info inline-items">
+
+							<a href="#" class="post-add-icon inline-items">
+								<svg class="olymp-heart-icon"><use xlink:href="#olymp-heart-icon"></use></svg>
+								<span>{{candidate.getLikeNumber()}}</span>
+							</a>
+
+							<ul class="friends-harmonic">
+								<li>
+									<a href="#">
+										<img loading="lazy" src="./../../../../assets/img/template/friend-harmonic/friend-harmonic7.webp" alt="friend" width="28" height="28">
+									</a>
+								</li>
+								<li>
+									<a href="#">
+										<img loading="lazy" src="./../../../../assets/img/template/friend-harmonic/friend-harmonic8.webp" alt="friend" width="28" height="28">
+									</a>
+								</li>
+								<li>
+									<a href="#">
+										<img loading="lazy" src="./../../../../assets/img/template/friend-harmonic/friend-harmonic9.webp" alt="friend" width="28" height="28">
+									</a>
+								</li>
+							</ul>
+
+							<!-- <div class="names-people-likes">
+								<a href="#">Diana</a>, <a href="#">Nicholas</a> and
+								<br>13 more liked this
+							</div> -->
+
+
+							<div class="comments-shared">
+								<a href="#" class="post-add-icon inline-items">
+									<svg class="olymp-speech-balloon-icon"><use xlink:href="#olymp-speech-balloon-icon"></use></svg>
+									<span>{{candidate.getCommentNumber()}}</span>
+								</a>
+
+								<a href="#" class="post-add-icon inline-items">
+									<svg class="olymp-share-icon"><use xlink:href="#olymp-share-icon"></use></svg>
+									<span>{{candidate.getShareNumber()}}</span>
+								</a>
+							</div>
+
+
+						</div>
+
+						<div class="control-block-button post-control-button">
+
+							<a href="#" class="btn btn-control">
+								<svg class="olymp-like-post-icon"><use xlink:href="#olymp-like-post-icon"></use></svg>
+							</a>
+
+							<a href="#" class="btn btn-control">
+								<svg class="olymp-comments-post-icon"><use xlink:href="#olymp-comments-post-icon"></use></svg>
+							</a>
+
+							<a href="#" class="btn btn-control">
+								<svg class="olymp-share-icon"><use xlink:href="#olymp-share-icon"></use></svg>
+							</a>
+
+						</div>
+
+					</article>
+
+					<div class="mCustomScrollbar" data-mcs-theme="dark">
+
+						<ul class="comments-list">
+							<li *ngFor="let comment of candidate.getCommmentList()" class="comment-item">
+								<div class="post__author author vcard inline-items">
+									<img loading="lazy" src="img/avatar48-sm.webp" alt="author" width="28" height="28">
+
+									<div class="author-date">
+										<a class="h6 post__author-name fn" href="#">Marina Valentine</a>
+										<div class="post__date">
+											<time class="published" datetime="2017-03-24T18:18">
+												46 mins ago
+											</time>
+										</div>
+									</div>
+
+									<a href="#" class="more"><svg class="olymp-three-dots-icon"><use xlink:href="#olymp-three-dots-icon"></use></svg></a>
+
+								</div>
+
+								<p>{{comment.content}}</p>
+
+								<a href="#" class="post-add-icon inline-items">
+									<svg class="olymp-heart-icon"><use xlink:href="#olymp-heart-icon"></use></svg>
+									<span>0</span>
+								</a>
+								<a href="#" class="reply">Reply</a>
+							</li>
+						</ul>
+
+					</div>
+
+					<form class="comment-form inline-items" *ngIf="isAuth==true">
+
+						<div class="post__author author vcard inline-items">
+							<img loading="lazy" [src]="currentUser.photoUrl" width="36" height="36" alt="author">
+
+							<div class="form-group with-icon-right ">
+								<textarea class="form-control" placeholder="Qu'en pensez-vous?..."></textarea>
+								<div class="add-options-message">
+									<a href="#" class="options-message">
+										<svg class="olymp-camera-icon"><use xlink:href="#olymp-camera-icon"></use></svg>
+									</a>
+								</div>
+							</div>
+						</div>
+					</form>
+                    <div class="row justify-content-center" *ngIf="isAuth!=true">
+                        <div class="col col-sm-7 mt-3 mb-3">
+                           <h5> Connectez-vous pour donner votre avis. Cliquez <a routerLink="/login">ici</a> pour vous connecter.</h5>
+                        </div>
+                    </div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- ... end Window-popup Open Photo Popup V1 -->

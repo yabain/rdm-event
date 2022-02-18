@@ -131,7 +131,10 @@ export class CandidatsListComponent implements OnInit {
     )
     
   }
-
+  shoConsole()
+  {
+    console.log("Selected ",this.selectedCandidate)
+  }
   addNewCategorie()
   {
     this.submitted=true;
@@ -182,6 +185,11 @@ export class CandidatsListComponent implements OnInit {
       this.notificationService.errorNotification("Une error est survenue l'ors de l'ajout d'un nouveau candidature: "+error.message);
 
     })
+  }
+
+  selectCandidat(candidat)
+  {
+    this.selectedCandidate=candidat;
   }
 
 }
