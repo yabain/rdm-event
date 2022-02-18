@@ -11,6 +11,9 @@ import { UserService } from '../../services/user/user.service';
 import { FirebaseFile } from '../../utils/services/firebase';
 import { ToastrNotificationService } from '../../utils/services/toastr-notification/toastr-notification.service';
 
+
+declare var $:any;
+
 @Component({
   selector: 'app-candidats-list',
   templateUrl: './candidats-list.component.html',
@@ -31,6 +34,9 @@ export class CandidatsListComponent implements OnInit {
   submitted:boolean=false;
   waitResponse:boolean=false;
   allImageCandidats:CustomFile[]=[]
+  formCandidature:FormGroup;
+  waitCandidatureResponse:boolean=false;
+  submittedCandidature: boolean;
 
   constructor(
     private evenementService:VoteEvenementBussinessService,
@@ -51,11 +57,8 @@ export class CandidatsListComponent implements OnInit {
     }
   }
 
-  ngOnInit(): void {
-
-    this.authService.isLoggedIn.subscribe((value)=>{
-      this.isAuth=value;
-    })
+  initEvent()
+  {
     this.evenementService.getEventByID(this.idEvent)
     .then((value)=>{
       this.event=value.result
@@ -68,7 +71,12 @@ export class CandidatsListComponent implements OnInit {
       // console.log("Error ",error)
       this.notificationService.errorNotification(`Une erreur est survenue: ${error.message}`)
     })
-
+  }
+  ngOnInit(): void {
+    this.authService.isLoggedIn.subscribe((value)=>{
+      this.isAuth=value;
+    })
+    this.initEvent();
     this.userProfilService.currentUser.subscribe((user)=>{
       this.currentUser=user;
     })
@@ -77,6 +85,16 @@ export class CandidatsListComponent implements OnInit {
       nomCategorie:new FormControl("",[Validators.required]),
       description:new FormControl("")
     })
+
+    this.formCandidature = new FormGroup({
+      fullName:new FormControl("",[Validators.required]),
+      num:new FormControl(0,[Validators.required]),
+      description:new FormControl("")
+    })
+
+    $("#add-candidat").on("hide.bs.modal",(e)=>{
+      this.clearCandidatureForm();
+    })
   }
 
   getAllVoteByCandidate(id:EntityID)
@@ -84,10 +102,15 @@ export class CandidatsListComponent implements OnInit {
     return ""
   }
 
-  uploadCandidateImage(file)
+  uploadCandidateImage(file:{file:CustomFile,newFile:boolean})
   {
+    if(!file.newFile)
+    {
+      this.allImageCandidats.push(file.file)
+      return;
+    }
     this.notificationService.asyncNotification(new Promise((resolve,reject)=>{
-      this.firebaseFile.uploadFile(this.event.eventOwner.toString().toString(),file)
+      this.firebaseFile.uploadFile(this.event.eventOwner.toString().toString(),file.file)
       .subscribe({
         complete:()=>{
           resolve(file)
@@ -96,32 +119,31 @@ export class CandidatsListComponent implements OnInit {
       })
     }),
     (resp)=>{
-      this.allImageCandidats.push(file)
-      this.notificationService.successNofitication(`L'image ${file.name} a été uploadé avec success`)
+      this.allImageCandidats.push(file.file)
+      this.notificationService.successNofitication(`L'image ${file.file.name} a été uploadé avec success`)
     },
     (error)=>{
       console.log("upload Error: ",error)
-      return `Erreur lors de l'uplodad de l'image ${file.name}:${error.message}`
+      return `Erreur lors de l'uplodad de l'image ${file.file.name}:${error.message}`
     }
     ,
-    `Upload de l'image ${file.name} en cours`
+    `Upload de l'image ${file.file.name} en cours`
     )
     
   }
 
   addNewCategorie()
   {
-    console.log("new Cat")
     this.submitted=true;
     if(!this.formCategorie.valid) return;
     let cat=new CategorieEvenement()
     cat.hydrate(this.formCategorie.value);
     this.waitResponse=true;
-    console.log("idEvent ",this.idEvent)
     this.evenementService.addCathegorie(this.idEvent,cat)
     .then((result)=>{
       this.waitResponse=false;
       this.submitted=false;
+      this.formCategorie.reset();
       (<HTMLAnchorElement>document.querySelector("#categorieModalCloseButton")).click()
       this.notificationService.successNofitication("La nouvelle catégorie a été ajouté avec success")
     })
@@ -130,6 +152,35 @@ export class CandidatsListComponent implements OnInit {
       this.submitted=true;
       this.notificationService.errorNotification("Une erreur c'est produite: "+error.message)
       console.log("Error add catégorie ",error)
+    })
+  }
+  clearCandidatureForm()
+  {
+      this.allImageCandidats=[];
+      this.formCandidature.reset();
+  }
+  addNewCandidature()
+  {
+    this.submittedCandidature=true;
+    if(!this.formCandidature.valid) return;
+    this.waitCandidatureResponse=true;
+    let candidat:VoteCandidate=new VoteCandidate();
+    candidat.hydrate(this.formCandidature.value);
+    candidat.images=this.allImageCandidats.map((candidatImg)=>candidatImg.link);
+    this.evenementService.addCandidate(this.idEvent,candidat)
+    .then((result)=>{
+      this.submittedCandidature=false;
+      this.waitCandidatureResponse=false;
+      this.clearCandidatureForm()
+      $("#add-candidat").modal("toggle")
+      this.notificationService.successNofitication("Un nouveau candidature a été ajouté avec succées");
+      this.initEvent();
+    })
+    .catch((error)=>{
+      this.submittedCandidature=false;
+      this.waitCandidatureResponse=false;
+      this.notificationService.errorNotification("Une error est survenue l'ors de l'ajout d'un nouveau candidature: "+error.message);
+
     })
   }
 

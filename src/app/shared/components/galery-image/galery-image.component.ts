@@ -1,7 +1,9 @@
-import { AfterViewInit, Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { CustomFile, EntityID, User } from '../../entities';
 import { FirebaseFile } from '../../utils/services/firebase';
 import { ToastrNotificationService } from '../../utils/services/toastr-notification/toastr-notification.service';
+
+declare var $:any;
 
 @Component({
   selector: 'app-galery-image',
@@ -15,6 +17,7 @@ export class GaleryImageComponent implements OnInit,OnChanges {
   @Input() loadFromDatabase:boolean=true;
   @Input() user:User
   @Input() arrayImage:CustomFile[]=[]
+  @Output() selectedImageEvent:EventEmitter<CustomFile>=new EventEmitter<CustomFile>()
 
   constructor(
     private firebaseFile:FirebaseFile,
@@ -32,6 +35,14 @@ export class GaleryImageComponent implements OnInit,OnChanges {
         .then((result)=>{
           this.hasLoaded=true;
           this.arrayImage=result.result;
+          setTimeout(()=>{
+            $.material.init();
+            document.querySelectorAll('.choose-photo-item input')
+            .forEach((element)=>element.addEventListener("change",(e)=>{
+              let srcImg=(<HTMLImageElement>(<HTMLElement>e.target).previousElementSibling).src;
+              this.selectedImageEvent.emit(this.arrayImage.find((custom)=>custom.link==srcImg));
+            }))
+          })
         })
         .catch((error)=>{
           this.notificationService.errorNotification("Erreur l'ors du chargement des images. Veuillez recharger la page");

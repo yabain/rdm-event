@@ -2,6 +2,9 @@ import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output } from '@
 import { CustomFile, EntityID, User } from '../../entities';
 import { FirebaseFile } from '../../utils/services/firebase';
 
+declare var $:any;
+
+
 @Component({
   selector: 'app-uploader-choise-image-file',
   templateUrl: './uploader-choise-image-file.component.html',
@@ -11,7 +14,10 @@ export class UploaderChoiseImageFileComponent implements OnInit {
   
   @Input() idComponent:string="update-header-photo"
   @Input() user:User;
-  @Output() fileEventUploaded:EventEmitter<CustomFile>=new EventEmitter<CustomFile>()
+  @Output() fileEventUploaded:EventEmitter<{file:CustomFile,newFile:boolean}>=new EventEmitter<{file:CustomFile,newFile:boolean}>()
+  selectedImage:CustomFile;
+  hasSelectedImage:boolean=false
+
   constructor(
     private firebaseFile:FirebaseFile
   ) { }
@@ -38,9 +44,26 @@ export class UploaderChoiseImageFileComponent implements OnInit {
       selectedImage.size = file.size;
       selectedImage.type = file.type;
       selectedImage.data = file;
-      this.fileEventUploaded.emit(selectedImage);
-      (<HTMLAnchorElement>document.querySelector('#closeModal')).click()
+      this.fileEventUploaded.emit({file:selectedImage,newFile:true});
+      $("#"+this.idComponent).modal('toggle')
     }
+  }
+  choiseSelectedData()
+  {
+    this.fileEventUploaded.emit({file:this.selectedImage,newFile:false});
+    this.closeModal()
+  }
+  closeModal()
+  {
+    $("#select-candidate-photo").modal('toggle')
+    $("#"+this.idComponent).modal('toggle')    
+    // (<HTMLAnchorElement>document.querySelector('#select-candidate-photo')).click()
+  }
+
+  OnSelectedImageEVent(imgSrc)
+  {
+    this.hasSelectedImage=true;
+    this.selectedImage=imgSrc    
   }
 
 }

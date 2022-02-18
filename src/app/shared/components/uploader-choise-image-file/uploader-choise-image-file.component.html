@@ -20,7 +20,7 @@
 				<input type="file" (change)="uploadSelectedFile($event)" style="display: none;" id="selecteFile" accept="image/*" >
 			</a>
 
-				<a href="" class="upload-photo-item" data-bs-toggle="modal" data-bs-target="#choose-from-my-photo">
+				<a href="" class="upload-photo-item" data-bs-toggle="modal" data-bs-target="#select-candidate-photo">
 
 			<svg class="olymp-photos-icon"><use xlink:href="#olymp-photos-icon"></use></svg>
 
@@ -37,7 +37,7 @@
 
 <!-- Window-popup Choose from my Photo -->
 
-<div class="modal fade" id="choose-from-my-photo" tabindex="-1" role="dialog" aria-labelledby="choose-from-my-photo" aria-hidden="true">
+<div class="modal fade" id="select-candidate-photo" tabindex="-1" role="dialog" aria-labelledby="choose-from-my-photo" aria-hidden="true">
 	<div class="modal-dialog window-popup choose-from-my-photo" role="document">
 
 		<div class="modal-content">
@@ -66,12 +66,12 @@
 				<!-- Tab panes -->
 				<div class="tab-content">
 					<div class="tab-pane fade active show" id="home" role="tabpanel" aria-expanded="true">
-						<app-galery-image [loadFromDatabase]="true" [user]="user"></app-galery-image>
-						<a href="" class="btn btn-secondary btn-lg btn--half-width">Annler</a>
-						<a href="" disabled class="btn btn-primary btn-lg btn--half-width">Selectionnez</a>
+						<app-galery-image (selectedImageEvent)="OnSelectedImageEVent($event)" [loadFromDatabase]="true" [user]="user"></app-galery-image>
+						<button (click)="closeModal()" class="btn btn-secondary btn-lg btn--half-width">Annuler</button>
+						<button (click)="choiseSelectedData()" [disabled]="hasSelectedImage==false" class="btn btn-primary btn-lg btn--half-width">Selectionnez</button>
 
 					</div>
-					<div class="tab-pane fade" id="profile" role="tabpanel" aria-expanded="false">
+					<!-- <div class="tab-pane fade" id="profile" role="tabpanel" aria-expanded="false">
 						<div class="choose-photo-item">
 							<figure>
 								<img loading="lazy" src="img/choose-photo11.webp" alt="photo" width="225" height="180">
@@ -83,7 +83,7 @@
 						</div>
 						<a href="" class="btn btn-secondary btn-lg btn--half-width">Cancel</a>
 						<a href="" class="btn btn-primary btn-lg disabled btn--half-width">Confirm Photo</a>
-					</div>
+					</div> -->
 				</div>
 			</div>
 		</div>
