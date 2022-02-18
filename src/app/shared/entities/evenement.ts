@@ -86,7 +86,10 @@ export class Evenement extends Entity
         return 0;
     }
 
-    
+    getSpecialActionByOwner(idOwner:EntityID):UserAction
+    {
+        return null;
+    }
 
     getActionByType(type:UserActionType)
     {

@@ -2,6 +2,7 @@ import { Entity, EntityID, Evenement } from ".";
 import { EventType } from "../enum";
 import { UserActionType } from "../enum/useraction.enum";
 import { UserActionBuilder } from "../utils/functions";
+import { VoteAction } from "./useraction";
 import { VoteCandidate } from "./votecandidate";
 
 export class VoteEvenement extends Evenement
@@ -54,6 +55,10 @@ export class VoteEvenement extends Evenement
         return this.getActionByType(UserActionType.VOTE_ACTION).length
     }
 
+     getVoteActionByOwner(idOwner:EntityID):VoteAction
+    {
+        return (<VoteAction[]>this.getActionByType(UserActionType.VOTE_ACTION)).find((vote)=>vote.idOwnerAction.toString()==idOwner.toString())
+    }
     override getSpecialActionNumber()
     {
         return this.getVoteNumber()
