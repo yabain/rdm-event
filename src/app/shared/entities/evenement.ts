@@ -86,6 +86,8 @@ export class Evenement extends Entity
         return 0;
     }
 
+    
+
     getActionByType(type:UserActionType)
     {
         return this.actions.filter((userAction)=>userAction.actionType==type)

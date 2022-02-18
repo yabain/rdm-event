@@ -51,6 +51,7 @@
               "src/assets/js/plugins/isotope/isotope.pkgd.min.js",
               "src/assets/js/plugins/ajax-pagination/ajax-pagination.min.js",
               "src/assets/js/plugins/jquery/plugins/jquery.magnific-popup.min.js",
+              "src/assets/js/plugins/jquery/plugins/swiper.jquery.min.js",
               "src/assets/js/theme/main.js",
               "src/assets/js/theme/libs-init.js",
               "src/assets/js/plugins/bootstrap/bootstrap.bundle.min.js",

@@ -82,7 +82,7 @@ export class CandidatsListComponent implements OnInit {
     })
 
     this.formCategorie=new FormGroup({
-      nomCategorie:new FormControl("",[Validators.required]),
+      nom:new FormControl("",[Validators.required]),
       description:new FormControl("")
     })
 

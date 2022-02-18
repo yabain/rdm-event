@@ -43,6 +43,7 @@ export class VoteCandidate extends Entity
     }
     override hydrate(entity: Record<string | number,any>):void
     {
+        
         for(const key of Object.keys(entity))
         {
             if(key=="id") this.id.setId(entity[key]);

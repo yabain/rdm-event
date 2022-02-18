@@ -22,7 +22,10 @@ export class VoteEvenement extends Evenement
         this.categories.push(defaultCathegories)
     }
 
-        
+    getCandidatesByCategories(categorieID:EntityID):VoteCandidate[]
+    {
+        return this.candidates.filter((candidate)=>candidate.idCategori.toString()==categorieID.toString())
+    }
     override hydrate(entity: Record<string | number,any>):void
     {
         for(const key of Object.keys(entity))
