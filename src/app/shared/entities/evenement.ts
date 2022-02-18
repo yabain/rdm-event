@@ -113,15 +113,37 @@ export class Evenement extends Entity
 
     override toString():Record<string | number,any>
     {
-        let r={};
-        for(const k of Object.keys(this))
-        {
-            if(k=="id") r[k]=this.id.toString();
-            else if(k=="eventOwner") r[k]=this.eventOwner.toString();
-            else if(k=="actions") r[k]=this.actions.map((action)=>action.toString());
-            else r[k]=Reflect.get(this,k);
+    //     let r={};
+    //     for(const k of Object.keys(this))
+    //     {
+    //         if(k=="id") r[k]=this.id.toString();
+    //         else if(k=="eventOwner") r[k]=this.eventOwner.toString();
+    //         else if(k=="actions") r[k]=this.actions.map((action)=>action.toString());
+    //         else r[k]=Reflect.get(this,k);
+    //     }
+    //     return r;
+    // }
+        return {
+            ...super.toString(),
+            name:this.name,
+            place:this.place,
+            state:this.state,
+            isStarted:this.isStarted,
+            startDateTime:this.startDateTime,
+            endDateTime:this.endDateTime,
+            startDate:this.startDate,
+            startTime:this.startTime,
+            endTime:this.endTime,
+            eventOwner:this.eventOwner.toString(),
+            endDate:this.endDate,
+            description:this.description,
+            urlBanner:this.urlBanner,
+            createdDate:this.createdDate,
+            scopeVisibilityAction:this.scopeVisibilityAction,
+            selectedGroupVisibilityAction:this.selectedGroupVisibilityAction,
+            eventType:this.eventType,
+            actions:this.actions.map((action)=>action.toString())
         }
-        return r;
     }
 }
 

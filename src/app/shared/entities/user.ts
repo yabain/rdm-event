@@ -41,6 +41,29 @@ export class User extends Entity
     {
         return this.userType==UserType.NORMAL_USER? this.fullname : this.getPrintableName()
     }
+    override toString(): Record<string | number, any> {
+        return {
+            ...super.toString(),
+            "username":this.username,
+            "fullname":this.fullname,
+            "sexe":this.sexe,
+            "email":this.email,
+            "photoUrl":this.photoUrl,
+            "password":this.password,
+            "phoneNumber":this.phoneNumber,
+            "dateCreated":this.dateCreated,
+            "dateNaiss":this.dateNaiss,
+            "lieuxNaiss":this.lieuxNaiss,
+            "villeResidenceActuelle":this.villeResidenceActuelle,
+            "nationalite":this.nationalite,
+            "rememberMe":this.rememberMe,
+            "about":this.about,
+            "availability":this.availability,
+            "dateDeleted":this.dateDeleted,
+            "userType":this.userType
+        }
+
+    }
 
 }
 

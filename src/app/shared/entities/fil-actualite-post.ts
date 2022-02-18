@@ -18,13 +18,18 @@ export class FilActualitePost extends Entity
 
     override toString():Record<string | number,any>
     {
-        let r={};
-        for(let k of Object.keys(this))
-        {
-            if(k=="id") r[k]=this.id.toString();
-            if(k=="idEvent") r[k]=this.idEvent.toString();
-            else r[k]=Reflect.get(this,k);
+        // let r={};
+        // for(let k of Object.keys(this))
+        // {
+        //     if(k=="id") r[k]=this.id.toString();
+        //     if(k=="idEvent") r[k]=this.idEvent.toString();
+        //     else r[k]=Reflect.get(this,k);
+        // }
+        // return r;
+        return {
+            ...super.toString(),
+            idEvent:this.idEvent.toString(),
+            datePublication:this.datePublication
         }
-        return r;
     }
 }

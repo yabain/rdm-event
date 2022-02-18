@@ -3,7 +3,7 @@
         <div *ngFor="let image of arrayImage" class="choose-photo-item">
             <div class="radio">
                 <label class="custom-radio">
-                    <img loading="lazy" [src]="image.link" alt="photo" width="247" height="166">
+                    <img loading="lazy" [src]="image.link" style="max-width: 247px; max-height: 166px;" alt="photo" width="247" height="166">
                     <input type="radio" name="optionsRadios">
                 </label>
             </div>

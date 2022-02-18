@@ -19,14 +19,20 @@ export class UserAction extends Entity
 
     override toString():Record<string | number,any>
     {
-        let r={};
-        for(const k of Object.keys(this))
-        {
-            if(k=="id") r[k]=this.id.toString();
-            if(k=="idOwnerAction") r[k]=this.idOwnerAction.toString();
-            else r[k]=Reflect.get(this,k);
+        // let r={};
+        // for(const k of Object.keys(this))
+        // {
+        //     if(k=="id") r[k]=this.id.toString();
+        //     if(k=="idOwnerAction") r[k]=this.idOwnerAction.toString();
+        //     else r[k]=Reflect.get(this,k);
+        // }
+        // return r;
+        return {
+            ...super.toString(),
+            date:this.date,
+            actionType:this.actionType,
+            idOwnerAction:this.idOwnerAction.toString()
         }
-        return r;
     }
 }
 
@@ -48,15 +54,19 @@ export class VoteAction extends UserAction
 
     override toString():Record<string | number,any>
     {
-        let r={};
-        for(const k of Object.keys(this))
-        {
-            if(k=="id") r[k]=this.id.toString();
-            if(k=="idOwnerAction") r[k]=this.idOwnerAction.toString();
-            if(k=="idCandidateSelected") r[k]=this.idCandidateSelected.toString();
-            else r[k]=Reflect.get(this,k);
+        // let r={};
+        // for(const k of Object.keys(this))
+        // {
+        //     if(k=="id") r[k]=this.id.toString();
+        //     if(k=="idOwnerAction") r[k]=this.idOwnerAction.toString();
+        //     if(k=="idCandidateSelected") r[k]=this.idCandidateSelected.toString();
+        //     else r[k]=Reflect.get(this,k);
+        // }
+        // return r;
+        return {
+            ...super.toString(),
+            idCandidateSelected:this.idCandidateSelected.toString()
         }
-        return r;
     }
 }
 
@@ -78,20 +88,24 @@ export class CommentAction extends UserAction
 
     override toString():Record<string | number,any>
     {
-        let r={};
-        for(const k of Object.keys(this))
-        {
-            if(k=="id") r[k]=this.id.toString();
-            if(k=="idOwnerAction") r[k]=this.idOwnerAction.toString();
-            if(k=="parentCommentID") r[k]=this.parentCommentID.toString();
-            else r[k]=Reflect.get(this,k);
+        // let r={};
+        // for(const k of Object.keys(this))
+        // {
+        //     if(k=="id") r[k]=this.id.toString();
+        //     if(k=="idOwnerAction") r[k]=this.idOwnerAction.toString();
+        //     if(k=="parentCommentID") r[k]=this.parentCommentID.toString();
+        //     else r[k]=Reflect.get(this,k);
+        // }
+        // return r;
+        return {
+            ...super.toString(),
+            parentCommentID:this.parentCommentID.toString(),
+            content:this.content
         }
-        return r;
     }
 }
 
 export class LiketAction extends UserAction
 {
     override actionType: UserActionType=UserActionType.LIKE_ACTION;
-
 }

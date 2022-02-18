@@ -14,4 +14,11 @@ export class BusinessUser extends User
     {
         return this.workGroupName
     }
+    override toString(): Record<string | number, any> {
+        return {
+            ...super.toString(),
+            workGroupName:this.workGroupName,
+            userType:this.userType
+        }
+    }
 }

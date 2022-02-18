@@ -59,14 +59,25 @@ export class VoteCandidate extends Entity
 
     override toString():Record<string | number,any>
     {
-        let r={};
-        for(const k of Object.keys(this))
-        {
-            if(k=="id") r[k]=this.id.toString();
-            if(k=="idCategori") r[k]=this.idCategori.toString();
-            else if(k=="actions") r[k]=this.actions.map((action)=>action.toString());
-            else r[k]=Reflect.get(this,k);
+        // let r={};
+        // for(const k of Object.keys(this))
+        // {
+        //     if(k=="id") r[k]=this.id.toString();
+        //     if(k=="idCategori") r[k]=this.idCategori.toString();
+        //     else if(k=="actions") r[k]=this.actions.map((action)=>action.toString());
+        //     else r[k]=Reflect.get(this,k);
+        // }
+        // return r;
+        return {
+            ...super.toString(),
+            fullName:this.fullName,
+            description:this.description,
+            birthDate:this.birthDate,
+            images:this.images,
+            idCategori:this.idCategori.toString(),    
+            num:this.num,
+            metier:this.metier,
+            actions:this.actions.map((action)=>action.toString())
         }
-        return r;
     }
 }

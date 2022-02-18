@@ -10,8 +10,6 @@ export class VoteEvenement extends Evenement
     override eventType:EventType=EventType.VOTE_EVENT
     categories:CategorieEvenement[]=[]
     candidates:VoteCandidate[]=[];
-    selectedCandidate:VoteCandidate=new VoteCandidate()
-
 
     constructor()
     {
@@ -65,16 +63,21 @@ export class VoteEvenement extends Evenement
     }
     override toString():Record<string | number,any>
     {
-        let r={};
-        for(const k of Object.keys(this))
-        {
-            if(k=="id") r[k]=this.id.toString();
-            if(k=="candidates") r[k]=this.candidates.map((candidate)=>candidate.toString());
-            if(k=="categories") r[k]=this.categories.map((categorie)=>categorie.toString());
-            if(k=="actions") r[k]=this.actions.map((action)=>action.toString());
-            else r[k]=Reflect.get(this,k);
+        // let r={};
+        // for(const k of Object.keys(this))
+        // {
+        //     if(k=="id") r[k]=this.id.toString();
+        //     if(k=="candidates") r[k]=this.candidates.map((candidate)=>candidate.toString());
+        //     if(k=="categories") r[k]=this.categories.map((categorie)=>categorie.toString());
+        //     if(k=="actions") r[k]=this.actions.map((action)=>action.toString());
+        //     else r[k]=Reflect.get(this,k);
+        // }
+        // return r;
+        return {
+            ...super.toString(),
+            categories:this.categories.map((categorie)=>categorie.toString()),
+            candidates:this.candidates.map((candidate)=>candidate.toString()),
         }
-        return r;
     }
 }
 
@@ -95,13 +98,19 @@ export class CategorieEvenement extends Entity
 
     override toString():Record<string | number,any>
     {
-        let r={};
-        for(const k of Object.keys(this))
-        {
-            if(k=="id") r[k]=this.id.toString();
-            if(k=="evendID") r[k]=this.id.toString();
-            else r[k]=Reflect.get(this,k);
+        // let r={};
+        // for(const k of Object.keys(this))
+        // {
+        //     if(k=="id") r[k]=this.id.toString();
+        //     if(k=="evendID") r[k]=this.id.toString();
+        //     else r[k]=Reflect.get(this,k);
+        // }
+        // return r;
+        return {
+            ...super.toString(),
+            nom:this.nom,
+            description:this.description,
+            eventID:this.evendID.toString()
         }
-        return r;
     }
 }

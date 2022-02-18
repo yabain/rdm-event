@@ -15,12 +15,15 @@ export  class Entity
 
     toString():Record<string | number,any>
     {
-        let r={};
-        for(const k of Object.keys(this))
-        {
-            if(k=="id") r[k]=this.id.toString();
-            else r[k]=Reflect.get(this,k);
+        // let r={};
+        // for(const k of Object.keys(this))
+        // {
+        //     if(k=="id") r[k]=this.id.toString();
+        //     else r[k]=Reflect.get(this,k);
+        // }
+        // return r;
+        return {
+            id:this.id.toString()
         }
-        return r;
     }
 }
