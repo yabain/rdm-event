@@ -75,7 +75,15 @@
 						</div>
 
 						<p>Candidate N°{{candidate.num}} dans le cadre de l'évènement intitulé << {{event.name}} >></p>
-
+                        <div class="row justify-content-center" *ngIf="isAuth==true && userOwner.id.toString()!=currentUser.id.toString()">
+                            <div class="col col-sm-7 mt-3 mb-3">
+                                <button type="button" *ngIf="hasAlreadyVote()!=true"  id="btn_submit" class="btn btn-breez btn-lg full-width">
+                                    <app-progress-indeterminate></app-progress-indeterminate>
+                                    Porter mon vote sur ce candidat</button>
+                                <button type="button" *ngIf="hasAlreadyVote()==true" id="btn_submit" class="btn btn-danger btn-lg full-width">Annuler mon vote sur ce candidat</button>
+                                                               
+                            </div>
+                        </div>
 
 						<div class="post-additional-info inline-items">
 
