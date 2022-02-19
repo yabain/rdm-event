@@ -88,7 +88,7 @@
                             <div *ngIf="isAuth">
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12">
-                                        <div *ngIf="owner.id.toString()==event.eventOwner.toString()">
+                                        <div *ngIf="currentUser!=null && currentUser.id.toString()==event.eventOwner.toString()">
                                             <a (click)="changeStatusPublishedEvent()" *ngIf="!event.isPublishedEvent()" class="btn btn-blue btn-lg full-width" style="background-color: #4e814c;">
                                                 <app-progress-indeterminate *ngIf="waitResponseChangePublish"></app-progress-indeterminate>
                                                 
@@ -101,7 +101,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
-                                        <div *ngIf="owner.id.toString()==event.eventOwner.toString()">
+                                        <div *ngIf="currentUser!=null && currentUser.id.toString()==event.eventOwner.toString()">
                                             <a *ngIf="!event.isStarted" (click)="changeStatusStateEvent()" class="btn btn-blue btn-lg full-width" style="background-color: #4e814c;">
                                                 <app-progress-indeterminate *ngIf="waitResponseChangeStatus"></app-progress-indeterminate>
                                                 
@@ -243,8 +243,8 @@
                     <div class="monthly-indicator-wrap">
                         <div class="monthly-indicator">
                             <a class="btn btn-control bg-blue">
-                                <svg class="olymp-happy-face-icon">
-                                    <use xlink:href="#olymp-happy-face-icon"></use>
+                                <svg class="olymp-heart-icon">
+                                    <use xlink:href="#olymp-heart-icon"></use>
                                 </svg>
                             </a>
 
@@ -256,8 +256,8 @@
 
                         <div class="monthly-indicator">
                             <a class="btn btn-control bg-green">
-                                <svg class="olymp-happy-face-icon">
-                                    <use xlink:href="#olymp-happy-face-icon"></use>
+                                <svg class="olymp-share-icon">
+                                    <use xlink:href="#olymp-share-icon"></use>
                                 </svg>
                             </a>
 
@@ -282,8 +282,8 @@
 
                         <div class="monthly-indicator">
                             <a class="btn btn-control bg-blue">
-                                <svg class="olymp-happy-face-icon">
-                                    <use xlink:href="#olymp-happy-face-icon"></use>
+                                <svg class="olymp-chat---messages-icon">
+                                    <use xlink:href="#olymp-chat---messages-icon"></use>
                                 </svg>
                             </a>
 

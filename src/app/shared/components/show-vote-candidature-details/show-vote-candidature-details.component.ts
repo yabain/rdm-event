@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { User } from '../../entities';
 import { VoteAction } from '../../entities/useraction';
 import { VoteEvenement } from '../../entities/vote-evenement';
@@ -9,12 +9,15 @@ import { UserProfilService } from '../../services/user-profil/user-profil.servic
 import { UserService } from '../../services/user/user.service';
 import { ToastrNotificationService } from '../../utils/services/toastr-notification/toastr-notification.service';
 
+// declare var Swiper:any;
+declare var $:any;
+
 @Component({
   selector: 'app-show-vote-candidature-details',
   templateUrl: './show-vote-candidature-details.component.html',
   styleUrls: ['./show-vote-candidature-details.component.scss']
 })
-export class ShowVoteCandidatureDetailsComponent implements OnInit {
+export class ShowVoteCandidatureDetailsComponent implements OnInit, OnChanges {
   @Input() idComponent:String="show-vote-candidature-detail-modal"
   @Input() candidate:VoteCandidate;
   @Input() event:VoteEvenement;
@@ -23,6 +26,9 @@ export class ShowVoteCandidatureDetailsComponent implements OnInit {
   waitForResponseVote:boolean=false;
   currentUser:User;
   isAuth:boolean=false;
+  swipers:any={}
+  hasAlreadyMakeVoteToCategorie=false;
+  hasAlreadyMakeVoteToCategorieAndCandidate=false;
   constructor(
     private evenementService:VoteEvenementBussinessService,
     private userService:UserService,
@@ -30,22 +36,29 @@ export class ShowVoteCandidatureDetailsComponent implements OnInit {
     private authService:AuthService,
     private notificationService:ToastrNotificationService
     ) { }
+  
 
   ngOnInit(): void {
     this.userProfilService.currentUser.subscribe((user)=>{
-      this.currentUser=user
+      if(!user) return;
+      this.currentUser=user;     
     })
 
     this.authService.isLoggedIn.subscribe((auth)=>{
       this.isAuth=auth;
-    })
-    
+    })    
   } 
-  hasAlreadyVote()
-  {
-    let vote=this.event.getVoteActionByOwner(this.currentUser.id)
-    return vote!=undefined && vote !=null;
+  ngOnChanges(changes: SimpleChanges): void {
+    if(changes['candidate'])
+    {
+      console.log("voteID ",this.event)
+      this.hasAlreadyMakeVoteToCategorieAndCandidate=this.event.getVoteByCategorieVoterAndCandidate(this.candidate.idCategori,this.currentUser.id,this.candidate.id)!=undefined;
+      this.hasAlreadyMakeVoteToCategorie=this.event.getVoteByCategorieAndVoter(this.candidate.idCategori,this.currentUser.id)!=undefined;
+      console.log("Vote ",this.hasAlreadyMakeVoteToCategorieAndCandidate,this.hasAlreadyMakeVoteToCategorie)
+    
+    }
   }
+
   addOrRemoveVote()
   {
     if(this.waitForResponseVote) return;
@@ -53,12 +66,12 @@ export class ShowVoteCandidatureDetailsComponent implements OnInit {
     let isAdd=true;
     let promise;
     
-
-    if(this.hasAlreadyVote())
+    if(!this.hasAlreadyMakeVoteToCategorie)
     {
       let vote:VoteAction=new VoteAction();
       vote.date=(new Date()).toISOString();
       vote.idCandidateSelected.setId(this.candidate.id.toString());
+      vote.idCategorieCategorieSelected.setId(this.candidate.idCategori.toString());
       vote.idOwnerAction.setId(this.currentUser.id.toString());
       promise=this.evenementService.addVote(this.event.id,vote,this.currentUser.id,this.candidate.id)
     }
@@ -67,11 +80,12 @@ export class ShowVoteCandidatureDetailsComponent implements OnInit {
       promise=this.evenementService.removeVote(this.currentUser.id,this.event.id)
       isAdd=false;
     }
-
     promise.then((result)=>{
       this.waitForResponseVote=false;
       if(isAdd) this.notificationService.successNofitication(`Votre vote sur le candidate N°${this.candidate.num} a été bien enregistré`)
       else this.notificationService.warningNotification(`Vous avez retirer votre vote sur le candidat N°${this.candidate.num}. Vous pouvez de nouveau faire un choix`)
+      $(`#${this.idComponent}`).modal('toggle')
+      this.hasMakeAction.emit(true)
     })
     .catch((error)=>{
       this.waitForResponseVote=false;

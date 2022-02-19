@@ -30,6 +30,7 @@ export class CandidatsListComponent implements OnInit {
   owner:User;
   candidates:VoteCandidate[]=[]
   selectedCandidate:VoteCandidate=new VoteCandidate()
+  selectedCategorie:CategorieEvenement;
   formCategorie:FormGroup;
   submitted:boolean=false;
   waitResponse:boolean=false;
@@ -62,6 +63,7 @@ export class CandidatsListComponent implements OnInit {
     this.evenementService.getEventByID(this.idEvent)
     .then((value)=>{
       this.event=value.result
+      console.log("Event ",this.event)
       return this.userService.getUserById(this.event.eventOwner)
     })
     .then((value)=>{
@@ -141,6 +143,7 @@ export class CandidatsListComponent implements OnInit {
     if(!this.formCategorie.valid) return;
     let cat=new CategorieEvenement()
     cat.hydrate(this.formCategorie.value);
+    cat.evendID.setId(this.idEvent.toString())
     this.waitResponse=true;
     this.evenementService.addCathegorie(this.idEvent,cat)
     .then((result)=>{
@@ -170,6 +173,7 @@ export class CandidatsListComponent implements OnInit {
     let candidat:VoteCandidate=new VoteCandidate();
     candidat.hydrate(this.formCandidature.value);
     candidat.images=this.allImageCandidats.map((candidatImg)=>candidatImg.link);
+    candidat.idCategori.setId(this.selectedCategorie.id.toString())
     this.evenementService.addCandidate(this.idEvent,candidat)
     .then((result)=>{
       this.submittedCandidature=false;
@@ -186,10 +190,17 @@ export class CandidatsListComponent implements OnInit {
 
     })
   }
-
+  selectCategorie(categorie)
+  {
+    console.log("Categorie ",categorie)
+    this.selectedCategorie=categorie
+  }
   selectCandidat(candidat)
   {
     this.selectedCandidate=candidat;
   }
-
+  hasMakeAction()
+  {
+    this.initEvent()
+  }
 }

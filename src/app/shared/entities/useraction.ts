@@ -41,6 +41,7 @@ export class VoteAction extends UserAction
 {
     override actionType: UserActionType=UserActionType.VOTE_ACTION;
     idCandidateSelected:EntityID=new EntityID()
+    idCategorieCategorieSelected:EntityID=new EntityID()
     override hydrate(entity: Record<string | number,any>):void
     {
         for(const key of Object.keys(entity))
@@ -48,6 +49,7 @@ export class VoteAction extends UserAction
             if(key=="id") this.id.setId(entity[key]);
             else if(key=="idOwnerAction") this.idOwnerAction.setId(entity[key]);
             else if(key=="idCandidateSelected") this.idCandidateSelected.setId(entity[key]);
+            else if(key=="idCategorieCategorieSelected") this.idCategorieCategorieSelected.setId(entity[key]);
             else if(Reflect.has(this,key)) Reflect.set(this,key,entity[key]);
         }
     }
@@ -65,7 +67,8 @@ export class VoteAction extends UserAction
         // return r;
         return {
             ...super.toString(),
-            idCandidateSelected:this.idCandidateSelected.toString()
+            idCandidateSelected:this.idCandidateSelected.toString(),
+            idCategorieCategorieSelected:this.idCategorieCategorieSelected.toString()
         }
     }
 }

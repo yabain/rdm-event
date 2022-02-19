@@ -14,11 +14,11 @@ export class VoteEvenement extends Evenement
     constructor()
     {
         super();
-        let defaultCathegories= new CategorieEvenement()
-        defaultCathegories.nom="Defaut"
-        defaultCathegories.description="Catégorie par défaut";
-        defaultCathegories.evendID.setId(this.id.toString())
-        this.categories.push(defaultCathegories)
+        // let defaultCathegories= new CategorieEvenement()
+        // defaultCathegories.nom="Defaut"
+        // defaultCathegories.description="Catégorie par défaut";
+        // defaultCathegories.evendID.setId(this.id.toString())
+        // this.categories.push(defaultCathegories)
     }
 
     getCandidatesByCategories(categorieID:EntityID):VoteCandidate[]
@@ -27,20 +27,20 @@ export class VoteEvenement extends Evenement
     }
     override hydrate(entity: Record<string | number,any>):void
     {
-        for(const key of Object.keys(entity))
+        for(let key of Object.keys(entity))
         {
             if(key=="id") this.id.setId(entity[key]);
-            if(key=="actions") this.actions=entity[key].map((action)=>{
+            else if(key=="actions") this.actions=entity[key].map((action)=>{
                 let act = UserActionBuilder(action)
                 act.hydrate(action)
                 return act
             })
-            if(key=="categories") this.categories=entity[key].map((cat)=>{
+            else if(key=="categories") this.categories=entity[key].map((cat)=>{
                 let cathegorie = new CategorieEvenement()
                 cathegorie.hydrate(cat)
                 return cathegorie
             })
-            if(key=="candidates") this.candidates=entity[key].map((candidate)=>{
+            else if(key=="candidates") this.candidates=entity[key].map((candidate)=>{
                 let can=new VoteCandidate();
                 can.hydrate(candidate);
                 return can;
@@ -52,8 +52,32 @@ export class VoteEvenement extends Evenement
     {
         return this.getActionByType(UserActionType.VOTE_ACTION).length
     }
+    getVoteByCategorie(categorieID:EntityID)
+    {
+        return (<VoteAction[]>this.getActionByType(UserActionType.VOTE_ACTION))
+        .find((vote)=>vote.idCategorieCategorieSelected.toString()==categorieID.toString())
+    }
+    getVoteByCategorieVoterAndCandidate(categorieID:EntityID,voterID:EntityID,candidateID:EntityID)
+    {
+        return (<VoteAction[]>this.getActionByType(UserActionType.VOTE_ACTION))
+        .find((vote)=>vote.idOwnerAction.toString()==voterID.toString() && 
+                vote.idCategorieCategorieSelected.toString()==categorieID.toString() && 
+                vote.idCandidateSelected.toString()==candidateID.toString()
+            )
+    }
 
-     getVoteActionByOwner(idOwner:EntityID):VoteAction
+    getVoteByCategorieAndVoter(categorieID:EntityID,voterID:EntityID)
+    {
+        return (<VoteAction[]>this.getActionByType(UserActionType.VOTE_ACTION))
+            .find((vote)=>vote.idOwnerAction.toString()==voterID.toString() && vote.idCategorieCategorieSelected.toString()==categorieID.toString())
+    }
+
+    getCandidateByID(candidateID:EntityID)
+    {
+        return this.candidates.find((candidat)=>candidat.id.toString()==candidateID.toString())
+    }
+
+    getVoteActionByOwner(idOwner:EntityID):VoteAction
     {
         return (<VoteAction[]>this.getActionByType(UserActionType.VOTE_ACTION)).find((vote)=>vote.idOwnerAction.toString()==idOwner.toString())
     }
@@ -91,7 +115,7 @@ export class CategorieEvenement extends Entity
         for(const key of Object.keys(entity))
         {
             if(key=="id") this.id.setId(entity[key]);
-            if(key=="evendID") this.evendID.setId(entity[key]);
+            else if(key=="evendID") this.evendID.setId(entity[key]);
             else if(Reflect.has(this,key)) Reflect.set(this,key,entity[key]);
         }
     }

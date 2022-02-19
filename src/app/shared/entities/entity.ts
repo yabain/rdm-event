@@ -5,7 +5,7 @@ export  class Entity
     public id:EntityID=new EntityID();
     hydrate(entity: Record<string | number,any>):void
     {
-        console.log("Entity ",entity)
+        console.log("entity ientr")
         for(const key of Object.keys(entity))
         {
             if(key=="id") this.id.setId(entity[key]);

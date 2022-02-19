@@ -101,7 +101,7 @@ export class Evenement extends Entity
         for(const key of Object.keys(entity))
         {
             if(key=="id") this.id.setId(entity[key]);
-            if(key=="eventOwner") this.eventOwner.setId(entity[key]);
+            else if(key=="eventOwner") this.eventOwner.setId(entity[key]);
             else if(key=="actions") this.actions=entity[key].map((action)=>{
                 let act = UserActionBuilder(action)
                 act.hydrate(action)

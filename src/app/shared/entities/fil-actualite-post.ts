@@ -11,7 +11,7 @@ export class FilActualitePost extends Entity
         for(let key of Object.keys(entity))
         {
             if(key=="id") this.id.setId(entity[key]);
-            if(key=="idEvent") this.idEvent.setId(entity[key]);
+            else if(key=="idEvent") this.idEvent.setId(entity[key]);
             else if(Reflect.has(this,key)) Reflect.set(this,key,entity[key]);
         }
     }

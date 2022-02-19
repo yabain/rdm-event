@@ -43,7 +43,7 @@ import { EvenementBussinessService } from "./evenement-bussiness.service";
     addVote(eventID:EntityID,vote:VoteAction,userVoter:EntityID,candidateID:EntityID):Promise<ActionStatus<boolean>>
     {
       let event=this.list.get(eventID.toString())
-      if(event.getVoteActionByOwner(userVoter)!=null && event.getVoteActionByOwner(userVoter)!=undefined){
+      if(event.getVoteByCategorieAndVoter(event.getCandidateByID(candidateID).idCategori, userVoter)!=undefined){
         let action=new ActionStatus<boolean>()
         action.result=true;
         return Promise.resolve(action);

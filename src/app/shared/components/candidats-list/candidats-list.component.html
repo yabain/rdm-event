@@ -1,6 +1,6 @@
 <div class="container">
 
-    <a *ngIf="event.eventOwner.toString()==currentUser.id.toString()" title="Ajouter une catégorie" class="btn btn-control bg-blue" style="background-color: #4e814c;" data-bs-toggle="modal"
+    <a title="Ajouter une catégorie" *ngIf="event.eventOwner.toString()==currentUser.id.toString()" title="Ajouter une catégorie" class="btn btn-control bg-blue" style="background-color: #4e814c;" data-bs-toggle="modal"
         data-bs-target="#add-cathegorie">
         <svg class="olymp-plus-icon">
             <use xlink:href="#olymp-plus-icon"></use>
@@ -11,7 +11,7 @@
 <div class="container" *ngFor="let categorie of event.categories">
     <h1> {{categorie.nom}}</h1>
     <div class="row">
-        <div class="col col-xl-3 col-lg-6 col-md-6 col-sm-6 col-12" *ngIf="event.eventOwner.toString()==currentUser.id.toString()">
+        <div  *ngIf="event.eventOwner.toString()==currentUser.id.toString()" class="col col-xl-3 col-lg-6 col-md-6 col-sm-6 col-12" >
 
             <!-- Friend Item -->
 
@@ -20,7 +20,7 @@
                 <a class="full-block" data-bs-toggle="modal" data-bs-target="#add-candidat">
                     <div class="content">
 
-                        <a class="btn btn-control bg-blue" data-bs-toggle="modal" style="background-color: #4e814c;"
+                        <a (click)="selectCategorie(categorie)" class="btn btn-control bg-blue" data-bs-toggle="modal" style="background-color: #4e814c;"
                             data-bs-target="#add-candidat">
                             <svg class="olymp-plus-icon">
                                 <use xlink:href="#olymp-plus-icon"></use>
@@ -49,7 +49,7 @@
 
                     <div class="friend-item-content">
 
-                        <div class="more" >
+                        <div  *ngIf="event.eventOwner.toString()==currentUser.id.toString()" class="more" >
                             <svg class="olymp-three-dots-icon">
                                 <use xlink:href="#olymp-three-dots-icon"></use>
                             </svg>
@@ -316,6 +316,6 @@
 
 
 
-<app-show-vote-candidature-details [userOwner]="owner" [event]="event" [candidate]="selectedCandidate" idComponent="show-vote-candidature-detail-modal"></app-show-vote-candidature-details>
+<app-show-vote-candidature-details (hasMakeAction)="hasMakeAction()" [userOwner]="owner" [event]="event" [candidate]="selectedCandidate" idComponent="show-vote-candidature-detail-modal"></app-show-vote-candidature-details>
 <app-uploader-choise-image-file [user]="owner" (fileEventUploaded)="uploadCandidateImage($event)" idComponent="update-header-photo"></app-uploader-choise-image-file>
 

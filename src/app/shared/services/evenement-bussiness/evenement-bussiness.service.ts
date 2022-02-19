@@ -42,7 +42,6 @@ export abstract class EvenementBussinessService<T extends Evenement=Evenement> e
   }
   loadNewBunchData()
   {
-    console.log("date",this.startDate.toISOString(),this.endDate.toISOString())
     this.firebaseApi
     .getFirebaseDatabase()
     .ref(db_branch_builder.getBranchOfEvents())
@@ -50,7 +49,6 @@ export abstract class EvenementBussinessService<T extends Evenement=Evenement> e
     .startAt(this.currentDate.getTime())
     .once("value",(dataSnapshot)=>{
       let data=dataSnapshot.val()
-      console.log("Data ",data)
       for(let k in data)
       {
         let event=this.hydrateObjet(data[k]);
