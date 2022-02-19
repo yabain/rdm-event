@@ -565,7 +565,7 @@
 										</li>
 									</ul>
 	
-									<a [routerLink]="['/page/ellection/',selectedEvent.id.toString()]" class="btn btn-blue btn-sm full-width" *ngIf="selectedEvent.eventType=='vote_event'">Passer au vote</a>
+									<a (click)="navigateToEllection()" class="btn btn-blue btn-sm full-width" *ngIf="selectedEvent.eventType=='vote_event'">Passer au vote</a>
 									<a class="btn btn-blue btn-sm full-width" *ngIf="selectedEvent.eventType!='vote_event'">Acheter le billet</a>
 									<a class="btn btn-breez btn-sm full-width">Contacter l'organisation</a>
 								</div>

@@ -109,9 +109,9 @@ export class EventComponent implements OnInit {
       console.log("Error: ",error)
     })
   }
-  navigateToEllection(EllectId?){
-    let url = 'page/ellection/' + EllectId;
-    this.router.navigate([url]);
+  navigateToEllection(){
+    $("#detail_event").modal("toggle")
+    this.router.navigate(['/page/ellection/',this.selectedEvent.id.toString()]);
     // this.router.navigateByUrl('/page/ellection');
   }
   navigateToConf(ConfId?: string){
