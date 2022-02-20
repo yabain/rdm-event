@@ -1,7 +1,7 @@
 <div class="post-additional-info inline-items">
 
     <a class="post-add-icon inline-items">
-        <svg class="olymp-heart-icon">
+        <svg class="olymp-heart-icon" (click)="like()">
             <use xlink:href="#olymp-heart-icon"></use>
         </svg>
         <span>{{event.getLikeNumber()}}</span>

@@ -89,6 +89,18 @@ export abstract class EvenementBussinessService<T extends Evenement=Evenement> e
     this.list.get(eventID.toString()).actions.push(userAction)
     return this.updateEvent(this.list.get(eventID.toString()))
   }
+  removeAction(eventID:EntityID,userActionID:EntityID):Promise<ActionStatus<boolean>>
+  {
+    let event=this.list.get(eventID.toString())
+    let actionPos=event.actions.findIndex((action)=>userActionID.toString()==action.id.toString())
+      if(actionPos<0) {
+        let action=new ActionStatus<boolean>()
+        action.result=true;
+        return Promise.resolve(action);
+      }
+      event.actions.splice(actionPos,1);
+    return this.updateEvent(this.list.get(eventID.toString()))
+  }
   
   
   changeEventState(eventID:EntityID,eventStatus:EventState):Promise<ActionStatus<boolean>>
@@ -97,7 +109,6 @@ export abstract class EvenementBussinessService<T extends Evenement=Evenement> e
     this.list.get(eventID.toString()).state=eventStatus;
     this.list.get(eventID.toString()).datePublication=0;
 
-    console.log("event ",this.list.get(eventID.toString()))
 
     let post:FilActualitePost=new FilActualitePost();
     post.idEvent.setId(eventID.toString())

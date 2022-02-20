@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { EntityID, Evenement, User } from '../../entities';
 import { VoteEvenement } from '../../entities/vote-evenement';
 import { UserActionType } from '../../enum/useraction.enum';
@@ -15,6 +15,7 @@ import { UserService } from '../../services/user/user.service';
 export class EventActionListComponent implements OnInit {
   @Input() event:Evenement=new VoteEvenement()
   @Input() owner:User=new User()
+  @Output() doActionEvent:EventEmitter<{action:UserActionType,content:any}>=new EventEmitter()
   message:String=""
   constructor(
     private userProfilService:UserProfilService,
@@ -35,7 +36,7 @@ export class EventActionListComponent implements OnInit {
       if(nbreLike==1)
       {     
         let idLiker:EntityID=this.event.getActionByType(UserActionType.LIKE_ACTION)[0].idOwnerAction 
-        if(this.authService.isLoggedIn.getValue() && this.owner.id.toString()==idLiker.toString())
+        if( this.userProfilService.currentUser.getValue().id.toString()==idLiker.toString())
           this.message="Vous aimez";
         else 
           {
@@ -74,6 +75,16 @@ export class EventActionListComponent implements OnInit {
       }
 
     }
+  }
+
+  like()
+  {
+    console.log("like")
+    this.doActionEvent.emit({action:UserActionType.LIKE_ACTION,content:""})
+  }
+  comment()
+  {
+
   }
 
 }

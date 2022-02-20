@@ -40,7 +40,7 @@
                 height="762">
         </div>
 
-        <app-event-action-list [event]="event"></app-event-action-list>
+        <app-event-action-list (doActionEvent)="makeAction($event)" [event]="event"></app-event-action-list>
 
         <div class="control-block-button post-control-button">
 
