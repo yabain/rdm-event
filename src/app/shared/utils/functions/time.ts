@@ -88,4 +88,9 @@ export class UtilTime
         let times =stringTime.split(":")
         return `${UtilTime.getDateNumberFromDate(d)} ${monthStringList[d.getMonth()]} ${d.getFullYear()} A ${times[0]}H:${times[1]}`
     }
+    static getReadeableDateFromDate(date:Date)
+    {
+        let times=[date.getHours()<10?"0"+date.getHours():date.getHours(),date.getMinutes()<10?"0"+date.getMinutes():date.getMinutes()]
+        return `${UtilTime.getDateNumberFromDate(date)} ${monthStringList[date.getMonth()]} ${date.getFullYear()} à ${times[0]}H:${times[1]}`
+    }
 }

@@ -110,7 +110,7 @@ export class EventComponent implements OnInit {
     })
   }
   navigateToEllection(){
-    $("#detail_event").modal("toggle")
+    // $("#detail_event").modal("toggle")
     this.router.navigate(['/page/ellection/',this.selectedEvent.id.toString()]);
     // this.router.navigateByUrl('/page/ellection');
   }

@@ -3,6 +3,7 @@ import { EntityID, FilActualitePost } from '../../entities';
 import { ActionStatus } from '../../others/actionstatus';
 import { EventService } from '../../utils/services/events/event.service';
 import { FirebaseDataBaseApi } from '../../utils/services/firebase';
+import { FirebaseCursor } from '../../utils/services/firebase/firebase-cursor';
 import { AbstractCrudService } from '../abstract-crud/abstractcrud.service';
 import { LocalStorageService } from '../localstorage/localstorage.service';
 import * as db_branch_builder from "./../../utils/functions/db-branch.builder"
@@ -14,6 +15,7 @@ export class FilActualiteService extends AbstractCrudService<FilActualitePost> {
   
   protected cursorForLoadSegmentData:any="";
   protected maxPageLoad=5;
+  protected cursor:FirebaseCursor;
 
   constructor(
     firebaseApi:FirebaseDataBaseApi,
@@ -21,30 +23,37 @@ export class FilActualiteService extends AbstractCrudService<FilActualitePost> {
     private eventService:EventService
   ) { 
     super(firebaseApi,localStrogeService,"fil_actualite")
-    this.loadNewBunchData();
 
     this.eventService.loginEvent.subscribe((login)=>{
       if(login) this.loadNewBunchData();
     })
+    this.cursor=new FirebaseCursor(
+      this.firebaseApi.getFirebaseDatabase()
+      .ref(db_branch_builder.getBranchOfFilActualites())
+      .orderByChild("datePublication"),this.maxPageLoad,
+      "datePublication"
+    )
+    
   }
   createInstance(): FilActualitePost {
     return new FilActualitePost()
   }
-  loadNewBunchData():Promise<ActionStatus<void>>
+  loadNewBunchData():Promise<ActionStatus<FilActualitePost[]>>
   {
     return new Promise<ActionStatus<boolean>>((resolve,reject)=>{
-      if(this.cursorForLoadSegmentData=="")
-      {
-        // this.firebaseApi.getFirebaseDatabase()
-        // .ref(db_branch_builder.getBranchOfFilActualites())
-        // .endAt(this.maxPageLoad)
-        // .orderByChild("datePublication",this.cursorForLoadSegmentData)
-        // .limitToLast(this.maxPageLoad)
-        // .once("value",(snapshoot)=>{
-        //   console.log("fils-actualité",snapshoot.doc)
-        //   console.log("fils-actualité",snapshoot.val())
-        // })
-      }
+      let data=[]
+      let resultAction=new ActionStatus();
+      this.cursor.next()
+      .then((result)=>{
+        result.result.forEach((obj)=>{
+          let instance=this.hydrateObjet(obj);
+          data.push(instance);
+          this.setObject(instance)
+        })
+        resultAction.result=data;
+        resolve(resultAction)
+      })
+      .catch((error)=>reject(error))
     })
   }
   addNewPost(post:FilActualitePost):Promise<ActionStatus<void>>

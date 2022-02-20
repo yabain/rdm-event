@@ -110,17 +110,18 @@ export abstract class AbstractCrudService<T extends Entity>
     }
 
     findByID(objID: EntityID,branch:String): Promise<ActionStatus<T>> {
-        return new Promise<any>((resolve, reject) => {
-            if (this.list.has(objID.toString())) {
+            return new Promise<ActionStatus<T>>((resolve, reject) => {
             let result: ActionStatus<T> = new ActionStatus<T>();
+
+            if (this.list.has(objID.toString())) {
             result.result = this.list.get(objID.toString());
             return resolve(result);
             }
             this.firebaseApi.fetchOnce(branch.toString())
-            .then((value:ActionStatus<any>)=>{
+            .then((value:ActionStatus<T>)=>{
                 let instance:T=this.hydrateObjet(value.result)
                 this.setObject(instance);
-                value.result=instance;
+                result.result=instance;
                 resolve(value);
             })
             .catch((error:ActionStatus<T>)=>{

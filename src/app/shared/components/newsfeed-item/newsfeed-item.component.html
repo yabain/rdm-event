@@ -1,0 +1,68 @@
+<div class="ui-block" style="border: solid; border-color: rgb(77, 138, 90, 0.300);">
+
+    <article class="hentry post has-post-thumbnail">
+
+        <div class="post__author author vcard inline-items">
+            <img loading="lazy" [src]="owner.photoUrl" alt="author" width="42"
+                height="42">
+
+            <div class="author-date">
+                <a class="h6 post__author-name fn">{{owner.getFullName()}}</a> a publier 
+                <div class="post__date">
+                    <time class="published" datetime="2004-07-24T18:18">
+                        {{getReadableDate()}}
+                    </time>
+                </div>
+            </div>
+
+            <div class="more" >
+                <svg class="olymp-three-dots-icon">
+                    <use xlink:href="#olymp-three-dots-icon"></use>
+                </svg>
+                <ul class="more-dropdown">
+                    <li>
+                        <a>Editer</a>
+                    </li>
+                    <li>
+                        <a>Supprimer</a>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+
+        <p style="text-align: justify;">
+           {{event.description}}
+        </p>
+
+        <div class="post-thumb" *ngIf="event.urlBanner!=''">
+            <img loading="lazy" [src]="event.urlBanner" alt="photo" width="518"
+                height="762">
+        </div>
+
+        <app-event-action-list [event]="event"></app-event-action-list>
+
+        <div class="control-block-button post-control-button">
+
+            <a class="btn btn-control">
+                <svg class="olymp-like-post-icon">
+                    <use xlink:href="#olymp-like-post-icon"></use>
+                </svg>
+            </a>
+
+            <a class="btn btn-control">
+                <svg class="olymp-comments-post-icon">
+                    <use xlink:href="#olymp-comments-post-icon"></use>
+                </svg>
+            </a>
+
+            <a class="btn btn-control">
+                <svg class="olymp-share-icon">
+                    <use xlink:href="#olymp-share-icon"></use>
+                </svg>
+            </a>
+
+        </div>
+
+    </article>
+</div>

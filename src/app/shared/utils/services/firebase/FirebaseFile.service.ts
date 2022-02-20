@@ -15,12 +15,12 @@ export class FirebaseFile {
   constructor(private firebaseDatabaseApi:FirebaseDataBaseApi) {
     this.db=this.firebaseDatabaseApi.getFirebaseFile().ref();
    }
-  uploadFile(repos:string,file:CustomFile):BehaviorSubject<ActionStatus>
+  uploadFile(repos:string,file:CustomFile):BehaviorSubject<ActionStatus<any>>
   {
-    let result:ActionStatus=new ActionStatus();
+    let result:ActionStatus<any>=new ActionStatus<any>();
     result.result=0;
 
-    let subject:BehaviorSubject<ActionStatus>=new BehaviorSubject<ActionStatus>(result);
+    let subject:BehaviorSubject<ActionStatus<any>>=new BehaviorSubject<ActionStatus<any>>(result);
 
     let uploadTask=this.db.child(`${repos}/${(new EntityID()).toString()}.${file.getExtention()}`).put(file.data,{
       contentType:file.type
@@ -61,7 +61,7 @@ export class FirebaseFile {
 
   listAll(url=""):Promise<ActionStatus<CustomFile[]>>
   {
-    return new Promise<ActionStatus>((resolve,reject)=>{
+    return new Promise<ActionStatus<any>>((resolve,reject)=>{
       let actionResult=new ActionStatus<CustomFile[]>()
       this.db.child(url).listAll()
       .then((res)=>{
@@ -74,7 +74,7 @@ export class FirebaseFile {
         })
         return Promise.all(actionResult.result.map((custom)=>custom.link))
       })
-      .then((result:ActionStatus[])=>{
+      .then((result:ActionStatus<any>[])=>{
         for(let i=0;i<result.length;i++)
         {
           actionResult.result[i].link=result[i];

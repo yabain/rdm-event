@@ -31,7 +31,6 @@ import { EvenementBussinessService } from "./evenement-bussiness.service";
     }
     addCathegorie(eventID:EntityID,cathegorie:CategorieEvenement):Promise<ActionStatus<boolean>>
     {
-        console.log("Vote ",this.list.get(eventID.toString()) as VoteEvenement);
         (<VoteEvenement>this.list.get(eventID.toString())).categories.push(cathegorie)
         return this.updateEvent(this.list.get(eventID.toString()))
     }

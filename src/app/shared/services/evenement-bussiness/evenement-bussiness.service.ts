@@ -58,6 +58,10 @@ export abstract class EvenementBussinessService<T extends Evenement=Evenement> e
     })
   }
 
+  // createInstance():T{
+  //   return new Evenement();
+  // }
+
   createNewEvent(event:T):Promise<ActionStatus<boolean>>
   {
     return this.save(event,db_branch_builder.getBranchOfEvent(event.id))
