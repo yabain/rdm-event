@@ -8,6 +8,8 @@ import { CategorieEvenement } from "./vote-evenement";
 
 export class Evenement extends Entity
 {
+    
+    
     name:String="";
     place:String=""
     state:EventState=EventState.UNPUBLISHED;
@@ -72,6 +74,12 @@ export class Evenement extends Entity
         let cd = new Date(this.createdDate.toString())
         return `Créer ${weekStringList[cd.getDay()]} ${UtilTime.getDateNumberFromDate(cd)} ${UtilTime.getMonthStringByNumber(cd.getMonth())} à ${UtilTime.getTimeFromDate(cd)}`
     }
+    getActionByOwner(userAction: UserActionType, idOwner: EntityID) {
+        return this.actions.find((action)=>action.idOwnerAction.toString()==idOwner.toString() && action.actionType==userAction);
+    }
+    getPosActionByOwner(userAction: UserActionType, idOwner: EntityID) {
+        return this.actions.findIndex((action)=>action.idOwnerAction.toString()==idOwner.toString() && action.actionType==userAction);
+      }
     getCommentNumber()
     {
         return this.getActionByType(UserActionType.COMMENT_ACTION).length
