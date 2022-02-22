@@ -21,9 +21,12 @@ export class TopHeaderMenuComponent implements OnInit {
     private userProfilService:UserProfilService,
     private router:Router
   ) { 
-    // this.isAuth = this.isAuthService.isAuth;
-    // // this.isOwner = true;
-    // this.isAdmin = this.isAuthService.isAdmin;
+    this.userProfilService.currentUser.subscribe((user:User)=>{
+      this.user=user;
+    })
+    this.authService.isLoggedIn.subscribe((isLoggin)=>{
+      this.isAuth=isLoggin
+    })
 
    
   }

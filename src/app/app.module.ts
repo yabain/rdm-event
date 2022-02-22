@@ -9,6 +9,11 @@ import { EventComponent } from './pages/event/event.component';
 import { EllectionsComponent } from './pages/ellections/ellections.component';
 import { CommonModule } from '@angular/common';
 import { ProgressIndeterminateModule } from './shared/components/progress-indeterminate/progress-indeterminate.module';
+import { ProfilComponent } from './pages/profil/profil.component';
+import { ChatComponent } from './pages/chat/chat.component';
+import { GamesComponent } from './pages/games/games.component';
+import { BestScoreManager } from './pages/games/snake/snake.storage.service';
+import { SnakeComponent } from './pages/games/snake/snake.component';
 // import { NotificationService } from './shared/services/notification/notification.sevices';
 // import { NotificationService } from './shared/services/notification/notification.service';
 
@@ -18,6 +23,10 @@ import { ProgressIndeterminateModule } from './shared/components/progress-indete
     NewsfeedComponent,
     EventComponent,
     EllectionsComponent,
+    ProfilComponent,
+    ChatComponent,
+    GamesComponent,
+    SnakeComponent
   ],
   imports: [
     BrowserModule,
@@ -29,7 +38,8 @@ import { ProgressIndeterminateModule } from './shared/components/progress-indete
     CommonModule
   ],
   providers: [
-    // NotificationService
+    // NotificationService,
+    BestScoreManager
   ],
   bootstrap: [AppComponent]
 })

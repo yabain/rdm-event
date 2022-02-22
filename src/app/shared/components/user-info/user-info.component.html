@@ -1,0 +1,179 @@
+<div class="ui-block">
+    <div class="ui-block-title">
+        <h6 class="title">Informations Personnel</h6>
+    </div>
+    <div class="ui-block-content">
+
+
+        <!-- Personal Information Form  -->
+
+        <form>
+            <div class="row">
+
+                <div class="col col-lg-6 col-md-6 col-sm-12 col-12">
+                    <div class="form-group label-floating">
+                        <label class="control-label">Nom</label>
+                        <input class="form-control" placeholder="" type="text" value="{{nom}}">
+                    </div>
+
+                    <div class="form-group label-floating">
+                        <label class="control-label">Email</label>
+                        <input class="form-control" placeholder="" type="email" value="{{email}}">
+                    </div>
+
+                    <div class="form-group date-time-picker label-floating">
+                        <label class="control-label">Date de naissance</label>
+                        <input name="datetimepicker" value="{{dateNaiss}}" />
+                        <span class="input-group-addon">
+                            <svg class="olymp-month-calendar-icon icon">
+                                <use xlink:href="#olymp-month-calendar-icon"></use>
+                            </svg>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="col col-lg-6 col-md-6 col-sm-12 col-12">
+                    <div class="form-group label-floating">
+                        <label class="control-label">Prénom</label>
+                        <input class="form-control" placeholder="" type="text" value="{{prenom}}">
+                    </div>
+
+                    <div class="form-group label-floating">
+                        <label class="control-label">Siteweb</label>
+                        <input class="form-control" placeholder="" type="email" value="">
+                    </div>
+
+
+                    <div class="form-group label-floating is-empty">
+                        <label class="control-label">Numéro de Téléphone</label>
+                        <input class="form-control" placeholder="" type="number">
+                    </div>
+                </div>
+<!-- 
+                <div class="col col-lg-4 col-md-4 col-sm-12 col-12">
+                    <div class="form-group label-floating is-select">
+                        <label class="control-label">Your Country</label>
+                        <select class="form-select">
+                            <option value="US">United States</option>
+                            <option value="AU">Australia</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col col-lg-4 col-md-4 col-sm-12 col-12">
+                    <div class="form-group label-floating is-select">
+                        <label class="control-label">Your State / Province</label>
+                        <select class="form-select">
+                            <option value="CA">California</option>
+                            <option value="TE">Texas</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col col-lg-4 col-md-4 col-sm-12 col-12">
+                    <div class="form-group label-floating is-select">
+                        <label class="control-label">Your City</label>
+                        <select class="form-select">
+                            <option value="SF">San Francisco</option>
+                            <option value="NY">New York</option>
+                        </select>
+                    </div>
+                </div> -->
+                <div class="col col-lg-4 col-md-4 col-sm-12 col-12">
+                    <div class="form-group label-floating is-select">
+                        <label class="control-label">Région</label>
+                        <input class="form-control" placeholder="" type="ex: Ouest" value="">
+                    </div>
+                </div>
+                <div class="col col-lg-4 col-md-4 col-sm-12 col-12">
+                    <div class="form-group label-floating is-select">
+                        <label class="control-label">Ville</label>
+                        <input class="form-control" placeholder="" type="ex: Bangangté" value="">
+                    </div>
+                </div>
+                <div class="col col-lg-4 col-md-4 col-sm-12 col-12">
+                    <div class="form-group label-floating is-select">
+                        <label class="control-label">Quartier</label>
+                        <input class="form-control" placeholder="" type="ex: Tchougo" value="">
+                    </div>
+                </div>
+                <div class="col col-lg-6 col-md-6 col-sm-12 col-12">
+                    <div class="form-group label-floating is-select">
+                        <label class="control-label">Genre</label>
+                        <select class="form-select">
+                            <option value="femme">Femme</option>
+                            <option value="homme">Homme</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <textarea class="form-control"
+                            placeholder="Décrivez-vous en quelques mots"></textarea>
+                    </div>
+                </div>
+                <div class="col col-lg-6 col-md-6 col-sm-12 col-12">
+                    <div class="form-group label-floating is-select">
+                        <label class="control-label">Métier</label>
+                        <select class="form-select">
+                            <option value="élève">Elève</option>
+                            <option value="étudiant">Etudiant(e)</option>
+                            <option value="employer">Employer</option>
+                            <option value="chef">Chef d'entreprise</option>
+                        </select>
+                    </div>
+                    <div class="form-group label-floating is-empty">
+                        <label class="control-label">Nom d'école/entreprise</label>
+                        <input class="form-control" placeholder="" type="text">
+                    </div>
+
+                    <div class="form-group label-floating">
+                        <label class="control-label">Spécialité/Domaine</label>
+                        <input class="form-control" placeholder="" type="text" value="">
+                    </div>
+                </div>
+                <div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <div class="form-group with-icon label-floating">
+                        <label class="control-label">Lien facebook</label>
+                        <input class="form-control" type="text" value="">
+                        <svg class="c-facebook" width="20" height="20">
+                            <use xlink:href="#olymp-facebook-icon"></use>
+                        </svg>
+                    </div>
+                    <div class="form-group with-icon label-floating">
+                        <label class="control-label">Lien Twitter</label>
+                        <input class="form-control" type="text" value="">
+                        <svg class="c-twitter" width="20" height="20">
+                            <use xlink:href="#olymp-twitter-icon"></use>
+                        </svg>
+                    </div>
+                    <div class="form-group with-icon label-floating is-empty">
+                        <label class="control-label">Lien Instagram</label>
+                        <input class="form-control" type="text">
+                        <svg class="c-instagram" width="20" height="20">
+                            <use xlink:href="#olymp-instagram-icon"></use>
+                        </svg>
+                    </div>
+                    <!-- <div class="form-group with-icon label-floating">
+                        <label class="control-label">Your Dribbble Account</label>
+                        <input class="form-control" type="text" value="www.dribbble.com/thecowboydesigner">
+                        <svg class="c-dribbble" width="20" height="20">
+                            <use xlink:href="#olymp-dribble-icon"></use>
+                        </svg>
+                    </div>
+                    <div class="form-group with-icon label-floating is-empty">
+                        <label class="control-label">Your Spotify Account</label>
+                        <input class="form-control" type="text">
+                        <svg class="c-spotify" width="20" height="20">
+                            <use xlink:href="#olymp-spotify-icon"></use>
+                        </svg>
+                    </div> -->
+                </div>
+                <div class="col col-lg-6 col-md-6 col-sm-12 col-12">
+                </div>
+                <div class="col col-lg-6 col-md-6 col-sm-12 col-12">
+                    <button class="btn btn-secondary btn-lg full-width" style="background-color: #4e814c;">Enregistrer</button>
+                </div>
+
+            </div>
+        </form>
+
+        <!-- ... end Personal Information Form  -->
+    </div>
+</div>

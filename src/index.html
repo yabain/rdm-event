@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <title>RdM |</title>
@@ -10,6 +11,10 @@
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+  <a href="https://github.com/SamirHodzic/ngx-snake">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+  </a>
+  
   <style type="text/css">
     body,
     html {
@@ -20,7 +25,7 @@
     .app-loading .logo {
       width: 100px;
       height: 100px;
-      background: url(./assets/img/img/yi_icon.png) center center no-repeat;
+      background: url(./assets/img/img/yi_icon_1.webp) center center no-repeat;
     }
 
     .app-loading {
@@ -77,6 +82,7 @@
     }
   </style>
 </head>
+
 <body style="background-color: rgba(240, 240, 240, 0.877);">
   <app-root>
     <div class="app-loading">
@@ -86,12 +92,30 @@
       </svg>
     </div>
   </app-root>
-  
-<script>
-	document.addEventListener("DOMContentLoaded", function() {
-		var webpMachine = new webpHero.WebpMachine()
-		webpMachine.polyfillDocument()
-	});
-</script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      var webpMachine = new webpHero.WebpMachine()
+      webpMachine.polyfillDocument()
+    });
+  </script>
+  <script>
+    function myFunction() {
+      var dots = document.getElementById("dots");
+      var moreText = document.getElementById("more");
+      var btnText = document.getElementById("myBtn");
+
+      if (dots.style.display === "none") {
+        dots.style.display = "inline";
+        btnText.innerHTML = "<br>Lire plus";
+        moreText.style.display = "none";
+      } else {
+        dots.style.display = "none";
+        btnText.innerHTML = "<br>Lire moins";
+        moreText.style.display = "inline";
+      }
+    }
+  </script>
 </body>
+
 </html>

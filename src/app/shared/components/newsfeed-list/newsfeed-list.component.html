@@ -3,7 +3,7 @@
 
     <app-newsfeed-item *ngFor="let event of events;let i=index" [event]="event" [owner]="users[i]" [post]="newsfeed[i]" ></app-newsfeed-item>
     <app-progress-indeterminate *ngIf="hasLoadedData==false"></app-progress-indeterminate>
-    <!-- <div class="ui-block" style="border: solid; border-color: rgb(77, 138, 90, 0.300);">
+   <div class="ui-block" style="border: solid; border-color: rgb(77, 138, 90, 0.300);">
 
         <article class="hentry post has-post-thumbnail">
 
@@ -39,7 +39,7 @@
             <p style="text-align: justify;">
                 LICENCE ET MASTER EN SCIENCES INFIRMIERES à l’Université des Montagnes : Présentation de la formation.
                 « Sciences Infirmières »: Une formation ,plusieurs débouchés ! <br>
-                M. Lénaic POKAM, diplômé de l’UdM en sciences infirmières, doctorant et enseignant vous présente cette
+                M. Lénaic POKAM, diplômé de l’UdM en sciences infirmières, doctorant et enseignant<span id="dots" style="color: #4e814c;">...</span><span id="more"> vous présente cette
                 formation transdisciplinaire aux divers champs d’applications. <br> <br>
                 Contacter M Lénaic POKAM (Responsable de la filière) au téléphone WhatsApp : +237693734655 <br>
                 Les débouchés : Pratique, Clinicien. Intervenir au sein d’une formation sanitaire / Gestion,
@@ -55,7 +55,8 @@
                  Déposer votre dossier dans un lieu de dépôt de dossier en fonction de votre ville.
                 Si vous êtes hors du Cameroun, vous pouvez déposer votre dossier en ligne sur le site web : <a
                     href="www.udm.aed-cm.org"> www.udm.aed-cm.org</a>
-                • Vous pouvez contacter ces numéros WhatsApp : +237 691 144 884
+                • Vous pouvez contacter ces numéros WhatsApp : +237 691 144 884</span>
+                <b onclick="myFunction()" id="myBtn" style="color: #4e814c;"><br> Lire plus</b>
 
             </p>
 
@@ -158,7 +159,7 @@
         </article>
     </div>
 
-    <div class="ui-block" style="border: solid; border-color: rgb(77, 138, 90, 0.300);">
+    <!-- <div class="ui-block" style="border: solid; border-color: rgb(77, 138, 90, 0.300);">
 
         <article class="hentry post has-post-thumbnail">
 
@@ -322,7 +323,7 @@
             </div>
 
         </article>
-    </div>
+    </div> -->
 
     <div class="ui-block" style="border: solid; border-color: rgb(77, 138, 90, 0.300);">
 
@@ -1971,6 +1972,6 @@
             </div>
 
         </article>
-    </div> -->
+    </div> 
 
 </div>
