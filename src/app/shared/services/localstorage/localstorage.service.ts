@@ -4,9 +4,7 @@ import { BehaviorSubject } from 'rxjs';
 import { EventService } from '../../utils/services/events/event.service';
 
 
-@Injectable({
-  providedIn:"root"
-})
+@Injectable()
 export class LocalStorageService {
   data: Map < String, BehaviorSubject<any> >= new Map < String, BehaviorSubject<any> >();
   localstoragekey="data_rdm_event"
@@ -57,11 +55,11 @@ export class LocalStorageService {
     this.data.forEach((value:BehaviorSubject<any>,key:String)=>{
       dataObj[key.toString()]=value.getValue();
     });
+
     localStorage.setItem(this.localstoragekey,JSON.stringify(dataObj));
   }
   clearData()
   {
-    localStorage.clear();
     this.data.clear();
   }
 }

@@ -13,7 +13,7 @@ import { UserService } from '../user/user.service';
   providedIn: 'root'
 })
 export class UserProfilService {
-  currentUser: BehaviorSubject<User> = new BehaviorSubject<User>(new User());
+  currentUser: BehaviorSubject<User> = new BehaviorSubject<User>(null);
 
   constructor(
     private localStorageService:LocalStorageService,
@@ -29,7 +29,7 @@ export class UserProfilService {
     this.eventService.logoutEvent.subscribe((value)=>{
       if(value)
       {
-        this.currentUser.next(new User())
+        this.currentUser.next(null)
       }
     })
   }

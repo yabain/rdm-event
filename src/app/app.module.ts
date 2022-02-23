@@ -14,6 +14,7 @@ import { ChatComponent } from './pages/chat/chat.component';
 import { GamesComponent } from './pages/games/games.component';
 import { BestScoreManager } from './pages/games/snake/snake.storage.service';
 import { SnakeComponent } from './pages/games/snake/snake.component';
+import { LocalStorageService } from './shared/services/localstorage/localstorage.service';
 // import { NotificationService } from './shared/services/notification/notification.sevices';
 // import { NotificationService } from './shared/services/notification/notification.service';
 
@@ -39,7 +40,8 @@ import { SnakeComponent } from './pages/games/snake/snake.component';
   ],
   providers: [
     // NotificationService,
-    BestScoreManager
+    BestScoreManager,
+    LocalStorageService
   ],
   bootstrap: [AppComponent]
 })

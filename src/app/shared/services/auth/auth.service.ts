@@ -37,9 +37,7 @@ export class AuthService {
   }
   setAuth(logged:{isLoggedIn:boolean})
   {
-    this.localStorageService.setData("auth_data",logged);
-    console.log('00000')
-    
+    this.localStorageService.setData("auth_data",logged);    
   }
 
   /*
@@ -80,17 +78,12 @@ export class AuthService {
       .then((result: ActionStatus<any>) => {
         let userID: EntityID=new EntityID();
         userID.setId(result.result.user.uid)
-        localStorage.setItem('USER', result.result.user);
         result.result=userID;
         this.setAuth({isLoggedIn:true});
-        localStorage.setItem('isAuth', 'true');
-        let timeout = setTimeout(this.setUserToLocalStorage, 2000);
         resolve(result);
       })
       .catch((error: ActionStatus<any>) => {
-        let actionStatus=new ActionStatus();
         this.firebaseApi.handleApiError(error)
-        localStorage.setItem('isAuth', 'false');
         reject(error);
       })
     });
