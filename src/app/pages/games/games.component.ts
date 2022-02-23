@@ -10,7 +10,8 @@ export class GamesComponent implements OnInit {
 
   constructor(
     // private notification : NotificationService
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
     // this.showNotification();

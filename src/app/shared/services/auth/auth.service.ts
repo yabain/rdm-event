@@ -38,6 +38,7 @@ export class AuthService {
   setAuth(logged:{isLoggedIn:boolean})
   {
     this.localStorageService.setData("auth_data",logged);
+    console.log('00000')
     
   }
 
@@ -46,7 +47,7 @@ export class AuthService {
    */
   logOut() {
     this.setAuth({isLoggedIn:false})
-    this.localStorageService.clearData()
+    this.localStorageService.clearData();
     this.eventService.logoutEvent.next(true);
   }
 
@@ -72,7 +73,6 @@ export class AuthService {
 
   }
 
-
   // Login into your account
   authLogin(user:User): Promise<ActionStatus<EntityID>> {
     return new Promise((resolve, reject) => {
@@ -80,15 +80,39 @@ export class AuthService {
       .then((result: ActionStatus<any>) => {
         let userID: EntityID=new EntityID();
         userID.setId(result.result.user.uid)
+        localStorage.setItem('USER', result.result.user);
         result.result=userID;
-        this.setAuth({isLoggedIn:true})
+        this.setAuth({isLoggedIn:true});
+        localStorage.setItem('isAuth', 'true');
+        let timeout = setTimeout(this.setUserToLocalStorage, 2000);
         resolve(result);
       })
       .catch((error: ActionStatus<any>) => {
         let actionStatus=new ActionStatus();
         this.firebaseApi.handleApiError(error)
+        localStorage.setItem('isAuth', 'false');
         reject(error);
       })
     });
+  }
+
+  setUserToLocalStorage(){
+    let user = JSON.parse(localStorage.getItem('data_rdm_event'));
+    console.log('test: 0', user.user_profil.username); 
+
+    localStorage.setItem('username', user.user_profil.username);
+    localStorage.setItem('fullname', user.user_profil.fullname);
+    localStorage.setItem('sexe', user.user_profil.sexe);
+    localStorage.setItem('email', user.user_profil.email);
+    localStorage.setItem('photoUrl', user.user_profil.photoURL);
+    localStorage.setItem('password', user.user_profil.password);
+    localStorage.setItem('phoneNumber', user.user_profil.phoneNumber);
+    localStorage.setItem('dateCreated', user.user_profil.dateCreated);
+    localStorage.setItem('dateNaiss', user.user_profil.dateNaiss);
+    localStorage.setItem('lieuxNaiss', user.user_profil.lieuxNaiss);
+    localStorage.setItem('villeResidenceActuelle', user.user_profil.villeResidenceActuelle);
+    localStorage.setItem('nationalite', user.user_profil.nationalite);
+    localStorage.setItem('about', user.user_profil.about);
+
   }
 }

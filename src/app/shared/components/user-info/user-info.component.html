@@ -7,23 +7,23 @@
 
         <!-- Personal Information Form  -->
 
-        <form>
+        <form *ngIf="isAuth">
             <div class="row">
 
                 <div class="col col-lg-6 col-md-6 col-sm-12 col-12">
                     <div class="form-group label-floating">
-                        <label class="control-label">Nom</label>
-                        <input class="form-control" placeholder="" type="text" value="{{nom}}">
+                        <label class="control-label">Nom & Prénom</label>
+                        <input class="form-control" placeholder="" type="text" value="{{user.fullname}}">
                     </div>
 
                     <div class="form-group label-floating">
                         <label class="control-label">Email</label>
-                        <input class="form-control" placeholder="" type="email" value="{{email}}">
+                        <input class="form-control" placeholder="" type="email" value="{{user.email}}">
                     </div>
 
                     <div class="form-group date-time-picker label-floating">
                         <label class="control-label">Date de naissance</label>
-                        <input name="datetimepicker" value="{{dateNaiss}}" />
+                        <input name="datetimepicker" value="{{user.dateNaiss}}" />
                         <span class="input-group-addon">
                             <svg class="olymp-month-calendar-icon icon">
                                 <use xlink:href="#olymp-month-calendar-icon"></use>
@@ -34,19 +34,19 @@
 
                 <div class="col col-lg-6 col-md-6 col-sm-12 col-12">
                     <div class="form-group label-floating">
-                        <label class="control-label">Prénom</label>
-                        <input class="form-control" placeholder="" type="text" value="{{prenom}}">
+                        <label class="control-label">Nom d'utilisateur</label>
+                        <input class="form-control" placeholder="" type="text" value="{{user.username}}">
                     </div>
 
                     <div class="form-group label-floating">
                         <label class="control-label">Siteweb</label>
-                        <input class="form-control" placeholder="" type="email" value="">
+                        <input class="form-control" placeholder="" type="email" value="{{user.lienSite}}">
                     </div>
 
 
                     <div class="form-group label-floating is-empty">
                         <label class="control-label">Numéro de Téléphone</label>
-                        <input class="form-control" placeholder="" type="number">
+                        <input class="form-control" placeholder="" type="number" value="{{user.phoneNumber}}">
                     </div>
                 </div>
 <!-- 
@@ -80,27 +80,29 @@
                 <div class="col col-lg-4 col-md-4 col-sm-12 col-12">
                     <div class="form-group label-floating is-select">
                         <label class="control-label">Région</label>
-                        <input class="form-control" placeholder="" type="ex: Ouest" value="">
+                        <input class="form-control" placeholder="" type="ex: Ouest"  value="{{user.region}}">
                     </div>
                 </div>
                 <div class="col col-lg-4 col-md-4 col-sm-12 col-12">
                     <div class="form-group label-floating is-select">
                         <label class="control-label">Ville</label>
-                        <input class="form-control" placeholder="" type="ex: Bangangté" value="">
+                        <input class="form-control" placeholder="" type="ex: Bangangté"  value="{{user.ville}}">
                     </div>
                 </div>
                 <div class="col col-lg-4 col-md-4 col-sm-12 col-12">
                     <div class="form-group label-floating is-select">
                         <label class="control-label">Quartier</label>
-                        <input class="form-control" placeholder="" type="ex: Tchougo" value="">
+                        <input class="form-control" placeholder="" type="ex: Tchougo"  value="{{user.quartier}}">
                     </div>
                 </div>
                 <div class="col col-lg-6 col-md-6 col-sm-12 col-12">
                     <div class="form-group label-floating is-select">
                         <label class="control-label">Genre</label>
                         <select class="form-select">
-                            <option value="femme">Femme</option>
-                            <option value="homme">Homme</option>
+                            <option value="femme" *ngIf="homme==true">Femme</option>
+                            <option value="homme" selected="" *ngIf="homme==true">Homme</option>
+                            <option value="femme" selected="" *ngIf="femme==true">Femme</option>
+                            <option value="homme" *ngIf="femme==true">Homme</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -120,32 +122,32 @@
                     </div>
                     <div class="form-group label-floating is-empty">
                         <label class="control-label">Nom d'école/entreprise</label>
-                        <input class="form-control" placeholder="" type="text">
+                        <input class="form-control" placeholder="" type="text"  value="{{user.structure}}">
                     </div>
 
                     <div class="form-group label-floating">
                         <label class="control-label">Spécialité/Domaine</label>
-                        <input class="form-control" placeholder="" type="text" value="">
+                        <input class="form-control" placeholder="" type="text"  value="{{user.specialite}}">
                     </div>
                 </div>
                 <div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                     <div class="form-group with-icon label-floating">
                         <label class="control-label">Lien facebook</label>
-                        <input class="form-control" type="text" value="">
+                        <input class="form-control" type="text" value="{{user.facebook}}">
                         <svg class="c-facebook" width="20" height="20">
                             <use xlink:href="#olymp-facebook-icon"></use>
                         </svg>
                     </div>
                     <div class="form-group with-icon label-floating">
                         <label class="control-label">Lien Twitter</label>
-                        <input class="form-control" type="text" value="">
+                        <input class="form-control" type="text" value="{{user.twitter}}">
                         <svg class="c-twitter" width="20" height="20">
                             <use xlink:href="#olymp-twitter-icon"></use>
                         </svg>
                     </div>
                     <div class="form-group with-icon label-floating is-empty">
                         <label class="control-label">Lien Instagram</label>
-                        <input class="form-control" type="text">
+                        <input class="form-control" type="text" value="{{user.instagram}}">
                         <svg class="c-instagram" width="20" height="20">
                             <use xlink:href="#olymp-instagram-icon"></use>
                         </svg>
@@ -170,7 +172,13 @@
                 <div class="col col-lg-6 col-md-6 col-sm-12 col-12">
                     <button class="btn btn-secondary btn-lg full-width" style="background-color: #4e814c;">Enregistrer</button>
                 </div>
+            </div>
+        </form>
 
+        <form *ngIf="!isAuth">
+            <div class="row">
+                <h6>Vous devez vous <a routerLink="/page/login" style="color: green;">connecter</a> pour continuer.</h6>
+                <br><button class="btn btn-success col-md-3" style="background-color: #4e814c;  border: none;">Connexion</button>
             </div>
         </form>
 

@@ -299,29 +299,29 @@ export class FirebaseDataBaseApi {
       case FireBaseConstant.AUTH_USER_NOT_FOUND:
       case FireBaseConstant.AUTH_WRONG_PASSWORD:
       case FireBaseConstant.AUTH_ACCOUNT_EXIST_WITH_DIFFERENT_CREDENTIAL:
-        result.message = 'Incorrect email or password';
+        result.message = 'Email ou mot de passe incorrect';
         break;
       case FireBaseConstant.AUTH_WEAK_PASSWORD:
-        result.message = 'Password must have at least 6 characters';
+        result.message = 'Le mot de passe doit avoir au moins 6 caractères';
         break;
       case FireBaseConstant.AUTH_EMAIL_ALREADY_USE:
-        result.message = 'Email already used by another user';
+        result.message = 'cet email est déjà utilisé';
         break;
 
       case FireBaseConstant.AUTH_REQUIRE_RECENT_LOGIN:
-        result.message = 'You must log in to access the application. if you recently made a connection, you need to do it again';
+        result.message = "Vous devez vous connecter pour accéder à l'application. Si vous vous êtes récemment connecté, vous devez le faire à nouveau.";
         break;
       case FireBaseConstant.AUTH_CREDENTIAL_ALREADY_IN_USE:
-        result.message = 'You are already connected';
+        result.message = 'Vous êtes déjà connecté';
         break;
       case FireBaseConstant.AUTH_TOO_MANY_REQUEST:
         result.message = result.description;
         break;
       case FireBaseConstant.DESACTIVED_ACCOUNT:
-        result.message = 'Account Disabled. Please contact the administrator for a reactivation';
+        result.message = "Compte désactivé. Veuillez contacter l'administrateur pour une réactivation";
         break;
       case FireBaseConstant.NET_NETWORK_FAIL:
-        result.message = 'Offline. Please check your network connectivity';
+        result.message = 'Hors ligne. Veuillez vérifier votre connectivité réseau';
         break;
       case ActionStatus.INVALID_ARGUMENT_ERROR:
         break;

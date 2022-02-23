@@ -8,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AccountSettingComponent implements OnInit {
 
+  isAuth: boolean = false;
+
   constructor(
-    // private notification : NotificationService
-  ) { }
+  ) {
+    if (localStorage.getItem('isAuth') == 'true'){
+      this.isAuth = true;
+    }else {
+      this.isAuth = false;
+    }
+  }
 
   ngOnInit(): void {
     // this.showNotification();

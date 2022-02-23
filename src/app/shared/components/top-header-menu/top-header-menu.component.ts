@@ -14,6 +14,8 @@ export class TopHeaderMenuComponent implements OnInit {
   isAuth:boolean = false;
   isOwner:boolean = false;
   isAdmin:boolean = false;
+  fullName : string = '';
+  userName: string = '';
   user:User=new User()
 
   constructor(
@@ -21,17 +23,22 @@ export class TopHeaderMenuComponent implements OnInit {
     private userProfilService:UserProfilService,
     private router:Router
   ) { 
-    this.userProfilService.currentUser.subscribe((user:User)=>{
-      this.user=user;
-    })
-    this.authService.isLoggedIn.subscribe((isLoggin)=>{
-      this.isAuth=isLoggin
-    })
+    let user = JSON.parse(localStorage.getItem('data_rdm_event'));
+    this.isAuth = user.auth_data.isLoggedIn;
+    this.fullName = user.user_profil.fullname;
+    console.log('fullname: ',this.fullName)
+    this.userName = user.user_profil.username;
+    if(this.fullName != ''){
+      this.isAuth = true;
+    }
 
    
   }
 
   ngOnInit(): void {
+    let user = JSON.parse(localStorage.getItem('data_rdm_event'));
+    this.isAuth = user.auth_data.isLoggedIn;
+
     this.userProfilService.currentUser.subscribe((user:User)=>{
       this.user=user;
     })
