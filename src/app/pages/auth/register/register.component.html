@@ -4,11 +4,11 @@
 			<div class="form-group label-floating is-select">
 				<label class="control-label">Type de compte</label>
 				<select [ngClass]="{'form-select':true, 'is-invalid': submitted==true && form.controls['userType'].invalid}" formControlName="userType">
-					<option value="normal_user">Simple</option>
+					<option value="normal_user">Personel</option>
 					<option value="business_user">Organisation</option>
 				</select>
 				<div *ngIf="submitted==true && form.controls['userType'].invalid" class="invalid-feedback">
-					<span *ngIf="form.controls['userType'].errors['required']">Veuillez le type de compte</span>
+					<span *ngIf="form.controls['userType'].errors['required']">Veuillez choisir le type de compte</span>
 				</div>
 			</div>
 			<ng-container formGroupName="org_user"  *ngIf="form.controls['userType'].value=='business_user'">
@@ -112,12 +112,12 @@
 				<div class="checkbox">
 					<label>
 						<input name="optionsCheckboxes" type="checkbox">
-						I accept the <a href="">Terms and Conditions</a> of the website
+						J'accepte les <a style="color: #4e814c;">Conditions générales d'utilisation</a> de la plateforme RdM.
 					</label>
 				</div>
 			</div>
 
-			<button type="submit" class="btn btn-purple btn-lg full-width">
+			<button type="submit" class="btn btn-purple btn-lg full-width" style="background-color: #4e814c;">
 				<app-progress-indeterminate *ngIf="waitResponse"></app-progress-indeterminate>
 				<span *ngIf="!waitResponse">S'enregister!</span>
 			</button>

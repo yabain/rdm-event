@@ -1,0 +1,27 @@
+<br><br><br><br><br>
+<div class="game-container">
+  <div class="game-header">
+    <h3 class="logo">Y-Snake-Challenge</h3>
+    <div class="score-block">
+      <h3 class="score" [ngClass]="{'new-best-score': newBestScore}" style="color: white;">Score: {{score}}</h3>
+      <h3 class="best-score" [ngClass]="{'new-best-score': newBestScore}" style="color: white;">Meilleur Score: {{best_score}}</h3>
+    <br>
+    </div>
+  </div>
+  <div class="row" *ngFor="let column of board; let i = index;">
+    <div class="column" [ngStyle]="{'background-color': setColors(i, j)}" *ngFor="let row of column; let j = index">
+    </div>
+  </div>
+  <div class="start-button" [ngClass]="{'disable-clicks': gameStarted}" (click)="showMenu()">Démarer</div>
+  <div class="new-game-menu" *ngIf="showMenuChecker">
+    <span class="new-game-menu-label">Choix du mode</span>
+    <div class="start-button new-game-button" (click)="newGame(mode)" *ngFor="let mode of getKeys(all_modes)">
+      {{all_modes[mode]}}</div>
+  </div>
+</div><br>
+<div class="center" style="text-align:center;">
+    <button (click)="moveUp()" style="background-color: green; border-radius: 5px;"><img src="../../../../assets/img/img/up.png" style="height: 50px; width: 50px;" alt="Up"></button><br>
+    <button (click)="moveLeft()" style="background-color: green; border-radius: 5px"><img src="../../../../assets/img/img/left.png" style="height: 50px; width: 50px;" alt="Left"></button><img src="../../../../assets/img/img/rdm.png" style="height: 50px; width: 50px;" alt="RdM">
+    <button (click)="moveRight()" style="background-color: green; border-radius: 5px"><img src="../../../../assets/img/img/right.png" style="height: 50px; width: 50px;" alt="Right"></button><br>
+    <button (click)="moveDown()" style="background-color: green; border-radius: 5px"><img src="../../../../assets/img/img/down.png" style="height: 50px; width: 50px;" alt="Down"></button>
+</div>

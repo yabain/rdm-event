@@ -7,7 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TemplateComponent implements OnInit {
 
-  constructor() { }
+  constructor() { 
+    // if(localStorage.getItem('firstConnexion') == '1'){
+    //   window.location.reload();
+    //   localStorage.setItem('firstConnexion', '2');
+    // }
+  }
 
   ngOnInit(): void {
     document.querySelector("body")?.classList.add("landing-page")

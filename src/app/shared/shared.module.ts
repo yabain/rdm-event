@@ -28,6 +28,10 @@ import { ShowVoteCandidatureDetailsComponent } from './components/show-vote-cand
 import { ShowModalDetailsEventComponent } from './components/show-modal-details-event/show-modal-details-event.component';
 import { NewsfeedItemComponent } from './components/newsfeed-item/newsfeed-item.component';
 import { EventActionListComponent } from './components/event-action-list/event-action-list.component';
+import { UserInfoComponent } from "./components/user-info/user-info.component";
+import { AccountSettingComponent } from "./components/account-setting/account-setting.component";
+import { ChangePasswordComponent } from "./components/change-password/change-password.component";
+import { NotifSettingComponent } from "./components/notif-setting/notif-setting.component";
 
 
 
@@ -58,14 +62,18 @@ import { EventActionListComponent } from './components/event-action-list/event-a
     ShowModalDetailsEventComponent,
     NewsfeedItemComponent,
     EventActionListComponent,
-
+    UserInfoComponent,
+    AccountSettingComponent,
+    ChangePasswordComponent,
+    NotifSettingComponent,
+    
   ],
   imports: [
     CommonModule,
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
-    ProgressIndeterminateModule
+    ProgressIndeterminateModule,
   ],
   exports:[
     PreloaderComponent,

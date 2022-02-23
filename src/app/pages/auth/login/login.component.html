@@ -17,35 +17,35 @@
 				</div>
 			</div>
 
-			<div class="remember">
-
-				<div class="checkbox">
-					<label> 
-						<input name="optionsCheckboxes" type="checkbox">
-						Remember Me
-					</label>
-				</div>
-				<a href="" class="forgot" data-bs-toggle="modal" data-bs-target="#restore-password">Forgot my Password</a>
-			</div>
 			<div class="row justify-content-center">
 				<div class="col-10">
 					<span class="text-danger">{{errorMessage}}</span>
 					<span class="text-success">{{successMessage}}</span>
 				</div>
 			</div>
-			<button type="submit" class="btn btn-lg btn-primary full-width">
-				<app-progress-indeterminate *ngIf="waitResponse"></app-progress-indeterminate>
-				<span *ngIf="!waitResponse">Login</span>
+			<button type="submit" class="btn btn-lg btn-primary full-width" style="background-color: #4e814c; border: none;">
+				<app-progress-indeterminate *ngIf="waitResponse" style="background-color: white !important;"></app-progress-indeterminate>
+				<span *ngIf="!waitResponse">Se connecter</span>
 			</button>
+			<div class="remember">
 
+				<!-- <div class="checkbox">
+					<label> 
+						<input name="optionsCheckboxes" type="checkbox">
+						Remember Me
+					</label>
+				</div> -->
+				<a href="" class="forgot" data-bs-toggle="modal" data-bs-target="#restore-password">Mot de passe oublié</a>
+			</div>
+<!-- 
 			<div class="or"></div>
 
 			<a href="" class="btn btn-lg bg-facebook full-width btn-icon-left"><svg width="16" height="16"><use xlink:href="#olymp-facebook-icon"></use></svg>Login with Facebook</a>
 
-			<a href="" class="btn btn-lg bg-twitter full-width btn-icon-left"><svg width="16" height="16"><use xlink:href="#olymp-twitter-icon"></use></svg>Login with Twitter</a>
+			<a href="" class="btn btn-lg bg-twitter full-width btn-icon-left"><svg width="16" height="16"><use xlink:href="#olymp-twitter-icon"></use></svg>Login with Twitter</a> -->
 
 
-			<p>Don’t you have an account? <a href="">Register Now!</a> it’s really simple and you can start enjoing all the benefits!</p>
+			<p>Vous n'avez pas de compte? Cliquez sur <a style="color: #4e814c;">Regis</a> pour en créer</p>
 		</div>
 	</div>
 </form>

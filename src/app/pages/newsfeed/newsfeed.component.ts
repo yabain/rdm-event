@@ -10,7 +10,8 @@ export class NewsfeedComponent implements OnInit {
 
   constructor(
     // private notification : NotificationService
-  ) { }
+  ) { 
+  }
 
   ngOnInit(): void {
     document.querySelector("body")?.classList.add("page-has-left-panels page-has-right-panels");
@@ -20,6 +21,6 @@ export class NewsfeedComponent implements OnInit {
   showNotification(){
     // this.notification.showError();
   }
-
+  
 
 }
