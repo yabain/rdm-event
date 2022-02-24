@@ -103,7 +103,7 @@ export class CandidatsListComponent implements OnInit {
 
   getAllVoteByCandidate(id:EntityID)
   {
-    return ""
+    return this.event.getAllVoteByCandidate(id).length
   }
 
   uploadCandidateImage(file:{file:CustomFile,newFile:boolean})

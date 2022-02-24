@@ -71,11 +71,7 @@
                                 <a class="h5 author-name">{{candidat.fullName}}</a>
                             </div>
                         </div>
-
-                        <div *ngIf="voteStatus">
-                            <div class="country" *ngIf="isOwner">{{getAllVoteByCandidate(candidat.id)}} Votes</div>
-                        </div>
-                        <div class="country" *ngIf="!voteStatus">{{getAllVoteByCandidate(candidat.id)}} Votes</div>
+                        <div class="country" >{{getAllVoteByCandidate(candidat.id)}} Votes</div>
 
                         <ul class="friends-harmonic">
                             <li>

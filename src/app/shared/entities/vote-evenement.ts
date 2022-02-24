@@ -7,6 +7,7 @@ import { VoteCandidate } from "./votecandidate";
 
 export class VoteEvenement extends Evenement
 {
+    
     override eventType:EventType=EventType.VOTE_EVENT
     categories:CategorieEvenement[]=[]
     candidates:VoteCandidate[]=[];
@@ -57,6 +58,10 @@ export class VoteEvenement extends Evenement
         return (<VoteAction[]>this.getActionByType(UserActionType.VOTE_ACTION))
         .find((vote)=>vote.idCategorieCategorieSelected.toString()==categorieID.toString())
     }
+    getAllVoteByCandidate(candidateID: EntityID) {
+        return (<VoteAction[]>this.getActionByType(UserActionType.VOTE_ACTION))
+        .filter((vote)=> vote.idCandidateSelected.toString()==candidateID.toString())
+      }
     getVoteByCategorieVoterAndCandidate(categorieID:EntityID,voterID:EntityID,candidateID:EntityID)
     {
         return (<VoteAction[]>this.getActionByType(UserActionType.VOTE_ACTION))
