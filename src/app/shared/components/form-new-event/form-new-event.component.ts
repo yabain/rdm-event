@@ -77,7 +77,7 @@ export class FormNewEventComponent implements OnInit,AfterViewInit {
 
   submit()
   {
-console.log("result ",this.form.value)
+// console.log("result ",this.form.value)
     this.submited=true;
     if(!this.form.valid) return;
 

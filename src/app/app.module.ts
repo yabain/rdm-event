@@ -15,6 +15,9 @@ import { GamesComponent } from './pages/games/games.component';
 import { BestScoreManager } from './pages/games/snake/snake.storage.service';
 import { SnakeComponent } from './pages/games/snake/snake.component';
 import { LocalStorageService } from './shared/services/localstorage/localstorage.service';
+import { AuthService } from './shared/services/auth/auth.service';
+import { UserProfilService } from './shared/services/user-profil/user-profil.service';
+import { EventService } from './shared/utils/services/events/event.service';
 // import { NotificationService } from './shared/services/notification/notification.sevices';
 // import { NotificationService } from './shared/services/notification/notification.service';
 
@@ -41,7 +44,10 @@ import { LocalStorageService } from './shared/services/localstorage/localstorage
   providers: [
     // NotificationService,
     BestScoreManager,
-    LocalStorageService
+    LocalStorageService,
+    AuthService,
+    UserProfilService,
+    EventService
   ],
   bootstrap: [AppComponent]
 })

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../../services/auth/auth.service';
+import { UserProfilService } from '../../services/user-profil/user-profil.service';
 // import { NotificationService } from 'src/app/shared/services/notification/notification.sevices';
 
 @Component({
@@ -21,41 +23,39 @@ export class UserInfoComponent implements OnInit {
 
   constructor(
     // private notification : NotificationService
+    private authService:AuthService,
+    private userProfilService:UserProfilService
   ) {
-    if (localStorage.getItem('isAuth') == 'true'){
-      this.isAuth = true;
-    }else {
-      this.isAuth = false;
-    }
+   
+    // this.user = JSON.parse(localStorage.getItem('data_rdm_event')).user_profil;
 
-    this.user = JSON.parse(localStorage.getItem('data_rdm_event')).user_profil;
+    // if(this.sexe == 'Homme'){
+    //   this.homme = true;
+    //   this.femme = false;
+    //   console.log('sexe', this.homme)
+    // }
+    // else if(this.sexe == 'Femme'){
+    //   this.homme = false;
+    //   this.femme = true;
+    // }
+    // else{
+    //   this.homme = true;
+    //   this.femme = false;
+    // }
 
-    if(this.sexe == 'Homme'){
-      this.homme = true;
-      this.femme = false;
-      console.log('sexe', this.homme)
-    }
-    else if(this.sexe == 'Femme'){
-      this.homme = false;
-      this.femme = true;
-    }
-    else{
-      this.homme = true;
-      this.femme = false;
-    }
 }
 
   ngOnInit(): void {
     // this.showNotification();
-    this.getDataToLocalStorage();
+    this.userProfilService.currentUser.subscribe((user)=>{
+      this.user=user;
+    })
+    this.authService.isLoggedIn.subscribe((isAuth)=>{
+      this.isAuth=isAuth;
+    })
   }
 
   showNotification(){
     // this.notification.showError();
   }
-
-  getDataToLocalStorage(element? :any){
-    let user = JSON.parse(localStorage.getItem('data_rdm_event')).user_profil;
-  }
-
 }

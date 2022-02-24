@@ -40,6 +40,7 @@ export class LocalStorageService {
   {
     this.getSubjectByKey(key).next(data);
     this.saveData();
+
   }
 
   getSubjectByKey(key:String):BehaviorSubject<any>
@@ -61,5 +62,7 @@ export class LocalStorageService {
   clearData()
   {
     this.data.clear();
+    localStorage.clear();
+    console.log("Clezar")
   }
 }

@@ -120,9 +120,10 @@ export abstract class AbstractCrudService<T extends Entity>
             this.firebaseApi.fetchOnce(branch.toString())
             .then((value:ActionStatus<T>)=>{
                 let instance:T=this.hydrateObjet(value.result)
+                console.log("instance ",instance)
                 this.setObject(instance);
                 result.result=instance;
-                resolve(value);
+                resolve(result);
             })
             .catch((error:ActionStatus<T>)=>{
                 reject(error);
@@ -131,12 +132,12 @@ export abstract class AbstractCrudService<T extends Entity>
     }
     hydrateObjet(entity:Record<string,any>):T
     {
-      let obj:T=this.createInstance();
+      let obj:T=this.createInstance(entity);
       obj.hydrate(entity);
       return obj
     }
 
-    abstract createInstance():T;
+    abstract createInstance(entity:Record<string,any>):T;
 
     findAll(branch:String):Promise<ActionStatus<T[]>>
     {

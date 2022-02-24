@@ -21,6 +21,8 @@ export class User extends Entity
     availability:number=0;
     dateDeleted:String=""
     userType:UserType=UserType.NORMAL_USER
+    websiteLink:String="";
+
 
 
     getFullName()

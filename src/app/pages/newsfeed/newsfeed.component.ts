@@ -14,7 +14,9 @@ export class NewsfeedComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    document.querySelector("body")?.classList.add("page-has-left-panels page-has-right-panels");
+    document.querySelector("body").classList.add("page-has-left-panels");
+    document.querySelector("body").classList.add("page-has-right-panels");
+    
     // this.showNotification();
   }
 

@@ -31,12 +31,11 @@ export class UserService extends AbstractCrudService<User> {
 
   addUser(user: User): Promise<ActionStatus<void>>
   {
-    console.log("user ",user)
    return this.save(user,db_branch_builder.getBranchOfUser(user.id))
   }
 
-  createInstance(): User {
-    return new User()
+  createInstance(entity:Record<string,any>): User {
+    return userBuilder(entity)
   }
 
   getAllUser():Promise<ActionStatus<User>>

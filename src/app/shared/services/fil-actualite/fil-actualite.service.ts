@@ -23,16 +23,16 @@ export class FilActualiteService extends AbstractCrudService<FilActualitePost> {
     private eventService:EventService
   ) { 
     super(firebaseApi,localStrogeService,"fil_actualite")
-
-    this.eventService.loginEvent.subscribe((login)=>{
-      if(login) this.loadNewBunchData();
-    })
     this.cursor=new FirebaseCursor(
       this.firebaseApi.getFirebaseDatabase()
       .ref(db_branch_builder.getBranchOfFilActualites())
       .orderByChild("datePublication"),this.maxPageLoad,
       "datePublication"
     )
+    this.eventService.loginEvent.subscribe((login)=>{
+      if(login) this.loadNewBunchData();
+    })
+    
     
   }
   createInstance(): FilActualitePost {

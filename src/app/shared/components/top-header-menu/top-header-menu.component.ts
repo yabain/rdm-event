@@ -10,13 +10,12 @@ import { UserProfilService } from '../../services/user-profil/user-profil.servic
   styleUrls: ['./top-header-menu.component.scss']
 })
 export class TopHeaderMenuComponent implements OnInit {
-  @Input()
   isAuth:boolean = false;
   isOwner:boolean = false;
   isAdmin:boolean = false;
   fullName : string = '';
   userName: string = '';
-  user:User=null
+  user:User=new User()
 
   constructor(
     private authService: AuthService,
@@ -28,9 +27,11 @@ export class TopHeaderMenuComponent implements OnInit {
 
   ngOnInit(): void {
     this.userProfilService.currentUser.subscribe((user:User)=>{
+      console.log("user ",user)
       this.user=user;
     })
     this.authService.isLoggedIn.subscribe((isLoggin)=>{
+      console.log("isAauth ",isLoggin)
       this.isAuth=isLoggin
     })
 

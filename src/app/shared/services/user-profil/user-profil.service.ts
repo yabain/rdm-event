@@ -13,7 +13,7 @@ import { UserService } from '../user/user.service';
   providedIn: 'root'
 })
 export class UserProfilService {
-  currentUser: BehaviorSubject<User> = new BehaviorSubject<User>(null);
+  currentUser: BehaviorSubject<User> = new BehaviorSubject<User>(new User());
 
   constructor(
     private localStorageService:LocalStorageService,
@@ -23,19 +23,21 @@ export class UserProfilService {
 
     this.localStorageService.getSubjectByKey("user_profil").subscribe((userObj:any)=>{
       if(userObj){
+        console.log("userprofil ",userObj)
         this.currentUser.next(userBuilder(userObj))
       }
     })
     this.eventService.logoutEvent.subscribe((value)=>{
       if(value)
       {
-        this.currentUser.next(null)
+        this.currentUser.next(new User())
       }
     })
   }
   setUser(user:User):void
   {
     this.localStorageService.setData("user_profil",user.toString());
+    this.currentUser.next(user)
   }
     /*
    * resetPassword is used to reset your password.

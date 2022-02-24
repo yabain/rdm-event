@@ -12,11 +12,7 @@ export class AccountSettingComponent implements OnInit {
 
   constructor(
   ) {
-    if (localStorage.getItem('isAuth') == 'true'){
-      this.isAuth = true;
-    }else {
-      this.isAuth = false;
-    }
+  
   }
 
   ngOnInit(): void {
