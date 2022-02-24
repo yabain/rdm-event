@@ -54,6 +54,7 @@ export class EllectionsComponent implements OnInit {
     this.idEvent.setId(this.activatedRoute.snapshot.paramMap.get("idEvent"))
     this.evenementService.getEventByID(this.idEvent)
     .then((value)=>{
+      console.log("teka event ",value.result)
       this.event=value.result
       return this.userService.getUserById(this.event.eventOwner)
     })
@@ -75,6 +76,7 @@ export class EllectionsComponent implements OnInit {
   }
   getStringDate(stringDate,stringTime)
   {
+    if(stringDate=="") return ""
     return UtilTime.getReadeableDateFromString(stringDate,stringTime)
   }
 

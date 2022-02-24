@@ -19,9 +19,9 @@ declare var $:any;
 })
 export class ShowVoteCandidatureDetailsComponent implements OnInit, OnChanges {
   @Input() idComponent:String="show-vote-candidature-detail-modal"
-  @Input() candidate:VoteCandidate;
-  @Input() event:VoteEvenement;
-  @Input() userOwner:User;
+  @Input() candidate:VoteCandidate=new VoteCandidate();
+  @Input() event:VoteEvenement=new VoteEvenement();
+  @Input() userOwner:User=new User();
   @Output() hasMakeAction:EventEmitter<boolean>=new EventEmitter<boolean>()
   waitForResponseVote:boolean=false;
   currentUser:User;
@@ -50,7 +50,8 @@ export class ShowVoteCandidatureDetailsComponent implements OnInit, OnChanges {
   } 
   ngOnChanges(changes: SimpleChanges): void {
     if(changes['candidate'])
-    {
+    { 
+      if(this.event.name=="") return;
       console.log("voteID ",this.event)
       this.hasAlreadyMakeVoteToCategorieAndCandidate=this.event.getVoteByCategorieVoterAndCandidate(this.candidate.idCategori,this.currentUser.id,this.candidate.id)!=undefined;
       this.hasAlreadyMakeVoteToCategorie=this.event.getVoteByCategorieAndVoter(this.candidate.idCategori,this.currentUser.id)!=undefined;

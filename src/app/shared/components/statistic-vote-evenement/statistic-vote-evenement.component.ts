@@ -24,6 +24,7 @@ export class StatisticVoteEvenementComponent implements OnInit {
 
   getColor()
   {
-    return this.color[Math.trunc((Math.random()*10)%4)]
+    // return this.color[Math.trunc((Math.random()*10)%4)]
+    return  this.color[1]
   }
 }

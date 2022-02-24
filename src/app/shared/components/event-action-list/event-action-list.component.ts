@@ -65,7 +65,7 @@ export class EventActionListComponent implements OnInit {
           Promise.all([this.usersService.getUserById(idLiker1),this.usersService.getUserById(idLiker2)])
           .then((value:ActionStatus<User>[])=>{
             this.message=`${value[0].result.getFullName()}`;
-            if(this.event.getLikeNumber()==2) this.message+=`et ${value[1].result.getFullName()} aiment`
+            if(this.event.getLikeNumber()==2) this.message+=` et ${value[1].result.getFullName()} aiment`
             else this.message+=`, ${value[1].result.getFullName()} et ${this.event.getLikeNumber()-2} autres personnes aiment`
           })
           .catch((error)=>{
@@ -80,7 +80,7 @@ export class EventActionListComponent implements OnInit {
   like()
   {
     console.log("like")
-    this.doActionEvent.emit({action:UserActionType.LIKE_ACTION,content:""})
+    // this.doActionEvent.emit({action:UserActionType.LIKE_ACTION,content:""})
   }
   comment()
   {
