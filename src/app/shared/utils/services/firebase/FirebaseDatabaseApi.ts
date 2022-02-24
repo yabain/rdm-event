@@ -23,6 +23,23 @@ export class FirebaseDataBaseApi {
     if (isDevMode()) {
       // console.log('Dev Mode');
       FirebaseDataBaseApi.firebaseConfig = {
+        /////// real database acces
+
+        // apiKey: "AIzaSyDM4KOIw9P9SgpCODcAHSlFCRUpe_X0F2A",
+
+        // authDomain: "reseau-des-montagnes-f9a68.firebaseapp.com",
+      
+        // projectId: "reseau-des-montagnes-f9a68",
+      
+        // storageBucket: "reseau-des-montagnes-f9a68.appspot.com",
+      
+        // messagingSenderId: "337145034220",
+      
+        // appId: "1:337145034220:web:b934acfb52c865ddf23cc9",
+      
+        // measurementId: "G-ZT8KT25DYV"
+      
+
         /////// dev database access
 
         apiKey: "AIzaSyD31cRxzdmCgYMX_trB9ZVndWyLcprc1Fk",
@@ -46,6 +63,24 @@ export class FirebaseDataBaseApi {
       // console.log('Prod Mode');
       FirebaseDataBaseApi.firebaseConfig = {
         /////// real database acces
+
+        // apiKey: "AIzaSyDM4KOIw9P9SgpCODcAHSlFCRUpe_X0F2A",
+
+        // authDomain: "reseau-des-montagnes-f9a68.firebaseapp.com",
+      
+        // projectId: "reseau-des-montagnes-f9a68",
+      
+        // storageBucket: "reseau-des-montagnes-f9a68.appspot.com",
+      
+        // messagingSenderId: "337145034220",
+      
+        // appId: "1:337145034220:web:b934acfb52c865ddf23cc9",
+      
+        // measurementId: "G-ZT8KT25DYV"
+      
+      
+
+        /////// dev database acces
 
         apiKey: "AIzaSyD31cRxzdmCgYMX_trB9ZVndWyLcprc1Fk",
 

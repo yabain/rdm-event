@@ -117,10 +117,10 @@
 				</div>
 			</div>
 
-			<button type="submit" class="btn btn-purple btn-lg full-width" style="background-color: #4e814c;">
-				<app-progress-indeterminate *ngIf="waitResponse"></app-progress-indeterminate>
-				<span *ngIf="!waitResponse">S'enregister!</span>
+			<button  *ngIf="!waitResponse" type="submit" class="btn btn-purple btn-lg full-width" style="background-color: #4e814c;">
+				<span>S'enregister!</span>
 			</button>
+			<app-progress-indeterminate *ngIf="waitResponse"></app-progress-indeterminate>
 			<div class="row justify-content-center">
 				<div class="col-6">
 					<span class="text-danger">{{errorMessage}}</span>

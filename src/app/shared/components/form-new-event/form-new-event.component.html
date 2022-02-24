@@ -1,12 +1,12 @@
 <form [formGroup]="form" (ngSubmit)="submit()">
-    <div class="form-group label-floating is-select">
+    <!-- <div class="form-group label-floating is-select">
         <label class="control-label">Type d'évènement</label>
         <select class="form-select" formControlName="scopeVisibilityAction">
             <option value="private">Evenement Privé</option>
             <option value="public">Evenement Public</option>
             <option value="personnal">Evenement Personnel</option>
         </select>
-    </div>
+    </div> -->
 
     <div class="form-group label-floating is-select">
         <label class="control-label">Catégorie d'évènement</label>
@@ -89,7 +89,7 @@
             placeholder="Description">Ajouter la description de votre évènement.</textarea>
     </div>
     
-    <div class="form-group">
+    <!-- <div class="form-group">
         <label class="control-label">Restriction</label>
         <svg class="olymp-happy-face-icon">
             <use xlink:href="#olymp-happy-face-icon"></use>
@@ -103,9 +103,9 @@
             <option value="istec">ISTEC</option>
     
             <option title="mairie">Mairie</option>
-    
+
         </select>
-    </div>
+    </div> -->
     
     <button type="submit" id="btn_submit" class="btn btn-breez btn-lg full-width">Créer l'évènement</button>
 </form>

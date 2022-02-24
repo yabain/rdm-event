@@ -62,10 +62,10 @@
                                 </li>
                             </ul>
                         </div>
-                        <div class="friend-avatar">
+                        <div class="friend-avatar" data-bs-target="#show-vote-candidature-detail-modal" (click)="selectCandidat(candidat)" data-bs-toggle="modal">
                             <div class="author-thumb">
-                                <img loading="lazy" [src]="candidat.images.length>0?candidat.images[0]:''" alt="Olympus" width="34"
-                                    height="34">
+                                <img loading="lazy" [src]="candidat.images.length>0?candidat.images[0]:''" alt="img_candidat" width="134"
+                                height="134">
                             </div>
                             <div class="author-content">
                                 <a class="h5 author-name">{{candidat.fullName}}</a>
@@ -100,12 +100,9 @@
 
 
                         <div class="control-block-button">
-                            <a class="btn btn-control bg-blue" (click)="selectCandidat(candidat)" data-bs-toggle="modal" style="background-color: #4e814c;"
-                                data-bs-target="#show-vote-candidature-detail-modal">
-                                <svg class="olymp-happy-faces-icon">
-                                    <use xlink:href="#olymp-happy-faces-icon"></use>
-                                </svg>
-                            </a>
+                            
+                        <br><button class="btn btn-success col-md-6" data-bs-target="#show-vote-candidature-detail-modal" (click)="selectCandidat(candidat)" data-bs-toggle="modal" style="background-color: #4e814c;  border: none;">Détails</button>
+
                             <!-- 				
                             <a class="btn btn-control btn-grey-lighter">
                                 <svg class="olymp-settings-icon"><use xlink:href="#olymp-settings-icon"></use></svg>
