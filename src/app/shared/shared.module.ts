@@ -32,6 +32,7 @@ import { UserInfoComponent } from "./components/user-info/user-info.component";
 import { AccountSettingComponent } from "./components/account-setting/account-setting.component";
 import { ChangePasswordComponent } from "./components/change-password/change-password.component";
 import { NotifSettingComponent } from "./components/notif-setting/notif-setting.component";
+import { UserActionListComponent } from './components/user-action-list/user-action-list.component';
 
 
 
@@ -66,6 +67,7 @@ import { NotifSettingComponent } from "./components/notif-setting/notif-setting.
     AccountSettingComponent,
     ChangePasswordComponent,
     NotifSettingComponent,
+    UserActionListComponent,
     
   ],
   imports: [
