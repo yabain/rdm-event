@@ -133,55 +133,8 @@
 							</div>
 						</div>
 	
-	
-						<div class="post-additional-info inline-items">
-	
-							<a class="post-add-icon inline-items">
-								<svg class="olymp-heart-icon">
-									<use xlink:href="#olymp-heart-icon"></use>
-								</svg>
-								<span>{{event.getLikeNumber()}}</span>
-							</a>
-	
-							<div class="names-people-likes">
-								<a>UdM </a>, <a>Mutuelle UdM</a> et
-								<br>15 autre personnes ont aimées.
-							</div>
-	
-	
-							<div class="comments-shared">
-								<a class="post-add-icon inline-items">
-									<svg class="olymp-speech-balloon-icon">
-										<use xlink:href="#olymp-speech-balloon-icon"></use>
-									</svg>
-									<span>{{event.getCommentNumber()}} Commentaires</span>
-								</a>
-							</div>
-	
-	
-						</div>
-	
-						<div class="control-block-button post-control-button">
-	
-							<a class="btn btn-control">
-								<svg class="olymp-like-post-icon">
-									<use xlink:href="#olymp-like-post-icon"></use>
-								</svg>
-							</a>
-	
-							<a class="btn btn-control">
-								<svg class="olymp-comments-post-icon">
-									<use xlink:href="#olymp-comments-post-icon"></use>
-								</svg>
-							</a>
-	
-							<a class="btn btn-control">
-								<svg class="olymp-share-icon">
-									<use xlink:href="#olymp-share-icon"></use>
-								</svg>
-							</a>
-	
-						</div>
+
+						<app-event-action-list [event]="event" [owner]="owner"></app-event-action-list>
 					</div>
 
 				</article>
