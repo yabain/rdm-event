@@ -17,6 +17,7 @@ import { EvenementBussinessService } from "./evenement-bussiness.service";
   })
   export class VoteEvenementBussinessService extends EvenementBussinessService<VoteEvenement> {
     
+    
     constructor(
         firebaseApi:FirebaseDataBaseApi,
         localStorageService:LocalStorageService,
@@ -28,6 +29,11 @@ import { EvenementBussinessService } from "./evenement-bussiness.service";
       }
     createInstance(): VoteEvenement {
       return new VoteEvenement()
+    }
+    hydrateObjet(entity: Record<string, any>): VoteEvenement {
+      let instance=this.createInstance();
+      instance.hydrate(entity);
+      return instance
     }
     addCathegorie(eventID:EntityID,cathegorie:CategorieEvenement):Promise<ActionStatus<boolean>>
     {

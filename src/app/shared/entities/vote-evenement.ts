@@ -28,6 +28,7 @@ export class VoteEvenement extends Evenement
     }
     override hydrate(entity: Record<string | number,any>):void
     {
+        console.log("comparre start",entity)
         for(let key of Object.keys(entity))
         {
             if(key=="id") this.id.setId(entity[key]);
@@ -48,6 +49,8 @@ export class VoteEvenement extends Evenement
             });
             else if(Reflect.has(this,key)) Reflect.set(this,key,entity[key]);
         }
+        console.log("entity compare  ",entity,this)
+
     }
     getVoteNumber()
     {

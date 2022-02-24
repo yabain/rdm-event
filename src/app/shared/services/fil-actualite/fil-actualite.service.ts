@@ -13,6 +13,7 @@ import * as db_branch_builder from "./../../utils/functions/db-branch.builder"
 })
 export class FilActualiteService extends AbstractCrudService<FilActualitePost> {
   
+  
   protected cursorForLoadSegmentData:any="";
   protected maxPageLoad=5;
   protected cursor:FirebaseCursor;
@@ -38,6 +39,12 @@ export class FilActualiteService extends AbstractCrudService<FilActualitePost> {
   createInstance(): FilActualitePost {
     return new FilActualitePost()
   }
+  hydrateObjet(entity: Record<string, any>): FilActualitePost {
+    let instance=this.createInstance();
+    instance.hydrate(entity);
+    return instance
+  }
+
   loadNewBunchData():Promise<ActionStatus<FilActualitePost[]>>
   {
     return new Promise<ActionStatus<boolean>>((resolve,reject)=>{

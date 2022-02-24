@@ -51,11 +51,11 @@ export class NewsfeedListComponent implements OnInit {
     this.filActualiteService.loadNewBunchData()
     .then((value:ActionStatus<FilActualitePost[]>)=>{
       this.newsfeed=[...this.newsfeed,...value.result];
-      // console.log("value",value)
       return Promise.all([...value.result.map((filActualite)=>this.voteEvenementBussinessService.getEventByID(filActualite.idEvent))])
     })
     .then((value:ActionStatus<Evenement>[])=>{
       this.events=[...this.events,...value.map((result)=>result.result)];
+      console.log("value ",value)
       return Promise.all([...value.map((result:ActionStatus<Evenement>)=>this.usersService.getUserById(result.result.eventOwner))])
     })
     .then((value:ActionStatus<User>[])=>{
