@@ -174,9 +174,9 @@
 										</ul>
 									</td>
 									<td class="add-event">
+										<a class="btn btn-sm btn-border-think custom-color c-grey" (click)="selectEvent(event.event.id.toString())">Détails</a>
 										<a [routerLink]="['/page/ellection/',event.event.id.toString()]" class="btn btn-breez btn-sm" *ngIf="event.event.eventType=='vote_event'" >Passer au vote</a>
 										<a class="btn btn-breez btn-sm" *ngIf="event.event.eventType!='vote_event'">Acheter le billet</a>
-										<a class="btn btn-sm btn-border-think custom-color c-grey" (click)="selectEvent(event.event.id.toString())">Détails</a>
 									</td>
 								</tr>
 
@@ -256,10 +256,10 @@
 										</ul>
 									</td>
 									<td class="add-event">
-										<a href="20-CalendarAndEvents-MonthlyCalendar.html"
-											class="btn btn-breez btn-sm">Acheter le billet</a>
 										<a class="btn btn-sm btn-border-think custom-color c-grey"
 											data-bs-toggle="modal" data-bs-target="#bal-udm">Détails</a>
+										<a href="20-CalendarAndEvents-MonthlyCalendar.html"
+											class="btn btn-breez btn-sm">Acheter le billet</a>
 									</td>
 								</tr>
 								<tr class="event-item">
@@ -338,9 +338,9 @@
 										</ul>
 									</td>
 									<td class="add-event">
-										<a (click)="navigateToEllection()" class="btn btn-breez btn-sm">Passer au vote</a>
 										<a class="btn btn-sm btn-border-think custom-color c-grey"
 											data-bs-toggle="modal" data-bs-target="#miss-mister">Détails</a>
+											<a (click)="navigateToEllection()" class="btn btn-breez btn-sm">Passer au vote</a>
 									</td>
 								</tr>
 								<tr class="event-item">
@@ -421,10 +421,10 @@
 										</ul>
 									</td>
 									<td class="add-event">
-										<a href="20-CalendarAndEvents-MonthlyCalendar.html"
-											class="btn btn-breez btn-sm">Acheter le billet</a>
 										<a class="btn btn-sm btn-border-think custom-color c-grey">Contacter
 											l'organisateur</a>
+											<a href="20-CalendarAndEvents-MonthlyCalendar.html"
+												class="btn btn-breez btn-sm">Acheter le billet</a>
 									</td>
 								</tr>
 							</tbody>

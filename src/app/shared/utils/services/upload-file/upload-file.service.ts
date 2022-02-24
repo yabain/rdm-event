@@ -38,7 +38,7 @@ export class UploadFileService {
         return `Erreur lors de l'uplodad de l'image ${file.name}:${error.message}`
       }
       ,
-      `Upload de l'image ${file.name} en cours`
+      `Chargement de l'image ${file.name} en cours`
       )
     })
     

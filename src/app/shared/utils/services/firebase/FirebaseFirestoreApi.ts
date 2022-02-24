@@ -10,7 +10,7 @@ import { FireBaseConstant } from './firebase-constant';
   providedIn: 'root'
 })
 export class FirebaseFireStoreApi {
-  
+
 
   static firebaseConfig: any = {};
   debug: boolean = false;
@@ -22,23 +22,40 @@ export class FirebaseFireStoreApi {
     if (isDevMode()) {
       // console.log('Dev Mode');
       FirebaseFireStoreApi.firebaseConfig = {
+        /////// real database acces
+
+        apiKey: "AIzaSyDM4KOIw9P9SgpCODcAHSlFCRUpe_X0F2A",
+
+        authDomain: "reseau-des-montagnes-f9a68.firebaseapp.com",
+      
+        projectId: "reseau-des-montagnes-f9a68",
+      
+        storageBucket: "reseau-des-montagnes-f9a68.appspot.com",
+      
+        messagingSenderId: "337145034220",
+      
+        appId: "1:337145034220:web:b934acfb52c865ddf23cc9",
+      
+        measurementId: "G-ZT8KT25DYV"
+      
+
         /////// dev database access
 
-        apiKey: "AIzaSyD31cRxzdmCgYMX_trB9ZVndWyLcprc1Fk",
+        // apiKey: "AIzaSyD31cRxzdmCgYMX_trB9ZVndWyLcprc1Fk",
 
-        authDomain: "rdm-event.firebaseapp.com",
+        // authDomain: "rdm-event.firebaseapp.com",
 
-        databaseURL: "https://rdm-event-default-rtdb.firebaseio.com",
+        // databaseURL: "https://rdm-event-default-rtdb.firebaseio.com",
 
-        projectId: "rdm-event",
+        // projectId: "rdm-event",
 
-        storageBucket: "rdm-event.appspot.com",
+        // storageBucket: "rdm-event.appspot.com",
 
-        messagingSenderId: "421117252824",
+        // messagingSenderId: "421117252824",
 
-        appId: "1:421117252824:web:57ed9ce01fe61b2ece33ad",
+        // appId: "1:421117252824:web:57ed9ce01fe61b2ece33ad",
 
-        measurementId: "G-8W1L58D71W"
+        // measurementId: "G-8W1L58D71W"
 
       };
     } else {
@@ -46,21 +63,39 @@ export class FirebaseFireStoreApi {
       FirebaseFireStoreApi.firebaseConfig = {
         /////// real database acces
 
-        apiKey: "AIzaSyD31cRxzdmCgYMX_trB9ZVndWyLcprc1Fk",
+        apiKey: "AIzaSyDM4KOIw9P9SgpCODcAHSlFCRUpe_X0F2A",
 
-        authDomain: "rdm-event.firebaseapp.com",
+        authDomain: "reseau-des-montagnes-f9a68.firebaseapp.com",
+      
+        projectId: "reseau-des-montagnes-f9a68",
+      
+        storageBucket: "reseau-des-montagnes-f9a68.appspot.com",
+      
+        messagingSenderId: "337145034220",
+      
+        appId: "1:337145034220:web:b934acfb52c865ddf23cc9",
+      
+        measurementId: "G-ZT8KT25DYV"
+      
 
-        databaseURL: "https://rdm-event-default-rtdb.firebaseio.com",
 
-        projectId: "rdm-event",
+        /////// Dev database acces
 
-        storageBucket: "rdm-event.appspot.com",
+        // apiKey: "AIzaSyD31cRxzdmCgYMX_trB9ZVndWyLcprc1Fk",
 
-        messagingSenderId: "421117252824",
+        // authDomain: "rdm-event.firebaseapp.com",
 
-        appId: "1:421117252824:web:57ed9ce01fe61b2ece33ad",
+        // databaseURL: "https://rdm-event-default-rtdb.firebaseio.com",
 
-        measurementId: "G-8W1L58D71W"
+        // projectId: "rdm-event",
+
+        // storageBucket: "rdm-event.appspot.com",
+
+        // messagingSenderId: "421117252824",
+
+        // appId: "1:421117252824:web:57ed9ce01fe61b2ece33ad",
+
+        // measurementId: "G-8W1L58D71W"
 
       };
     }
@@ -82,26 +117,25 @@ export class FirebaseFireStoreApi {
   getFirebaseDatabase() {
     return this.db;
   }
-  getFirebaseFile()
-  {
+  getFirebaseFile() {
     return firebase.storage()
   }
 
   add(url: string, value: any): Promise<ActionStatus<any>> {
     let action = new ActionStatus<any>();
     return new Promise((resolve, reject) => {
-    //   this.db.ref(url).push().set(value).then((doc) => {
-    //     action.description = 'successful add new collection';
-    //     resolve(action);
-    //   }).catch((err) => {
-    //     // Bugsnag.notify(err)
-    //     action.apiCode = err.code;
-    //     action.code = ActionStatus.UNKNOW_ERROR;
-    //     action.message = 'error';
-    //     action.description = '' + err;
-    //     reject(action);
-    //   });
-        
+      //   this.db.ref(url).push().set(value).then((doc) => {
+      //     action.description = 'successful add new collection';
+      //     resolve(action);
+      //   }).catch((err) => {
+      //     // Bugsnag.notify(err)
+      //     action.apiCode = err.code;
+      //     action.code = ActionStatus.UNKNOW_ERROR;
+      //     action.message = 'error';
+      //     action.description = '' + err;
+      //     reject(action);
+      //   });
+
 
     });
   }
@@ -191,8 +225,8 @@ export class FirebaseFireStoreApi {
   update(branch: any, arg1: Record<string | number, any>): Promise<ActionStatus<any>> {
     return this.updates([
       {
-        link:branch,
-        data:arg1
+        link: branch,
+        data: arg1
       }
     ])
   }

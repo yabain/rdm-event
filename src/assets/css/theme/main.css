@@ -4836,10 +4836,10 @@ fieldset[disabled] .checkbox input[type="checkbox"] {
     margin-top: 0;
 }
 .friend-groups .friend-avatar .author-thumb {
-    width: 120px;
-    height: 120px;
+    width: 150px;
+    height: 150px;
     border-radius: 100px;
-    line-height: 120px;
+    line-height: 150px;
     background-color: #e6ecf5;
     background-color: var(--olympus-smoke);
     margin-bottom: 20px;

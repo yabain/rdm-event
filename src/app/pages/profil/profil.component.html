@@ -5,24 +5,30 @@
 <div class="profile-settings-responsive">
 
 	<a class="js-profile-settings-open profile-settings-open">
-		<svg class="settings-open-arrow" width="14" height="14"><use xlink:href="#olymp-popup-left-arrow"></use></svg>
-	</a> 
+		<svg class="settings-open-arrow" width="14" height="14">
+			<use xlink:href="#olymp-popup-left-arrow"></use>
+		</svg>
+	</a>
 	<div class="mCustomScrollbar" data-mcs-theme="dark">
 		<div class="ui-block">
+
 			<div class="your-profile">
 				<div class="ui-block-title ui-block-title-small">
 					<h2 class="title">MENU PROFILE</h2>
 				</div>
-
 				<div class="accordion" id="accordionExample1">
 					<div class="accordion-item">
 						<h6 class="accordion-header" id="headingOne1">
-							<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne1" aria-expanded="true" aria-controls="collapseOne1">
+							<button class="accordion-button" type="button" data-bs-toggle="collapse"
+								data-bs-target="#collapseOne1" aria-expanded="true" aria-controls="collapseOne1">
 								PARAMETRES DU PROFIL
-								<svg class="olymp-dropdown-arrow-icon"><use xlink:href="#olymp-dropdown-arrow-icon"></use></svg>
+								<svg class="olymp-dropdown-arrow-icon">
+									<use xlink:href="#olymp-dropdown-arrow-icon"></use>
+								</svg>
 							</button>
 						</h6>
-						<div id="collapseOne1" class="accordion-collapse collapse show" aria-labelledby="headingOne1" data-bs-parent="#accordionExample1">
+						<div id="collapseOne1" class="accordion-collapse collapse show" aria-labelledby="headingOne1"
+							data-bs-parent="#accordionExample1">
 							<div class="accordion-body">
 								<ul class="your-profile-menu">
 									<li>
@@ -42,7 +48,6 @@
 
 				<div class="ui-block-title">
 					<a routerLink="/page/profil/notif-settings" class="h6 title">Notifications</a>
-					<a href="#" class="items-round-little bg-primary">8</a>
 				</div>
 			</div>
 		</div>
@@ -61,33 +66,48 @@
 							<div class="col col-lg-5 col-md-5 col-sm-12 col-12">
 								<ul class="profile-menu">
 									<li>
-										<a style="color: rgb(9, 109, 41);" routerLink="/page/profil/user-info">Informations</a>
+										<a style="color: rgb(9, 109, 41);"
+											routerLink="/page/profil/user-info">Informations</a>
 									</li>
 									<li>
-										<a style="color: rgb(9, 109, 41);" routerLink="/page/profil/account-setting">Paramêtres</a>
+										<a style="color: rgb(9, 109, 41);"
+											routerLink="/page/profil/account-setting">Paramêtres</a>
 									</li>
 								</ul>
 							</div>
 							<div class="col col-lg-5 ms-auto col-md-5 col-sm-12 col-12">
 								<ul class="profile-menu">
 									<li>
-										<a style="color: rgb(9, 109, 41);" routerLink="/page/profil/change-pass">Mot de passe</a>
+										<a style="color: rgb(9, 109, 41);" routerLink="/page/profil/change-pass">Mot de
+											passe</a>
 									</li>
 									<li>
-										<a style="color: rgb(9, 109, 41);" routerLink="/page/profil/notif-setting">Notifications</a>
+										<a style="color: rgb(9, 109, 41);"
+											routerLink="/page/profil/notif-setting">Notifications</a>
 									</li>
 								</ul>
 							</div>
 						</div>
 					</div>
 					<div class="top-header-author">
-						<a class="author-thumb">
+						<a class="author-thumb" *ngIf="isAuth">
 							<!-- ../../../assets/img/img/user.jpeg -->
-							<img data-bs-toggle="modal" style="cursor:pointer" data-bs-target="#update-header-photo" loading="lazy" [src]="user.photoUrl" alt="user_img" width="124" height="124">
-						</a>
+							<img data-bs-toggle="modal" style="cursor:pointer" data-bs-target="#update-header-photo"
+								loading="lazy" [src]="user.photoUrl" alt="user_img" width="124" height="124">
+
+						</a><i *ngIf="isAuth" data-bs-toggle="modal" style="cursor:pointer"
+							data-bs-target="#update-header-photo" loading="lazy" class="fa fa-edit"
+							style="color: rgb(9, 109, 41); background-color: white; border-radius: 5px;"></i>
 						<div class="author-content">
 							<a class="h4 author-name" style="color: rgb(9, 109, 41);">{{user.getFullName()}}</a>
+							<div class="country">{{user.username}}</div>
 							<div class="country">{{user.villeResidenceActuelle}}, {{user.nationalite}}</div>
+							<div>
+								<button *ngIf="!isAuth" routerLink="/page/login" class="btn btn-success"
+									style="background-color: #4e814c;  border: none;">Connexion</button>
+								<button *ngIf="isAuth" (click)="logout()" class="btn btn-success col-md-8"
+									style="background-color: #a54141;  border: none;">Déconnexion</button>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -109,51 +129,55 @@
 	<div class="row">
 		<div class="col col-xl-9 order-xl-2 col-lg-9 order-lg-2 col-md-12 order-md-1 col-sm-12 col-12">
 			<router-outlet></router-outlet>
-            
 		</div>
 
-		<div class="col col-xl-3 order-xl-1 col-lg-3 order-lg-1 col-md-12 order-md-2 col-sm-12 col-12 responsive-display-none">
+		<div
+			class="col col-xl-3 order-xl-1 col-lg-3 order-lg-1 col-md-12 order-md-2 col-sm-12 col-12 responsive-display-none">
 			<div class="ui-block">
 
 				<!-- Your Profile  -->
-				
+
 				<div class="your-profile">
 					<div class="ui-block-title ui-block-title-small">
-                        <h2 class="title">MENU PROFILE</h2>
+						<h2 class="title">MENU PROFILE</h2>
 					</div>
 
 					<div class="accordion" id="accordionExample">
 						<div class="accordion-item">
 							<h6 class="accordion-header" id="headingOne">
-								<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+								<button class="accordion-button" type="button" data-bs-toggle="collapse"
+									data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
 									Paramêtre
-									<svg class="olymp-dropdown-arrow-icon"><use xlink:href="#olymp-dropdown-arrow-icon"></use></svg>
+									<svg class="olymp-dropdown-arrow-icon">
+										<use xlink:href="#olymp-dropdown-arrow-icon"></use>
+									</svg>
 								</button>
 							</h6>
-							<div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+							<div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+								data-bs-parent="#accordionExample">
 								<div class="accordion-body">
 									<ul class="your-profile-menu">
-                                        <li>
-                                            <a routerLink="/page/profil/user-info">Information du compte</a>
-                                        </li>
-                                        <li>
-                                            <a routerLink="/page/profil/account-setting">Paramêtres du compte</a>
-                                        </li>
-                                        <li>
-                                            <a routerLink="/page/profil/change-pass">Changer de mot de pass</a>
-                                        </li>
+										<li>
+											<a routerLink="/page/profil/user-info">Information du compte</a>
+										</li>
+										<li>
+											<a routerLink="/page/profil/account-setting">Paramêtres du compte</a>
+										</li>
+										<li>
+											<a routerLink="/page/profil/change-pass">Changer de mot de pass</a>
+										</li>
 									</ul>
 								</div>
 							</div>
 						</div>
 					</div>
-				
+
 					<div class="ui-block-title">
 						<a routerLink="/page/profil/notif-setting" class="h6 title">Notifications</a>
 						<a href="#" class="items-round-little bg-primary">8</a>
 					</div>
 				</div>
-				
+
 				<!-- ... end Your Profile  -->
 
 			</div>
@@ -168,11 +192,14 @@
 
 <!-- Window-popup Restore Password -->
 
-<div class="modal fade" id="restore-password" tabindex="-1" role="dialog" aria-labelledby="restore-password" aria-hidden="true">
+<div class="modal fade" id="restore-password" tabindex="-1" role="dialog" aria-labelledby="restore-password"
+	aria-hidden="true">
 	<div class="modal-dialog window-popup restore-password-popup" role="document">
 		<div class="modal-content">
 			<a href="#" class="close icon-close" data-bs-dismiss="modal" aria-label="Close">
-				<svg class="olymp-close-icon"><use xlink:href="#olymp-close-icon"></use></svg>
+				<svg class="olymp-close-icon">
+					<use xlink:href="#olymp-close-icon"></use>
+				</svg>
 			</a>
 
 			<div class="modal-header">
@@ -180,8 +207,9 @@
 			</div>
 
 			<div class="modal-body">
-				<form  method="get">
-					<p>Enter your email and click the send code button. You’ll receive a code in your email. Please use that
+				<form method="get">
+					<p>Enter your email and click the send code button. You’ll receive a code in your email. Please use
+						that
 						code below to change the old password for a new one.
 					</p>
 					<div class="form-group label-floating">
@@ -206,5 +234,5 @@
 </div>
 
 <!-- ... end Window-popup Restore Password -->
-<app-uploader-choise-image-file [user]="user" (fileEventUploaded)="uploadFile($event)" idComponent="update-header-photo"></app-uploader-choise-image-file>
-
+<app-uploader-choise-image-file [user]="user" (fileEventUploaded)="uploadFile($event)"
+	idComponent="update-header-photo"></app-uploader-choise-image-file>

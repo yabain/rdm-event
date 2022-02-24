@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { User } from 'src/app/shared/entities';
 import { ActionStatus } from 'src/app/shared/others/actionstatus';
 import { AuthService } from 'src/app/shared/services/auth/auth.service';
@@ -24,9 +25,16 @@ export class ProfilComponent implements OnInit {
     private authService:AuthService,
     private uploadFileService:UploadFileService,
     private usersService:UserService,
-    private notificationService:ToastrNotificationService
+    private notificationService:ToastrNotificationService,
+    private router:Router
   ) {
 
+   }
+
+   logout()
+   {
+     this.authService.logOut()
+     this.router.navigate(["/login"])
    }
 
   ngOnInit(): void {
