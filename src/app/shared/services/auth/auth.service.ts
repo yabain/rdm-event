@@ -78,7 +78,6 @@ export class AuthService {
       .then((result: ActionStatus<any>) => {
         let userID: EntityID=new EntityID();
         userID.setId(result.result.user.uid)
-
         result.result=userID;
         this.setAuth({isLoggedIn:true});
         resolve(result);

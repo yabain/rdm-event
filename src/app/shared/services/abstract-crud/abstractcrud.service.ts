@@ -119,13 +119,13 @@ export abstract class AbstractCrudService<T extends Entity>
             }
             this.firebaseApi.fetchOnce(branch.toString())
             .then((value:ActionStatus<T>)=>{
+              console.log("Value ",value,branch)
               let data={};
-              for(let key in value.result)
-              {
-                data=value.result[key];
-              }
-                let instance:T=this.hydrateObjet(data)
-                console.trace("instance ",instance)
+              // for(let key in value.result)
+              // {
+              //   data=value.result[key];
+              // }
+                let instance:T=this.hydrateObjet(value.result)
                 this.setObject(instance);
                 result.result=instance;
                 resolve(result);

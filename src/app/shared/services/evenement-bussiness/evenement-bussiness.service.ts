@@ -74,7 +74,7 @@ export abstract class EvenementBussinessService<T extends Evenement=Evenement> e
 
   getEventByID(eventID:EntityID):Promise<ActionStatus<Evenement>>
   {
-    return this.findByID(eventID,db_branch_builder.getBranchOfEvents())
+    return this.findByID(eventID,db_branch_builder.getBranchOfEvent(eventID))
   }
 
   
