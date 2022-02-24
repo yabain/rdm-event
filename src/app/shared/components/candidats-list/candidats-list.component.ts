@@ -10,6 +10,7 @@ import { UserProfilService } from '../../services/user-profil/user-profil.servic
 import { UserService } from '../../services/user/user.service';
 import { FirebaseFile } from '../../utils/services/firebase';
 import { ToastrNotificationService } from '../../utils/services/toastr-notification/toastr-notification.service';
+import { UploadFileService } from '../../utils/services/upload-file/upload-file.service';
 
 
 declare var $:any;
@@ -45,7 +46,8 @@ export class CandidatsListComponent implements OnInit {
     private userProfilService: UserProfilService,
     private notificationService:ToastrNotificationService,
     private authService: AuthService,
-    private firebaseFile:FirebaseFile
+    private firebaseFile:FirebaseFile,
+    private uploadFileService:UploadFileService
   ) { 
     this.voteStatus = true;
     // this.isOwner = true;
@@ -111,26 +113,13 @@ export class CandidatsListComponent implements OnInit {
       this.allImageCandidats.push(file.file)
       return;
     }
-    this.notificationService.asyncNotification(new Promise((resolve,reject)=>{
-      this.firebaseFile.uploadFile(this.event.eventOwner.toString().toString(),file.file)
-      .subscribe({
-        complete:()=>{
-          resolve(file)
-        },
-        error:(error)=>reject(error)
-      })
-    }),
-    (resp)=>{
+    this.uploadFileService.uploadFile(file.file,this.event.eventOwner.toString().toString())
+    .then((result)=>{
       this.allImageCandidats.push(file.file)
-      this.notificationService.successNofitication(`L'image ${file.file.name} a été uploadé avec success`)
-    },
-    (error)=>{
-      console.log("upload Error: ",error)
-      return `Erreur lors de l'uplodad de l'image ${file.file.name}:${error.message}`
-    }
-    ,
-    `Upload de l'image ${file.file.name} en cours`
-    )
+    })
+    .catch((error)=>{
+      console.log("Error: ",error)
+    })
     
   }
   shoConsole()

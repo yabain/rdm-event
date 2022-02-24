@@ -82,7 +82,8 @@
 					</div>
 					<div class="top-header-author">
 						<a class="author-thumb">
-							<img loading="lazy" src="../../../assets/img/img/user.jpeg" alt="user_img" width="124" height="124">
+							<!-- ../../../assets/img/img/user.jpeg -->
+							<img data-bs-toggle="modal" style="cursor:pointer" data-bs-target="#update-header-photo" loading="lazy" [src]="user.photoUrl" alt="user_img" width="124" height="124">
 						</a>
 						<div class="author-content">
 							<a class="h4 author-name" style="color: rgb(9, 109, 41);">{{user.getFullName()}}</a>
@@ -205,4 +206,5 @@
 </div>
 
 <!-- ... end Window-popup Restore Password -->
+<app-uploader-choise-image-file [user]="user" (fileEventUploaded)="uploadFile($event)" idComponent="update-header-photo"></app-uploader-choise-image-file>
 
