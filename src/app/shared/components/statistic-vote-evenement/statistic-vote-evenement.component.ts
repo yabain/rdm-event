@@ -21,4 +21,9 @@ export class StatisticVoteEvenementComponent implements OnInit {
   {
     return this.event.getBestCandidateByCategorie(categorieID)
   }
+
+  getColor()
+  {
+    return this.color[Math.trunc((Math.random()*10)%4)]
+  }
 }

@@ -33,6 +33,7 @@ import { AccountSettingComponent } from "./components/account-setting/account-se
 import { ChangePasswordComponent } from "./components/change-password/change-password.component";
 import { NotifSettingComponent } from "./components/notif-setting/notif-setting.component";
 import { UserActionListComponent } from './components/user-action-list/user-action-list.component';
+import { StatisticVoteEvenementComponent } from './components/statistic-vote-evenement/statistic-vote-evenement.component';
 
 
 
@@ -68,6 +69,7 @@ import { UserActionListComponent } from './components/user-action-list/user-acti
     ChangePasswordComponent,
     NotifSettingComponent,
     UserActionListComponent,
+    StatisticVoteEvenementComponent,
     
   ],
   imports: [
@@ -101,6 +103,7 @@ import { UserActionListComponent } from './components/user-action-list/user-acti
     ShowVoteCandidatureDetailsComponent,
     ShowModalDetailsEventComponent,
     NewsfeedItemComponent,
+    StatisticVoteEvenementComponent,
 
   ],
   providers:[

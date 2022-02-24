@@ -53,10 +53,10 @@ export class VoteEvenement extends Evenement
     {
         return this.getActionByType(UserActionType.VOTE_ACTION).length
     }
-    getVoteByCategorie(categorieID:EntityID)
+    getAllVoteByCategorie(categorieID:EntityID)
     {
         return (<VoteAction[]>this.getActionByType(UserActionType.VOTE_ACTION))
-        .find((vote)=>vote.idCategorieCategorieSelected.toString()==categorieID.toString())
+        .filter((vote)=>vote.idCategorieCategorieSelected.toString()==categorieID.toString())
     }
     getAllVoteByCandidate(candidateID: EntityID) {
         return (<VoteAction[]>this.getActionByType(UserActionType.VOTE_ACTION))
@@ -69,6 +69,25 @@ export class VoteEvenement extends Evenement
                 vote.idCategorieCategorieSelected.toString()==categorieID.toString() && 
                 vote.idCandidateSelected.toString()==candidateID.toString()
             )
+    }
+    
+    getBestCandidateByCategorie(categorieID:EntityID)
+    {
+        let best:{candidate:VoteCandidate,percent:number,vote:number}={candidate:null,percent:0,vote:0};
+
+        let candidatesVote:Map<String,{candidate:VoteCandidate,percent:number,vote:number}>=new Map<String,{candidate:VoteCandidate,percent:0,vote:number}>();
+
+        this.getAllVoteByCategorie(categorieID)
+        .forEach(vote => {
+            if(candidatesVote.has(vote.idCandidateSelected.toString())) candidatesVote.get(vote.idCandidateSelected.toString()).vote++;
+            else candidatesVote.set(vote.idCandidateSelected.toString(),{candidate:this.getCandidateByID(vote.idCandidateSelected),percent:0,vote:1})
+        });
+
+        Array.from(candidatesVote.values()).forEach((candidate)=>{
+            if(best.vote<candidate.vote) best=candidate;
+        })
+        best.percent=Math.trunc((best.vote*100)/this.getAllVoteByCategorie(categorieID).length)
+        return best;
     }
 
     getVoteByCategorieAndVoter(categorieID:EntityID,voterID:EntityID)
