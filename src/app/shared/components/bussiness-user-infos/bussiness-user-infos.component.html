@@ -7,48 +7,32 @@
 
         <!-- Personal Information Form  -->
 
-        <form [formGroup]="formGroup" (ngSubmit)="submitForm()">
+        <form *ngIf="isAuth" [formGroup]="formGroup" (ngSubmit)="submitForm()">
             <div class="row">
 
                 <div class="col col-lg-6 col-md-6 col-sm-12 col-12">
                     <div class="form-group label-floating">
-                        <label class="control-label">Nom & Prénom</label>
-                        <input class="form-control" placeholder="" type="text" formControlName="fullname">
+                        <label class="control-label">Nom de l'organisation</label>
+                        <input class="form-control" placeholder="" type="text" formControlName="workGroupName">
                     </div>
 
                     <div class="form-group label-floating">
                         <label class="control-label">Email</label>
-                        <input class="form-control" [attr.disabled]="true" placeholder="" type="email" formControlName="email">
+                        <input class="form-control" placeholder="" type="email" formControlName="email" [attr.disabled]="true">
                     </div>
-
-                    <div class="form-group date-time-picker label-floating">
-                        <label class="control-label">Date de naissance</label>
-                        <!-- <input name="datetimepicker"  /> -->
-                        <app-form-input-date formControlName="dateNaiss"></app-form-input-date>
-                        <span class="input-group-addon">
-                            <svg class="olymp-month-calendar-icon icon">
-                                <use xlink:href="#olymp-month-calendar-icon"></use>
-                            </svg>
-                        </span>
-                    </div>
+                   
                 </div>
 
                 <div class="col col-lg-6 col-md-6 col-sm-12 col-12">
-                    <div class="form-group label-floating">
-                        <label class="control-label">Nom d'utilisateur</label>
-                        <input class="form-control" placeholder="" type="text" formControlName="username">
-                    </div>
-
-                    <div class="form-group label-floating">
-                        <label class="control-label">Siteweb</label>
-                        <input class="form-control" placeholder="" type="email" formControlName="websiteLink">
-                    </div>
-
-
                     <div class="form-group label-floating is-empty">
                         <label class="control-label">Numéro de Téléphone</label>
                         <input class="form-control" placeholder="" type="number" formControlName="phoneNumber">
                     </div>
+
+                    <div class="form-group label-floating">
+                        <label class="control-label">Siteweb</label>
+                        <input class="form-control" placeholder="" type="text" formControlName="websiteLink">
+                    </div>                    
                 </div>
 <!-- 
                 <div class="col col-lg-4 col-md-4 col-sm-12 col-12">
@@ -60,24 +44,7 @@
                         </select>
                     </div>
                 </div>
-                <div class="col col-lg-4 col-md-4 col-sm-12 col-12">
-                    <div class="form-group label-floating is-select">
-                        <label class="control-label">Your State / Province</label>
-                        <select class="form-select">
-                            <option value="CA">California</option>
-                            <option value="TE">Texas</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="col col-lg-4 col-md-4 col-sm-12 col-12">
-                    <div class="form-group label-floating is-select">
-                        <label class="control-label">Your City</label>
-                        <select class="form-select">
-                            <option value="SF">San Francisco</option>
-                            <option value="NY">New York</option>
-                        </select>
-                    </div>
-                </div> -->
+                -->
                 <div class="col col-lg-4 col-md-4 col-sm-12 col-12">
                     <div class="form-group label-floating is-select">
                         <label class="control-label">Région</label>
@@ -97,40 +64,18 @@
                     </div>
                 </div>
                 <div class="col col-lg-6 col-md-6 col-sm-12 col-12">
-                    <div class="form-group label-floating is-select">
-                        <label class="control-label">Genre</label>
-                        <select formControlName="sexe" class="form-select">
-                            <option value="" >Choisissez votre sexe</option>
-                            <option value="Femme">Femme</option>
-                            <option value="Homme" >Homme</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <textarea formControlName="about" class="form-control"
-                            placeholder="Décrivez-vous en quelques mots"></textarea>
-                    </div>
-                </div>
-                <div class="col col-lg-6 col-md-6 col-sm-12 col-12">
-                    <div class="form-group label-floating is-select">
-                        <label class="control-label">Métier</label>
-                        <select formControlName="metier" class="form-select">
-                            <option value="">Faite votre choix</option>
-                            <option value="élève">Elève</option>
-                            <option value="étudiant">Etudiant(e)</option>
-                            <option value="employer">Employer</option>
-                            <option value="chef">Chef d'entreprise</option>
-                        </select>
-                    </div>
-                    <div class="form-group label-floating is-empty">
-                        <label class="control-label">Nom d'école/entreprise</label>
-                        <input class="form-control" placeholder="" type="text" formControlName="ecole_entreprise">
-                    </div>
-
                     <div class="form-group label-floating">
                         <label class="control-label">Spécialité/Domaine</label>
                         <input class="form-control" placeholder="" type="text"  formControlName="work_domaine">
                     </div>
                 </div>
+                <div class="col col-lg-6 col-md-6 col-sm-12 col-12">
+                    <div class="form-group">
+                        <textarea formControlName="about" class="form-control"
+                            placeholder="Décrivez votre entrepriseen quelques mots"></textarea>
+                    </div>
+                </div>
+
                 <div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                     <div class="form-group with-icon label-floating">
                         <label class="control-label">Lien facebook</label>
@@ -172,10 +117,13 @@
                 </div>
                 <div class="col col-lg-6 col-md-6 col-sm-12 col-12">
                     <button *ngIf="isSubmittedForm==false" class="btn btn-secondary btn-lg full-width" type="submit" style="background-color: #4e814c;">Enregistrer</button>
-			        <app-progress-indeterminate *ngIf="isSubmittedForm" style="background-color: white !important;"></app-progress-indeterminate>                
+			        <app-progress-indeterminate *ngIf="isSubmittedForm" style="background-color: white !important;"></app-progress-indeterminate>
                 </div>
             </div>
         </form>
+
+        
+
         <!-- ... end Personal Information Form  -->
     </div>
 </div>

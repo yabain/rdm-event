@@ -34,6 +34,9 @@ import { ChangePasswordComponent } from "./components/change-password/change-pas
 import { NotifSettingComponent } from "./components/notif-setting/notif-setting.component";
 import { UserActionListComponent } from './components/user-action-list/user-action-list.component';
 import { StatisticVoteEvenementComponent } from './components/statistic-vote-evenement/statistic-vote-evenement.component';
+import { FormInputDateComponent } from './components/form-input-date/form-input-date.component';
+import { BussinessUserInfosComponent } from './components/bussiness-user-infos/bussiness-user-infos.component';
+import { UpdateUserInfosComponent } from './components/update-user-infos/update-user-infos.component';
 
 
 
@@ -70,6 +73,9 @@ import { StatisticVoteEvenementComponent } from './components/statistic-vote-eve
     NotifSettingComponent,
     UserActionListComponent,
     StatisticVoteEvenementComponent,
+    FormInputDateComponent,
+    BussinessUserInfosComponent,
+    UpdateUserInfosComponent,
     
   ],
   imports: [

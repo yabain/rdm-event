@@ -14,25 +14,36 @@ export class User extends Entity
     dateCreated:String="";
     dateNaiss:String="";
     lieuxNaiss:String="";
-    villeResidenceActuelle:String="";
+    ville:String="";
+    region:String="";
     nationalite:String="";
+    quartier:String="";
     rememberMe:boolean=false;
     about:String=""
     availability:number=0;
     dateDeleted:String=""
     userType:UserType=UserType.NORMAL_USER
     websiteLink:String="";
-
-
+    ecole_entreprise:String=""
+    facebook_link:String=""
+    tweeter_link:String=""
+    instagram_link:String="";
+    metier:String="";
+    work_domaine:String=""
 
     getFullName()
     {
         return this.fullname
     }
+    setFullName(fullname)
+    {
+        this.fullname=fullname
+    }
     getPrintableName()
     {
         return this.username
     }
+    
 
     getPrintableIdentity()
     {
@@ -56,13 +67,23 @@ export class User extends Entity
             "dateCreated":this.dateCreated,
             "dateNaiss":this.dateNaiss,
             "lieuxNaiss":this.lieuxNaiss,
-            "villeResidenceActuelle":this.villeResidenceActuelle,
+            "ville":this.ville,
             "nationalite":this.nationalite,
             "rememberMe":this.rememberMe,
             "about":this.about,
             "availability":this.availability,
             "dateDeleted":this.dateDeleted,
-            "userType":this.userType
+            "region":this.region,
+            "quartier":this.quartier,
+            "ecole_entreprise":this.ecole_entreprise,
+            "websiteLink":this.websiteLink,
+            "facebook_link":this.facebook_link,
+            "tweeter_link":this.tweeter_link,
+            "instagram_link":this.instagram_link,
+            "userType":this.userType,
+            "metier":this.metier,
+            "work_domaine":this.work_domaine
+
         }
 
     }

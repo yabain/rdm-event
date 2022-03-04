@@ -14,6 +14,10 @@ export class BusinessUser extends User
     {
         return this.workGroupName
     }
+    override setFullName(fullname)
+    {
+        this.workGroupName=fullname
+    }
     override toString(): Record<string | number, any> {
         return {
             ...super.toString(),

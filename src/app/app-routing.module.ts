@@ -11,6 +11,7 @@ import { AccountSettingComponent } from './shared/components/account-setting/acc
 import { ChangePasswordComponent } from './shared/components/change-password/change-password.component';
 import { MainPageTemplateComponent } from './shared/components/main-page-template/main-page-template.component';
 import { NotifSettingComponent } from './shared/components/notif-setting/notif-setting.component';
+import { UpdateUserInfosComponent } from './shared/components/update-user-infos/update-user-infos.component';
 import { UserInfoComponent } from './shared/components/user-info/user-info.component';
 
 const routes: Routes = [
@@ -66,11 +67,11 @@ const routes: Routes = [
           },
           {
             path: 'user-info',
-            component: UserInfoComponent,
+            component: UpdateUserInfosComponent,
           },
           {
             path: '**',
-            component: UserInfoComponent,
+            component: UpdateUserInfosComponent,
           }
 
         ]

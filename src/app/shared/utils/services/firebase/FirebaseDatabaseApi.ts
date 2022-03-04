@@ -19,48 +19,32 @@ export class FirebaseDataBaseApi {
   db: any;
 
   constructor(private eventService: EventService) {
-
+    console.log("firebase classe")
     if (isDevMode()) {
-      // console.log('Dev Mode');
+      console.log('Dev Mode');
       FirebaseDataBaseApi.firebaseConfig = {
-        /////// real database acces
-
-        apiKey: "AIzaSyDM4KOIw9P9SgpCODcAHSlFCRUpe_X0F2A",
-
-        authDomain: "reseau-des-montagnes-f9a68.firebaseapp.com",
       
-        projectId: "reseau-des-montagnes-f9a68",
-      
-        storageBucket: "reseau-des-montagnes-f9a68.appspot.com",
-      
-        messagingSenderId: "337145034220",
-      
-        appId: "1:337145034220:web:b934acfb52c865ddf23cc9",
-      
-        measurementId: "G-ZT8KT25DYV"
-      
-
         /////// dev database access
 
-        // apiKey: "AIzaSyD31cRxzdmCgYMX_trB9ZVndWyLcprc1Fk",
+        apiKey: "AIzaSyD31cRxzdmCgYMX_trB9ZVndWyLcprc1Fk",
 
-        // authDomain: "rdm-event.firebaseapp.com",
+        authDomain: "rdm-event.firebaseapp.com",
 
-        // databaseURL: "https://rdm-event-default-rtdb.firebaseio.com",
+        databaseURL: "https://rdm-event-default-rtdb.firebaseio.com",
 
-        // projectId: "rdm-event",
+        projectId: "rdm-event",
 
-        // storageBucket: "rdm-event.appspot.com",
+        storageBucket: "rdm-event.appspot.com",
 
-        // messagingSenderId: "421117252824",
+        messagingSenderId: "421117252824",
 
-        // appId: "1:421117252824:web:57ed9ce01fe61b2ece33ad",
+        appId: "1:421117252824:web:57ed9ce01fe61b2ece33ad",
 
-        // measurementId: "G-8W1L58D71W"
+        measurementId: "G-8W1L58D71W"
 
       };
     } else {
-      // console.log('Prod Mode');
+      console.log('Prod Mode');
       FirebaseDataBaseApi.firebaseConfig = {
         /////// real database acces
 
@@ -77,26 +61,6 @@ export class FirebaseDataBaseApi {
         appId: "1:337145034220:web:b934acfb52c865ddf23cc9",
       
         measurementId: "G-ZT8KT25DYV"
-      
-      
-
-        /////// dev database acces
-
-        // apiKey: "AIzaSyD31cRxzdmCgYMX_trB9ZVndWyLcprc1Fk",
-
-        // authDomain: "rdm-event.firebaseapp.com",
-
-        // databaseURL: "https://rdm-event-default-rtdb.firebaseio.com",
-
-        // projectId: "rdm-event",
-
-        // storageBucket: "rdm-event.appspot.com",
-
-        // messagingSenderId: "421117252824",
-
-        // appId: "1:421117252824:web:57ed9ce01fe61b2ece33ad",
-
-        // measurementId: "G-8W1L58D71W"
 
       };
     }

@@ -67,7 +67,11 @@ export class UserProfilService {
     saveUserProfil(user:User):Promise<ActionStatus<User>>
     {
       return new Promise<ActionStatus<User>>((resolve,reject)=>{
-        
+        this.userService.updateUser(user).then((result)=>{
+          this.setUser(user);
+          resolve(result)
+        })
+        .catch((error)=>reject(error))
       })
     }
 }
